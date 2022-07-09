@@ -1,6 +1,6 @@
-declare module "better-sqlite3-session-store" {
-  import { Store, SessionData } from "express-session";
-  
+declare module 'better-sqlite3-session-store' {
+  import { Store, SessionData } from 'express-session';
+
   export interface SqliteStore extends Store {
     get(sid: string, callback: (err: any, session?: SessionData | null) => void): void;
     set(sid: string, session: SessionData, callback?: (err?: any) => void): void;

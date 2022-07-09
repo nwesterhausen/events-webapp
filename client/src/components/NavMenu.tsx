@@ -18,9 +18,7 @@ const NavMenu: Component = () => {
             <Nav.Link href='#archives' disabled>
               Archives
             </Nav.Link>
-            <OverlayTrigger
-              placement='auto'
-              overlay={<Tooltip id={'send-email'}>Submit a new event or an event correction.</Tooltip>}>
+            <OverlayTrigger placement='auto' overlay={<Tooltip id={'send-email'}>Submit a new event or an event correction.</Tooltip>}>
               <Nav.Link href='mailto:nwesterhausen@gmail.com?subject=Upcoming%20Event%20Contact'>
                 <Stack direction='horizontal' gap={2}>
                   <FiMail />

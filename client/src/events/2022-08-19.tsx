@@ -23,8 +23,7 @@ const Aug192022: Component = () => {
                 Main Squeeze <ListenLink href='https://www.youtube.com/watch?v=JwVcQGp3bLo' artist='Main Squeeze' />
               </span>
               <span>
-                Opener: Huckleberry Funk{' '}
-                <ListenLink href='https://www.youtube.com/watch?v=DQnhCYUMkYs' artist='Huckleberry Funk' />
+                Opener: Huckleberry Funk <ListenLink href='https://www.youtube.com/watch?v=DQnhCYUMkYs' artist='Huckleberry Funk' />
               </span>
             </Stack>
             <div>Doors open at 7:00 PM, Show starts at 8:00 PM.</div>
