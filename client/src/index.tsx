@@ -4,5 +4,13 @@ import { render } from 'solid-js/web';
 import 'bootswatch/dist/vapor/bootstrap.css';
 import './index.css';
 import App from './App';
+import { AuthenticationProvider } from './providers/Auth';
 
-render(() => <App />, document.getElementById('root') as HTMLElement);
+render(
+  () => (
+    <AuthenticationProvider>
+      <App />
+    </AuthenticationProvider>
+  ),
+  document.getElementById('root') as HTMLElement
+);
