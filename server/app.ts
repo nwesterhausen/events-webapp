@@ -7,6 +7,9 @@ import dotenv from 'dotenv';
 import debugLib from 'debug';
 import proxy from 'express-http-proxy';
 
+// Import database code
+import { connectDatabase } from './db';
+
 // Import our routes
 import indexRouter from './routes/index';
 
@@ -23,7 +26,7 @@ const SessionDB = new sqlite('sessions.sqlite3');
 dotenv.config();
 
 // Set database connection
-//! TODO
+app.set('db', connectDatabase());
 
 // Trust proxy to show visitor IP
 app.set('trust proxy', true);
