@@ -14,24 +14,26 @@ const NavMenu: Component = () => {
             <span>Upcoming Events</span>
           </Stack>
         </Navbar.Brand>
-        {authContext.auth.loggedIn ? <Navbar.Text class='ms-5'>Authorized as {authContext.auth.user.name}</Navbar.Text> : <></>}
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           {authContext.auth.loggedIn ? (
-            <Nav class='ms-auto'>
-              <Nav.Link href='#archives' disabled>
-                Archives
-              </Nav.Link>
-              <OverlayTrigger placement='auto' overlay={<Tooltip id={'send-email'}>Submit a new event or an event correction.</Tooltip>}>
-                <Nav.Link href='mailto:nwesterhausen@gmail.com?subject=Upcoming%20Event%20Contact'>
-                  <Stack direction='horizontal' gap={2}>
-                    <FiMail />
-                    Contact
-                  </Stack>
+            <>
+              <Navbar.Text class='ms-5'>Authorized as {authContext.auth.user.name}</Navbar.Text>
+              <Nav class='ms-auto'>
+                <Nav.Link href='#archives' disabled>
+                  Archives
                 </Nav.Link>
-              </OverlayTrigger>
-              <Nav.Link href='/auth/logout'>Logout</Nav.Link>
-            </Nav>
+                <OverlayTrigger placement='auto' overlay={<Tooltip id={'send-email'}>Submit a new event or an event correction.</Tooltip>}>
+                  <Nav.Link href='mailto:nwesterhausen@gmail.com?subject=Upcoming%20Event%20Contact'>
+                    <Stack direction='horizontal' gap={2}>
+                      <FiMail />
+                      Contact
+                    </Stack>
+                  </Nav.Link>
+                </OverlayTrigger>
+                <Nav.Link href='/auth/logout'>Logout</Nav.Link>
+              </Nav>
+            </>
           ) : (
             <></>
           )}
