@@ -131,3 +131,6 @@ dist
 
 # ts
 build
+
+# app-specific
+sessions.sqlite3
