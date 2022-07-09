@@ -12,7 +12,8 @@
     "postbuild": "copyfiles client/dist/* build",
     "postinstall": "cd client && pnpm install",
     "start:prod": "set DEBUG=eventsapp:* & set NODE_ENV=production & node build/index.js",
-    "clean": "rimraf build"
+    "clean": "rimraf build",
+    "start:prod:lin": "DEBUG=eventsapp:* NODE_ENV=production node build/index.js"
   },
   "dependencies": {
     "@types/cors": "^2.8.12",
