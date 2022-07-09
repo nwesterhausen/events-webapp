@@ -1,16 +1,38 @@
 import { Request } from 'express';
+import { Knex } from 'knex';
 
 /**
  * Creates details about the session to send to the page view renderer.
  */
 const debug = require('debug')('hotmarket:session-util');
 const PERMISSION_ID = {
-  VIEW_DASHBOARD: 1,
-  VIEW_ALL: 2,
-  MODIFY_ALL: 3,
-  MODERATOR: 4,
-  IS_ADMIN: 5,
+  VIEW_ALL: 1,
+  MODIFY_ALL: 2,
+  IS_ADMIN: 3,
 };
+
+type User = {
+  email: string;
+  name: string;
+  id: number;
+};
+
+export async function applyUserToSession(user: any, req: Request) {
+  req.session.user = user.email;
+  req.session.user_name = user.name;
+  req.session.user_id = user.id;
+  req.session.user_permissions = buildPermissionReference([]);
+
+  const permissions = await (req.app.get('db') as Knex).select().from('user_permissions').where({ user_id: user.id });
+
+  if (permissions.length == 0) {
+    debug(`${user.name} has no assigned permissions. (User ID: ${user.id})`);
+    return;
+  }
+
+  debug(`${user.name} has ${permissions.length} permissions.`);
+  req.session.user_permissions = buildPermissionReference(permissions.map((v) => v.permission_id));
+}
 
 /**
  * Helper function which composes an object from the data we store in the session. This
@@ -43,20 +65,12 @@ export function buildUserData(session: Request['session']) {
 export function buildPermissionReference(permissionArray: number[]) {
   const result = {
     IS_ADMIN: false,
-    MODERATOR: false,
     MODIFY_ALL: false,
-    VIEW_DASHBOARD: false,
     VIEW_ALL: false,
   };
   // Check if we were given an array. If we were, we can toggle the flags in the dictionary object
   // to be true as needed. If we weren't, just return all flags as false.
   if (Array.isArray(permissionArray)) {
-    if (permissionArray.indexOf(PERMISSION_ID.VIEW_DASHBOARD) >= 0) {
-      result.VIEW_DASHBOARD = true;
-    }
-    if (permissionArray.indexOf(PERMISSION_ID.MODERATOR) >= 0) {
-      result.MODERATOR = true;
-    }
     if (permissionArray.indexOf(PERMISSION_ID.MODIFY_ALL) >= 0) {
       result.MODIFY_ALL = true;
     }

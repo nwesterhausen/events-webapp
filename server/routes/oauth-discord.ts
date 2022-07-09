@@ -3,6 +3,7 @@ import { Knex } from 'knex';
 import passport from 'passport';
 import DiscordStrategy from 'passport-discord';
 import debugLib from 'debug';
+import { applyUserToSession } from '../lib/session';
 
 const debug = debugLib('eventsapp:oauth-google');
 const CallbackURL =
@@ -74,7 +75,8 @@ export const CreateDiscordOauthRouter = (db: Knex): Router => {
   router.get('/discord', passport.authenticate('discord'));
   router.get('/discord/callback', passport.authenticate('discord', { assignProperty: 'user' }), (req, res, next) => {
     debug(req.user);
-    res.send(req.user);
+    applyUserToSession(req.user, req);
+    res.redirect(302, '/');
   });
 
   return router;

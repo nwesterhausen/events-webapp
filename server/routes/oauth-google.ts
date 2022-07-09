@@ -3,6 +3,7 @@ import { Knex } from 'knex';
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
 import debugLib from 'debug';
+import { applyUserToSession } from '../lib/session';
 
 const debug = debugLib('eventsapp:oauth-google');
 const CallbackURL =
@@ -72,7 +73,8 @@ export const CreateGoogleOauthRouter = (db: Knex): Router => {
   router.get('/google', passport.authenticate('google', { assignProperty: 'user', scope: ['profile', 'email'] }));
   router.get('/google/callback', passport.authenticate('google', { assignProperty: 'user' }), (req, res, next) => {
     debug(req.user);
-    res.send(req.user);
+    applyUserToSession(req.user, req);
+    res.redirect(302, '/');
   });
 
   return router;
