@@ -3,12 +3,12 @@
     "module": "CommonJS",
     "esModuleInterop": true,
     "target": "ES6",
-    "rootDir": "./src",
+    "rootDir": "server",
     "outDir": "./build",
     "strict": true,
     "typeRoots": ["./typing-stubs", "./node_modules/@types"],
   },
   "include": [
-    "./src"
+    "server"
   ]
 }

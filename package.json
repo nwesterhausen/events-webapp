@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "build": "pnpm prebuild && tsc && pnpm postbuild",
-    "start": "set DEBUG=eventsapp:* & set \"NODE_ENV=development\" & nodemon src/index.ts",
-    "start:dbg": "set DEBUG=* & set \"NODE_ENV=development\" & nodemon src/index.ts",
-    "af": "prettier --write typing-stubs client/src client/public src",
+    "start": "set DEBUG=eventsapp:* & set \"NODE_ENV=development\" & nodemon server/index.ts",
+    "start:dbg": "set DEBUG=* & set \"NODE_ENV=development\" & nodemon server/index.ts",
+    "af": "prettier --write typing-stubs client/src client/public server",
     "build:client": "cd client && pnpm build",
     "prebuild": "pnpm build:client",
     "postbuild": "copyfiles client/dist/* build",
