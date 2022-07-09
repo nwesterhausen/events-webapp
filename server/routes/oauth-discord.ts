@@ -5,7 +5,7 @@ import DiscordStrategy from 'passport-discord';
 import debugLib from 'debug';
 import { applyUserToSession } from '../lib/session';
 
-const debug = debugLib('eventsapp:oauth-google');
+const debug = debugLib('eventsapp:oauth-discord');
 const CallbackURL =
   process.env.NODE_ENV === 'production' ? 'https://events.nwest.link/auth/discord/callback' : 'http://localhost:3030/auth/discord/callback';
 const scopes = ['identify', 'email'];
