@@ -1,17 +1,21 @@
 import logger from 'morgan';
-import express from 'express';
+import express, { ErrorRequestHandler } from 'express';
 import session from 'express-session';
 import sqlite from 'better-sqlite3';
 import sqliteStore from 'better-sqlite3-session-store';
 import dotenv from 'dotenv';
 import debugLib from 'debug';
 import proxy from 'express-http-proxy';
+import csrf from 'csurf';
 
 // Import database code
 import { connectDatabase } from './db';
 
 // Import our routes
 import indexRouter from './routes/index';
+import authRouter from './routes/auth';
+import { CreateGoogleOauthRouter } from './routes/oauth-google';
+import { CreateDiscordOauthRouter } from './routes/oauth-discord';
 
 const debug = debugLib('eventsapp:app');
 
@@ -26,27 +30,11 @@ const SessionDB = new sqlite('sessions.sqlite3');
 dotenv.config();
 
 // Set database connection
-app.set('db', connectDatabase());
+const knex = connectDatabase();
+app.set('db', knex);
 
 // Trust proxy to show visitor IP
 app.set('trust proxy', true);
-
-if (process.env.NODE_ENV === 'development') {
-  debug('Running in development mode');
-  // Configure the access logging to be shorter
-  app.use(logger('dev'));
-
-  // Forward "static files" to the vite dev server on 3001
-  app.use('/', proxy('http://localhost:3000'));
-} else {
-  // Configure the access logging to be longform
-  app.use(logger('combined'));
-
-  // Serving static files (e.g. client html, javascript, css, images) from /client
-  const staticFiles = 'client/dist';
-  debug(`Serving static files from ${staticFiles}`);
-  app.use(express.static(staticFiles));
-}
 
 // Automatically handle incoming JSON payloads
 app.use(express.json());
@@ -67,7 +55,48 @@ app.use(
   })
 );
 
+// setup route middlewares
+var csrfProtection = csrf();
+
+app.use('/auth', authRouter);
+app.use('/auth', CreateGoogleOauthRouter(knex));
+app.use('/auth', CreateDiscordOauthRouter(knex));
+
 // Serve the API
 app.use('/v1', indexRouter);
+
+if (process.env.NODE_ENV === 'development') {
+  debug('Running in development mode');
+  // Configure the access logging to be shorter
+  // app.use(logger('dev'));
+
+  // Forward "static files" to the vite dev server on 3001
+  app.use('/', proxy('http://localhost:3000'));
+} else {
+  // Configure the access logging to be longform
+  app.use(logger('combined'));
+
+  // Serving static files (e.g. client html, javascript, css, images) from /client
+  const staticFiles = 'client/dist';
+  debug(`Serving static files from ${staticFiles}`);
+  app.use(express.static(staticFiles));
+}
+
+// Error handler
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  // Set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // Render the error page
+  res.status(err.status || 500);
+  res.json(err);
+};
+app.use(errorHandler);
+
+// Exit on SIGTERM
+process.on('SIGTERM', () => {
+  process.exit();
+});
 
 export default app;

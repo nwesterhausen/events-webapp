@@ -5,7 +5,7 @@
     "target": "ES6",
     "rootDir": "server",
     "outDir": "./build",
-    "strict": true,
+    // "strict": true,
     "typeRoots": ["./typing-stubs", "./node_modules/@types"],
   },
   "include": [

@@ -18,9 +18,10 @@ exports.up = function (knex: Knex) {
        */
       .createTable('users', function (table) {
         table.increments();
-        table.string('first_name');
-        table.string('last_name');
+        table.string('name');
         table.string('email');
+        table.string('googleId');
+        table.string('discordId');
         table.timestamps(true, true);
       })
       .createTable('user_permissions', function (table) {
