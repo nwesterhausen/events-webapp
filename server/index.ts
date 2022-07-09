@@ -4,16 +4,20 @@ import http from 'http';
 
 const debug = debugLib('eventsapp:server');
 // Default port 3000 if not specified
-const port = normalizePort(process.env.PORT || '3030');
+const port: number = normalizePort(process.env.PORT) || 3030;
+// Host is localhost if dev, 0.0.0.0 if prod
+const host: string = process.env.NODE_ENV === 'development' ? 'localhost' : '0.0.0.0';
 
 // Set the port for the app
 app.set('port', port);
+
+app.set('host', host);
 
 // Create the webserver
 const server = http.createServer(app);
 
 // Listen on the port
-server.listen(port);
+server.listen(port, host);
 
 // Add an error handler to the webserver
 server.on('error', onError);
@@ -35,8 +39,8 @@ function normalizePort(val?: string) {
   let port = parseInt(val, 10);
 
   if (isNaN(port)) {
-    // named pipe
-    return val;
+    // named pipe (just false)
+    return false;
   }
 
   if (port >= 0) {
