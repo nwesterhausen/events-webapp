@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar, OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
 import { Component } from 'solid-js';
-import { FiMail } from 'solidjs-icons/fi';
+import { FiMail } from 'solid-icons/fi';
 import { useAuthContext } from '../providers/Auth';
 
 const NavMenu: Component = () => {

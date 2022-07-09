@@ -1,6 +1,6 @@
 import { OverlayTrigger, Tooltip, Button } from 'solid-bootstrap';
 import { Component } from 'solid-js';
-import { FiMusic } from 'solidjs-icons/fi';
+import { FiMusic } from 'solid-icons/fi';
 
 const ListenLink: Component<{ href: string; artist: string }> = (props) => {
   return (

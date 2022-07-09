@@ -1,6 +1,6 @@
 import { OverlayTrigger, Tooltip, Button } from 'solid-bootstrap';
 import { Component } from 'solid-js';
-import { SiYoutube } from 'solidjs-icons/si';
+import { SiYoutube } from 'solid-icons/si';
 
 const YoutubeLink: Component<{ href: string }> = (props) => {
   const hiddenId = Math.floor(100 * Math.random());

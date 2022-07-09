@@ -1,6 +1,6 @@
 import { OverlayTrigger, Tooltip, Button } from 'solid-bootstrap';
 import { Component } from 'solid-js';
-import { FiMap } from 'solidjs-icons/fi';
+import { FiMap } from 'solid-icons/fi';
 
 const NaviagationLink: Component<{ href: string }> = (props) => {
   const hiddenId = Math.floor(100 * Math.random());

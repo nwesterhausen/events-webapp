@@ -1,6 +1,6 @@
 import { OverlayTrigger, Tooltip, Button } from 'solid-bootstrap';
 import { Component } from 'solid-js';
-import { SiSpotify } from 'solidjs-icons/si';
+import { SiSpotify } from 'solid-icons/si';
 
 const SpotifyLink: Component<{ href: string }> = (props) => {
   const hiddenId = Math.floor(100 * Math.random());
