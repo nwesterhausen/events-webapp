@@ -3,7 +3,7 @@ import { Knex } from 'knex';
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
 import debugLib from 'debug';
-import { applyUserToSession } from '../lib/session';
+import { applyUserToSession, PERMISSION_ID } from '../lib/session';
 
 const debug = debugLib('eventsapp:oauth-google');
 const CallbackURL =
@@ -40,14 +40,17 @@ export const CreateGoogleOauthRouter = (db: Knex): Router => {
             if (matchingUser) {
               debug(`Matched existing user ${matchingUser.name}`);
               if (matchingUser.googleId === null) {
-                const _x = await db('users').where({ email: profile.emails[0].value }).update(
+                matchingUser.googleId = profile.id;
+                const _x: { id: number; googleId: string }[] | number = await db('users').where({ email: profile.emails[0].value }).update(
                   {
                     googleId: profile.id,
                   },
                   ['id', 'googleId']
                 );
-                if (_x.length > 0) {
+                if ((_x as []).length > 0) {
                   debug(`Updated user googleId ${_x[0].googleId}`);
+                } else if ((_x as number) === 1) {
+                  debug(`Updated user googleId (affected ${_x} rows)`);
                 } else {
                   debug(`Failure to udpate user's googleId`);
                 }
@@ -56,7 +59,7 @@ export const CreateGoogleOauthRouter = (db: Knex): Router => {
             }
           }
           // Create user if we were unable to match them.
-          const newUser = await db('users').insert(
+          const newUser: { id: number; name: string; email: string } = await db('users').insert(
             {
               googleId: profile.id,
               name: profile.displayName,
@@ -64,7 +67,13 @@ export const CreateGoogleOauthRouter = (db: Knex): Router => {
             },
             ['id', 'name', 'email']
           );
-          return resolve(cb(null, newUser));
+          const user = newUser[0];
+          debug(`Granting permission ${PERMISSION_ID.VIEW_ALL} (VIEW ALL) to ${user.id} (${user.name})`);
+          await db('user_permissions').insert({
+            user_id: user.id,
+            permission_id: PERMISSION_ID.VIEW_ALL,
+          });
+          return resolve(cb(null, user));
         }).catch(console.error);
       }
     )
@@ -74,7 +83,7 @@ export const CreateGoogleOauthRouter = (db: Knex): Router => {
   router.get('/google/callback', passport.authenticate('google', { assignProperty: 'user' }), (req, res, next) => {
     debug(req.user);
     applyUserToSession(req.user, req);
-    res.redirect(302, '/');
+    req.session.save((err) => res.redirect(302, '/'));
   });
 
   return router;

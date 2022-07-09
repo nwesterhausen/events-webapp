@@ -1,7 +1,6 @@
 import debugLib from 'debug';
 import { RequestHandler } from 'express';
 import { Knex } from 'knex';
-import { buildUserData } from '../lib/session';
 
 const debug = debugLib('eventsapp:account');
 
@@ -15,7 +14,6 @@ export const getAccount: RequestHandler = (req, res) => {
         return resolve(
           res.status(200).json({
             user_details: user,
-            ...buildUserData(req.session),
           })
         );
       } else {
