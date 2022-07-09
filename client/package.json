@@ -1,0 +1,29 @@
+{
+  "name": "static-events-site",
+  "version": "1.0.0",
+  "description": "Events website for friends.",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bootswatch": "^5.1.3",
+    "solid-bootstrap": "^1.0.8",
+    "solid-js": "^1.4.2",
+    "solidjs-icons": "^1.0.11",
+    "typescript": "^4.6.4",
+    "vite": "^2.9.9",
+    "vite-plugin-solid": "^2.2.6"
+  },
+  "prettier": {
+    "bracketSameLine": true,
+    "jsxSingleQuote": true,
+    "printWidth": 120,
+    "proseWrap": "always",
+    "singleQuote": true
+  },
+  "packageManager": "pnpm@7.5.0"
+}

@@ -1,0 +1,36 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.itenerary-details {
+  padding-left: 1rem;
+}
+
+.itenerary-item section {
+  padding-left: 0.5rem;
+}
+
+.tab-pane {
+  padding-top: 1rem;
+}
+
+.song-artist {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.song-submitter {
+  font-size: 0.8rem;
+}
