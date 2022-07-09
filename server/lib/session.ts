@@ -4,7 +4,7 @@ import { Knex } from 'knex';
 /**
  * Creates details about the session to send to the page view renderer.
  */
-const debug = require('debug')('hotmarket:session-util');
+const debug = require('debug')('eventsapp:session-util');
 const PERMISSION_ID = {
   VIEW_ALL: 1,
   MODIFY_ALL: 2,
@@ -22,16 +22,22 @@ export async function applyUserToSession(user: any, req: Request) {
   req.session.user_name = user.name;
   req.session.user_id = user.id;
   req.session.user_permissions = buildPermissionReference([]);
+  debug(`Initialized session for ${req.session.user_name}`);
+  try {
+    const permissions = await (req.app.get('db') as Knex).select().from('user_permissions').where({ user_id: user.id });
 
-  const permissions = await (req.app.get('db') as Knex).select().from('user_permissions').where({ user_id: user.id });
+    if (permissions.length == 0) {
+      debug(`${user.name} has no assigned permissions. (User ID: ${user.id})`);
+      return;
+    }
 
-  if (permissions.length == 0) {
-    debug(`${user.name} has no assigned permissions. (User ID: ${user.id})`);
+    debug(`${user.name} has ${permissions.length} permissions.`);
+    req.session.user_permissions = buildPermissionReference(permissions.map((v) => v.permission_id));
+  } catch (err) {
+    debug('user_permissions table is likely empty and we were unable to select from it');
+    debug(err);
     return;
   }
-
-  debug(`${user.name} has ${permissions.length} permissions.`);
-  req.session.user_permissions = buildPermissionReference(permissions.map((v) => v.permission_id));
 }
 
 /**
