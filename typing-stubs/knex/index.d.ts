@@ -20,7 +20,41 @@ declare module 'knex/types/tables' {
     user_id: number;
     permission_id: number;
   }
-
+  interface Setlist {
+    id: number;
+    notes: string;
+    location: string;
+  }
+  interface SetlistSong {
+    id: number;
+    name: string;
+    artist: string;
+  }
+  interface MusicType {
+    id: number;
+    name: string;
+  }
+  interface GuitarTab {
+    id: number;
+    url: string;
+  }
+  interface GuitarTab2Song {
+    guitar_tab_id: number;
+    setlist_song_id: number;
+  }
+  interface MusicLink {
+    id: number;
+    url: string;
+    type: number;
+  }
+  interface MusicLink2Song {
+    music_link_id: number;
+    setlist_song_id: number;
+  }
+  interface Song2Setlist {
+    setlist_id: number;
+    setlist_song_id: number;
+  }
   interface Tables {
     // This is same as specifying `knex<User>('users')`
     users: User;
@@ -66,5 +100,13 @@ declare module 'knex/types/tables' {
     >;
 
     user_permissions: UserPermission;
+    _music_types: MusicType;
+    guitar_tab_2_song: GuitarTab2Song;
+    guitar_tab: GuitarTab;
+    music_link_2_song: MusicLink2Song;
+    music_link: MusicLink;
+    song_2_setlist: Song2Setlist;
+    setlist_song: SetlistSong;
+    setlist: Setlist;
   }
 }

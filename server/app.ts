@@ -6,18 +6,17 @@ import sqliteStore from 'better-sqlite3-session-store';
 import dotenv from 'dotenv';
 import debugLib from 'debug';
 import proxy from 'express-http-proxy';
-import csrf from 'csurf';
 
 // Import database code
 import { connectDatabase } from './db';
 
 // Import our routes
-import indexRouter from './routes/index';
+import apiv1Router from './routes/api-v1';
 import authRouter from './routes/auth';
 import adminRouter from './routes/admin';
 import { CreateGoogleOauthRouter } from './routes/oauth-google';
 import { CreateDiscordOauthRouter } from './routes/oauth-discord';
-import { checkAdminAccess, checkAuthorization, checkViewAccess } from './lib/authorization';
+import { checkAdminAccess, checkViewAccess } from './lib/authorization';
 
 const debug = debugLib('eventsapp:app');
 
@@ -66,7 +65,7 @@ app.use('/auth', CreateDiscordOauthRouter(knex));
 app.use('/admin', checkAdminAccess, adminRouter);
 
 // Serve the API
-app.use('/v1', checkViewAccess, indexRouter);
+app.use('/v1', checkViewAccess, apiv1Router);
 
 if (process.env.NODE_ENV === 'development') {
   debug('Running in development mode');

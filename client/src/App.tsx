@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import { useAuthContext } from './providers/Auth';
 
 const UserManagement = lazy(() => import('./pages/UserManagement'));
+const ManageSetlists = lazy(() => import('./pages/ManageSetlists'));
 
 const CurrentEvents: Component = () => {
   return (
@@ -31,7 +32,14 @@ const App: Component = () => {
         {authContext.auth.loggedIn ? (
           <Routes>
             {authContext.auth.permissions.VIEW_ALL ? <Route path='/' component={CurrentEvents} /> : <></>}
-            {authContext.auth.permissions.IS_ADMIN ? <Route path='/user-admin' component={UserManagement} /> : <></>}
+            {authContext.auth.permissions.IS_ADMIN ? (
+              <>
+                <Route path='/user-admin' component={UserManagement} />
+                <Route path='/manage-setlists' component={ManageSetlists} />
+              </>
+            ) : (
+              <></>
+            )}
           </Routes>
         ) : (
           <LoginPage />

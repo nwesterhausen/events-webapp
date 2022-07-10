@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar, OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
+import { Container, Nav, Navbar, NavDropdown, OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
 import { FiMail } from 'solid-icons/fi';
 import { Component } from 'solid-js';
 import { useAuthContext } from '../providers/Auth';
@@ -20,7 +20,15 @@ const NavMenu: Component = () => {
             <Navbar.Collapse id='basic-navbar-nav'>
               <Navbar.Text class='ms-5'>Authorized as {authContext.auth.user.name}</Navbar.Text>
               <Nav class='ms-auto'>
-                {authContext.auth.permissions.IS_ADMIN ? <Nav.Link href='user-admin'>Users</Nav.Link> : <></>}
+                {authContext.auth.permissions.IS_ADMIN ? (
+                  <NavDropdown title='Manage' id='collasible-nav-dropdown'>
+                    <NavDropdown.Item href='user-admin'>Users</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href='manage-setlists'>Setlists</NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  <></>
+                )}
                 {authContext.auth.permissions.VIEW_ALL ? <Nav.Link disabled>Archives</Nav.Link> : <></>}
                 {authContext.auth.permissions.MODIFY_ALL ? (
                   <>
