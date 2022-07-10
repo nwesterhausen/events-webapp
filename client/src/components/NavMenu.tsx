@@ -16,7 +16,7 @@ const NavMenu: Component = () => {
         </Navbar.Brand>
         {authContext.auth.loggedIn ? (
           <>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+            <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>
               <Navbar.Text class='ms-5'>Authorized as {authContext.auth.user.name}</Navbar.Text>
               <Nav class='ms-auto'>
