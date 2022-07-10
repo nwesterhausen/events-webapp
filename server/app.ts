@@ -14,8 +14,10 @@ import { connectDatabase } from './db';
 // Import our routes
 import indexRouter from './routes/index';
 import authRouter from './routes/auth';
+import adminRouter from './routes/admin';
 import { CreateGoogleOauthRouter } from './routes/oauth-google';
 import { CreateDiscordOauthRouter } from './routes/oauth-discord';
+import { checkAdminAccess, checkAuthorization, checkViewAccess } from './lib/authorization';
 
 const debug = debugLib('eventsapp:app');
 
@@ -55,15 +57,16 @@ app.use(
   })
 );
 
-// setup route middlewares
-var csrfProtection = csrf();
-
+// Authorization (login) routes
 app.use('/auth', authRouter);
 app.use('/auth', CreateGoogleOauthRouter(knex));
 app.use('/auth', CreateDiscordOauthRouter(knex));
 
+// Administration route
+app.use('/admin', checkAdminAccess, adminRouter);
+
 // Serve the API
-app.use('/v1', indexRouter);
+app.use('/v1', checkViewAccess, indexRouter);
 
 if (process.env.NODE_ENV === 'development') {
   debug('Running in development mode');

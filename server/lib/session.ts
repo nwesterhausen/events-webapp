@@ -28,8 +28,6 @@ export async function applyUserToSession(user: any, req: Request) {
   req.session.user = user.email;
   req.session.user_name = user.name;
   req.session.user_id = user.id;
-  req.session.user_permissions = DefaultPermissions;
-  debug(`Initialized session for ${req.session.user_name}`);
 
   const permissions = await (req.app.get('db') as Knex).select().from('user_permissions').where({ user_id: user.id });
 
