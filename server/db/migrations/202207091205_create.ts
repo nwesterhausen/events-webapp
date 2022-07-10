@@ -37,6 +37,6 @@ exports.up = function (knex: Knex) {
   );
 };
 
-exports.down = function (kenx: Knex) {
-  return kenx.schema.dropTable('users').dropTable('permissions').dropTable('user_permissions');
+exports.down = function (knex: Knex) {
+  return knex.schema.dropTable('users').dropTable('permissions').dropTable('user_permissions');
 };
