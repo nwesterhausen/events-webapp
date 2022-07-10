@@ -3,7 +3,7 @@ import type { Component } from 'solid-js';
 import NavMenu from './components/NavMenu';
 import Aug192022 from './events/2022-08-19';
 import LoginPage from './pages/LoginPage';
-import { AuthenticationProvider, useAuthContext } from './providers/Auth';
+import { useAuthContext } from './providers/Auth';
 
 const App: Component = () => {
   const authContext = useAuthContext();
