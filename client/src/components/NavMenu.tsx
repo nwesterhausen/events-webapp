@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar, OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
-import { Component } from 'solid-js';
 import { FiMail } from 'solid-icons/fi';
+import { Component } from 'solid-js';
 import { useAuthContext } from '../providers/Auth';
 
 const NavMenu: Component = () => {
@@ -15,9 +15,9 @@ const NavMenu: Component = () => {
           </Stack>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse id='basic-navbar-nav'>
-          {authContext.auth.loggedIn ? (
-            <>
+        {authContext.auth.loggedIn ? (
+          <>
+            <Navbar.Collapse id='basic-navbar-nav'>
               <Navbar.Text class='ms-5'>Authorized as {authContext.auth.user.name}</Navbar.Text>
               <Nav class='ms-auto'>
                 {authContext.auth.permissions.VIEW_ALL ? (
@@ -43,11 +43,11 @@ const NavMenu: Component = () => {
                 )}
                 <Nav.Link href='/auth/logout'>Logout</Nav.Link>
               </Nav>
-            </>
-          ) : (
-            <></>
-          )}
-        </Navbar.Collapse>
+            </Navbar.Collapse>
+          </>
+        ) : (
+          <></>
+        )}
       </Container>
     </Navbar>
   );
