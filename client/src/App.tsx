@@ -13,14 +13,18 @@ const App: Component = () => {
       <NavMenu />
       <Container fluid class='p-3'>
         {authContext.auth.loggedIn ? (
-          <Tabs defaultActiveKey='aug192022' id='upcoming-event-listing' variant='pills'>
-            <Tab eventKey='aug192022' title='Aug 19-21'>
-              <Aug192022 />
-            </Tab>
-            <Tab eventKey='oct142022' title='Oct 14-16'>
-              "camping" weekend ?
-            </Tab>
-          </Tabs>
+          authContext.auth.permissions.VIEW_ALL ? (
+            <Tabs defaultActiveKey='aug192022' id='upcoming-event-listing' variant='pills'>
+              <Tab eventKey='aug192022' title='Aug 19-21'>
+                <Aug192022 />
+              </Tab>
+              <Tab eventKey='oct142022' title='Oct 14-16'>
+                "camping" weekend ?
+              </Tab>
+            </Tabs>
+          ) : (
+            <></>
+          )
         ) : (
           <LoginPage />
         )}
