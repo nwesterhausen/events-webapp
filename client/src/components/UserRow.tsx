@@ -1,10 +1,10 @@
 import { Badge, FormCheck, OverlayTrigger, Tooltip } from 'solid-bootstrap';
 import { BsGoogle, BsDiscord } from 'solid-icons/bs';
 import { Component, createMemo, createSignal } from 'solid-js';
-import { Create, Delete } from '../Api';
+import { Create, Delete } from '../lib/api';
 import { UserData } from '../pages/UserManagement';
 import { useAuthContext } from '../providers/Auth';
-import { PERMISSION_ID } from '../Types';
+import { PERMISSION_ID } from '../types';
 
 const Checked: Component = () => {
   return <FormCheck checked disabled type='checkbox' />;
