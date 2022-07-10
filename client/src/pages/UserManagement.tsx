@@ -57,7 +57,7 @@ const UserManagment: Component = () => {
           }}>
           <TbFileDownload size={16} class='icon-fix' /> Backup
         </Button>
-        <Button
+        <Button disabled
           onClick={() => {
             document.getElementById('user-data-file-upload')?.click();
           }}>
