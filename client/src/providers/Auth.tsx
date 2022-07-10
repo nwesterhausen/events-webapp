@@ -60,6 +60,7 @@ export const [AuthenticationProvider, useAuthContext] = createContextProvider(
 
     createEffect(() => {
       if (sessionLogin.latest.complete && sessionLogin.latest.user !== null) {
+        console.log(sessionLogin.latest);
         setAuth('user', {
           id: sessionLogin.latest.user_details.id,
           name: sessionLogin.latest.user_details.name,

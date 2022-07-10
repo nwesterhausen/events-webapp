@@ -20,17 +20,27 @@ const NavMenu: Component = () => {
             <>
               <Navbar.Text class='ms-5'>Authorized as {authContext.auth.user.name}</Navbar.Text>
               <Nav class='ms-auto'>
-                <Nav.Link href='#archives' disabled>
-                  Archives
-                </Nav.Link>
-                <OverlayTrigger placement='auto' overlay={<Tooltip id={'send-email'}>Submit a new event or an event correction.</Tooltip>}>
-                  <Nav.Link href='mailto:nwesterhausen@gmail.com?subject=Upcoming%20Event%20Contact'>
-                    <Stack direction='horizontal' gap={2}>
-                      <FiMail />
-                      Contact
-                    </Stack>
+                {authContext.auth.permissions.VIEW_ALL ? (
+                  <Nav.Link href='#archives' disabled>
+                    Archives
                   </Nav.Link>
-                </OverlayTrigger>
+                ) : (
+                  <></>
+                )}
+                {authContext.auth.permissions.MODIFY_ALL ? (
+                  <>
+                    <OverlayTrigger placement='auto' overlay={<Tooltip id={'send-email'}>Submit a new event or an event correction.</Tooltip>}>
+                      <Nav.Link href='mailto:nwesterhausen@gmail.com?subject=Upcoming%20Event%20Contact'>
+                        <Stack direction='horizontal' gap={2}>
+                          <FiMail />
+                          Contact
+                        </Stack>
+                      </Nav.Link>
+                    </OverlayTrigger>
+                  </>
+                ) : (
+                  <></>
+                )}
                 <Nav.Link href='/auth/logout'>Logout</Nav.Link>
               </Nav>
             </>
