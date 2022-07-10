@@ -1,3 +1,5 @@
+@use '../node_modules/bootswatch/dist/vapor/_variables' as *;
+
 html {
   min-height: 100%;
 }
@@ -37,4 +39,22 @@ code {
 
 .icon-fix {
   vertical-align: -0.125em;
+}
+
+.action-button {
+  display: inline-block;
+  width: 2rem;
+  border-radius: 25%;
+  border: 1px solid #0000;
+  margin: -1px;
+
+  &.disabled {
+    color: $gray-700;
+  }
+
+  &:not(.disabled):hover {
+    color: $danger;
+    cursor: pointer;
+    border: 1px solid $danger;
+  }
 }

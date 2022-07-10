@@ -1,10 +1,11 @@
-import { Badge, FormCheck, OverlayTrigger, Tooltip } from 'solid-bootstrap';
+import { Badge, Button, FormCheck, OverlayTrigger, Tooltip } from 'solid-bootstrap';
 import { BsGoogle, BsDiscord } from 'solid-icons/bs';
 import { Component, createMemo, createSignal } from 'solid-js';
 import { Create, Delete } from '../lib/api';
 import { UserData } from '../pages/UserManagement';
 import { useAuthContext } from '../providers/Auth';
 import { PERMISSION_ID } from '../types';
+import { FiTrash2 } from 'solid-icons/fi';
 
 const Checked: Component = () => {
   return <FormCheck checked disabled type='checkbox' />;
@@ -53,7 +54,8 @@ export const UserRowHeading: Component = () => {
       <th>View</th>
       <th>Edit</th>
       <th>Admin</th>
-      <th></th>
+      <th>Action</th>
+      <th>Status</th>
     </tr>
   );
 };
@@ -173,6 +175,17 @@ export const UserRow: Component<{ user: UserData }> = (props) => {
             }}
           />
         )}
+      </td>
+      <td class=''>
+        <a
+          class='text-center action-button'
+          classList={{ disabled: authContext.auth.user.id === props.user.id }}
+          onClick={() => {
+            if (authContext.auth.user.id === props.user.id) return; // Exit if this is for the current user
+            Delete('/admin/user', { user_id: props.user.id }).then(() => window.location.reload());
+          }}>
+          <FiTrash2 class='icon-fix' />
+        </a>
       </td>
       <td style={{ width: '5rem' }}>
         <Badge class={badgeClass()}>{savingState()}</Badge>

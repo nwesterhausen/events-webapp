@@ -45,7 +45,7 @@ declare module 'knex/types/tables' {
       // and make created_at and updated_at optional.
       // And "id" can't be provided at all.
       // Defaults to "base" type.
-      Pick<User, 'name'> & Partial<Pick<User, 'created_at' | 'updated_at'>>,
+      Pick<User, 'name' & 'email'> & Pick<User, 'discordId' | 'googleId'> & Partial<Pick<User, 'created_at' | 'updated_at'>>,
       // This interface is used for "update()" calls.
       // As opposed to regular specifying interface only once,
       // when specifying separate update interface, user will be

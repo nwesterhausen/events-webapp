@@ -40,7 +40,7 @@ export const postPermission: RequestHandler = (req, res) => {
       },
       ['id']
     );
-    debug(`Granted User#${user_id} Permission#${permission_id} (u_p#${JSON.stringify(_x)})`);
+    debug(`Granted User:${user_id} Permission:${permission_id} (u_p:${JSON.stringify(_x)})`);
 
     resolve(res.status(201).send({ created: _x }));
   }).catch((err) => {
@@ -85,7 +85,7 @@ export const deletePermission: RequestHandler = (req, res) => {
         permission_id: permission_id,
       })
       .del(['id']);
-    debug(`Deleted Permission#${permission_id} from User#${user_id} (u_p#${JSON.stringify(_x)})`);
+    debug(`Deleted Permission:${permission_id} from User:${user_id} (u_p:${JSON.stringify(_x)})`);
 
     resolve(res.status(200).send({ deleted: _x }));
   }).catch((err) => {

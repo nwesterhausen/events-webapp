@@ -2,7 +2,7 @@
 import { render } from 'solid-js/web';
 
 import 'bootswatch/dist/vapor/bootstrap.css';
-import './index.css';
+import './index.scss';
 
 import { Router } from 'solid-app-router';
 import App from './App';

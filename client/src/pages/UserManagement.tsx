@@ -1,7 +1,7 @@
 import { Button, Stack, Table } from 'solid-bootstrap';
 import { TbCloudUpload, TbFileDownload } from 'solid-icons/tb';
 import { Component, createResource, For } from 'solid-js';
-import { Get } from '../lib/api';
+import { Create, Get } from '../lib/api';
 import UserRow from '../components/UserRow';
 import { SaveJson } from '../lib/file-downloader';
 import { useAuthContext } from '../providers/Auth';
@@ -39,7 +39,7 @@ const UserManagment: Component = () => {
       } catch (err) {
         console.warn(err);
       } finally {
-        console.log(res);
+        Create('/admin/restore/users', res);
       }
     };
     if (el.files && el.files.length > 0) {
@@ -57,7 +57,7 @@ const UserManagment: Component = () => {
           }}>
           <TbFileDownload size={16} class='icon-fix' /> Backup
         </Button>
-        <Button disabled
+        <Button
           onClick={() => {
             document.getElementById('user-data-file-upload')?.click();
           }}>

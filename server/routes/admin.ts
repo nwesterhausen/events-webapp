@@ -1,6 +1,7 @@
 import express from 'express';
 import { deletePermission, postPermission } from './permissions';
-import { getUsers } from './users';
+import { postUserData } from './restore';
+import { deleteUser, getUsers } from './users';
 const router = express.Router();
 
 router.get('/', function (req, res, next) {
@@ -8,8 +9,11 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/users', getUsers);
+router.delete('/user', deleteUser);
 
 router.post('/permissions', postPermission);
 router.delete('/permissions', deletePermission);
+
+router.post('/restore/users', postUserData);
 
 export default router;
