@@ -8,6 +8,7 @@
     "start:dbg": "set DEBUG=* & set \"NODE_ENV=development\" & nodemon server/index.ts",
     "af": "prettier --write typing-stubs client/src client/public server README.md",
     "build:client": "cd client && pnpm build",
+    "build:client:update": "pnpm build:client && pnpm postbuild",
     "postbuild": "copyfiles client/dist/* build",
     "postinstall": "cd client && pnpm install",
     "start:prod": "set DEBUG=eventsapp:* & set NODE_ENV=production & node build/index.js",

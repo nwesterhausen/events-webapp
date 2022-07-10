@@ -20,6 +20,7 @@ const NavMenu: Component = () => {
             <Navbar.Collapse id='basic-navbar-nav'>
               <Navbar.Text class='ms-5'>Authorized as {authContext.auth.user.name}</Navbar.Text>
               <Nav class='ms-auto'>
+                {authContext.auth.permissions.IS_ADMIN ? <Nav.Link href='user-admin'>Users</Nav.Link> : <></>}
                 {authContext.auth.permissions.VIEW_ALL ? (
                   <Nav.Link href='#archives' disabled>
                     Archives
