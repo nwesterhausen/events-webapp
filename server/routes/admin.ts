@@ -1,4 +1,5 @@
 import express from 'express';
+import { deletePermission, postPermission } from './permissions';
 import { getUsers } from './users';
 const router = express.Router();
 
@@ -7,5 +8,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/users', getUsers);
+
+router.post('/permissions', postPermission);
+router.delete('/permissions', deletePermission);
 
 export default router;

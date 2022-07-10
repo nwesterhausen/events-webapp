@@ -19,3 +19,9 @@ export type Db_User = {
   created_at: string;
   updated_at: string;
 };
+
+export const PERMISSION_ID = {
+  VIEW_ALL: 1,
+  MODIFY_ALL: 2,
+  IS_ADMIN: 3,
+};

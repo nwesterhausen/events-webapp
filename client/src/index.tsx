@@ -3,14 +3,15 @@ import { render } from 'solid-js/web';
 
 import 'bootswatch/dist/vapor/bootstrap.css';
 import './index.css';
+
+import { Router } from 'solid-app-router';
 import App from './App';
 import { AuthenticationProvider } from './providers/Auth';
-import { hashIntegration, Router } from 'solid-app-router';
 
 render(
   () => (
     <AuthenticationProvider>
-      <Router source={hashIntegration()}>
+      <Router>
         <App />
       </Router>
     </AuthenticationProvider>

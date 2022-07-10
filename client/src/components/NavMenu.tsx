@@ -8,7 +8,7 @@ const NavMenu: Component = () => {
   return (
     <Navbar bg='dark' variant='dark' expand='lg'>
       <Container fluid>
-        <Navbar.Brand href='#home'>
+        <Navbar.Brand href='/'>
           <Stack gap={3} direction='horizontal'>
             <img alt='' src='favicon-32x32.png' width='32' height='32' />
             <span>Upcoming Events</span>
@@ -21,13 +21,7 @@ const NavMenu: Component = () => {
               <Navbar.Text class='ms-5'>Authorized as {authContext.auth.user.name}</Navbar.Text>
               <Nav class='ms-auto'>
                 {authContext.auth.permissions.IS_ADMIN ? <Nav.Link href='user-admin'>Users</Nav.Link> : <></>}
-                {authContext.auth.permissions.VIEW_ALL ? (
-                  <Nav.Link href='#archives' disabled>
-                    Archives
-                  </Nav.Link>
-                ) : (
-                  <></>
-                )}
+                {authContext.auth.permissions.VIEW_ALL ? <Nav.Link disabled>Archives</Nav.Link> : <></>}
                 {authContext.auth.permissions.MODIFY_ALL ? (
                   <>
                     <OverlayTrigger placement='auto' overlay={<Tooltip id={'send-email'}>Submit a new event or an event correction.</Tooltip>}>

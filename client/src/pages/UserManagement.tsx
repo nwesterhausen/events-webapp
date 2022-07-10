@@ -1,5 +1,6 @@
 import { Table } from 'solid-bootstrap';
 import { Component, createResource, For } from 'solid-js';
+import { Get } from '../Api';
 import UserRow from '../components/UserRow';
 import { useAuthContext } from '../providers/Auth';
 import { Db_User, PermissionsObject } from '../Types';
@@ -17,11 +18,7 @@ const UserManagment: Component = () => {
 
   const [data] = createResource(
     async (): Promise<UserData[]> => {
-      const resp = await fetch('/admin/users');
-      if (!resp.ok) {
-        return EmptyUserdata;
-      }
-      const data = await resp.json();
+      const data = await Get('/admin/users');
       if (data.user_details && Array.isArray(data.user_details)) {
         return data.user_details;
       }
@@ -48,7 +45,6 @@ const UserManagment: Component = () => {
           </For>
         </tbody>
       </Table>
-      <pre>{JSON.stringify(data.latest, null, 2)}</pre>
     </>
   );
 };

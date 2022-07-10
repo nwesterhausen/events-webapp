@@ -1,13 +1,36 @@
-import { FormCheck, OverlayTrigger, Tooltip } from 'solid-bootstrap';
+import { Badge, FormCheck, OverlayTrigger, Tooltip } from 'solid-bootstrap';
 import { BsGoogle, BsDiscord } from 'solid-icons/bs';
-import { Component } from 'solid-js';
+import { Component, createMemo, createSignal } from 'solid-js';
+import { Create, Delete } from '../Api';
 import { UserData } from '../pages/UserManagement';
+import { useAuthContext } from '../providers/Auth';
+import { PERMISSION_ID } from '../Types';
 
 const Checked: Component = () => {
   return <FormCheck checked disabled type='checkbox' />;
 };
 const NotChecked: Component = () => {
   return <FormCheck disabled type='checkbox' />;
+};
+const addUserPermission = async (user_id: number, permission_id: number): Promise<boolean> => {
+  const data = await Create('/admin/permissions', {
+    user_id: user_id,
+    permission_id: permission_id,
+  });
+  if (data.error || data.errors) {
+    return false;
+  }
+  return true;
+};
+const delUserPermission = async (user_id: number, permission_id: number): Promise<boolean> => {
+  const data = await Delete('/admin/permissions', {
+    user_id: user_id,
+    permission_id: permission_id,
+  });
+  if (data.error || data.errors) {
+    return false;
+  }
+  return true;
 };
 
 export const UserRowHeading: Component = () => {
@@ -35,7 +58,64 @@ export const UserRowHeading: Component = () => {
   );
 };
 
+const SavingStates = {
+  IDLE: 'Idle',
+  SAVING: 'Saving',
+  SUCCESS: 'Saved',
+  FAIL: 'ERR',
+};
+
 export const UserRow: Component<{ user: UserData }> = (props) => {
+  const authContext = useAuthContext();
+  const [savingState, setSavingState] = createSignal(SavingStates.IDLE);
+
+  const badgeClass = createMemo(() => {
+    switch (savingState()) {
+      case SavingStates.IDLE:
+        return 'bg-dark';
+      case SavingStates.SAVING:
+        return 'bg-warning';
+      case SavingStates.SUCCESS:
+        return 'bg-success';
+      case SavingStates.FAIL:
+      default:
+        return 'bg-danger';
+    }
+  });
+  const editDisabled = createMemo(() => {
+    return savingState() !== SavingStates.IDLE && savingState() !== SavingStates.SUCCESS;
+  });
+  const addPermission = (user_id: number, permission_id: number) => {
+    setSavingState(SavingStates.SAVING);
+    addUserPermission(user_id, permission_id)
+      .then((success) => {
+        if (success) {
+          setSavingState(SavingStates.SUCCESS);
+        } else {
+          setSavingState(SavingStates.FAIL);
+        }
+      })
+      .catch((err) => {
+        setSavingState(SavingStates.FAIL);
+        console.error(err);
+      });
+  };
+  const delPermission = (user_id: number, permission_id: number) => {
+    setSavingState(SavingStates.SAVING);
+    delUserPermission(user_id, permission_id)
+      .then((success) => {
+        if (success) {
+          setSavingState(SavingStates.SUCCESS);
+        } else {
+          setSavingState(SavingStates.FAIL);
+        }
+      })
+      .catch((err) => {
+        setSavingState(SavingStates.FAIL);
+        console.error(err);
+      });
+  };
+
   return (
     <tr>
       <td>{props.user.id}</td>
@@ -44,9 +124,59 @@ export const UserRow: Component<{ user: UserData }> = (props) => {
       <td>{props.user.googleId ? <Checked /> : <NotChecked />}</td>
       <td>{props.user.discordId ? <Checked /> : <NotChecked />}</td>
       <td>{props.user.created_at}</td>
-      <td>{props.user.VIEW_ALL ? <FormCheck checked /> : <FormCheck />}</td>
-      <td>{props.user.MODIFY_ALL ? <FormCheck checked /> : <FormCheck />}</td>
-      <td>{props.user.IS_ADMIN ? <FormCheck checked /> : <FormCheck />}</td>
+      <td>
+        {
+          <FormCheck
+            checked={props.user.VIEW_ALL}
+            disabled={editDisabled()}
+            onClick={(e) => {
+              const el = e.target as HTMLInputElement;
+              if (el.checked) {
+                addPermission(props.user.id, PERMISSION_ID.VIEW_ALL);
+              } else {
+                delPermission(props.user.id, PERMISSION_ID.VIEW_ALL);
+              }
+            }}
+          />
+        }
+      </td>
+      <td>
+        {
+          <FormCheck
+            checked={props.user.MODIFY_ALL}
+            disabled={editDisabled()}
+            onClick={(e) => {
+              const el = e.target as HTMLInputElement;
+              if (el.checked) {
+                addPermission(props.user.id, PERMISSION_ID.MODIFY_ALL);
+              } else {
+                delPermission(props.user.id, PERMISSION_ID.MODIFY_ALL);
+              }
+            }}
+          />
+        }
+      </td>
+      <td>
+        {authContext.auth.user.id === props.user.id ? (
+          <FormCheck checked={props.user.IS_ADMIN} disabled />
+        ) : (
+          <FormCheck
+            checked={props.user.IS_ADMIN}
+            disabled={editDisabled()}
+            onClick={(e) => {
+              const el = e.target as HTMLInputElement;
+              if (el.checked) {
+                addPermission(props.user.id, PERMISSION_ID.IS_ADMIN);
+              } else {
+                delPermission(props.user.id, PERMISSION_ID.IS_ADMIN);
+              }
+            }}
+          />
+        )}
+      </td>
+      <td style={{ width: '5rem' }}>
+        <Badge class={badgeClass()}>{savingState()}</Badge>
+      </td>
     </tr>
   );
 };
