@@ -39,7 +39,7 @@ export async function applyUserToSession(user: any, req: Request) {
   }
 
   debug(`${user.name} has ${permissions.length} permissions.`);
-  req.session.user_permissions = buildPermissionReference([...permissions.map((v) => v.permission_id)]);
+  req.session.user_permissions = buildPermissionReference(permissions);
 }
 
 /**
@@ -48,7 +48,7 @@ export async function applyUserToSession(user: any, req: Request) {
  * @param permissionArray array of user's permissions (as ids)
  * @returns object with booleans for each permission
  */
-export function buildPermissionReference(permissionArray: number[]) {
+export function buildPermissionReference(permissionArray: number[] | any[]) {
   const result = {
     IS_ADMIN: false,
     MODIFY_ALL: false,
@@ -56,17 +56,23 @@ export function buildPermissionReference(permissionArray: number[]) {
   };
   // Check if we were given an array. If we were, we can toggle the flags in the dictionary object
   // to be true as needed. If we weren't, just return all flags as false.
-  if (Array.isArray(permissionArray)) {
-    if (permissionArray.indexOf(PERMISSION_ID.MODIFY_ALL) >= 0) {
-      result.MODIFY_ALL = true;
-    }
-    if (permissionArray.indexOf(PERMISSION_ID.VIEW_ALL) >= 0) {
-      result.VIEW_ALL = true;
-    }
-    if (permissionArray.indexOf(PERMISSION_ID.IS_ADMIN) >= 0) {
-      result.IS_ADMIN = true;
+  if (Array.isArray(permissionArray) && permissionArray.length > 0) {
+    // Check if we were given an array of numbers or of "any"
+    if (typeof permissionArray[0] === 'number') {
+      if (permissionArray.indexOf(PERMISSION_ID.MODIFY_ALL) >= 0) {
+        result.MODIFY_ALL = true;
+      }
+      if (permissionArray.indexOf(PERMISSION_ID.VIEW_ALL) >= 0) {
+        result.VIEW_ALL = true;
+      }
+      if (permissionArray.indexOf(PERMISSION_ID.IS_ADMIN) >= 0) {
+        result.IS_ADMIN = true;
+      }
+    } else if (permissionArray[0].permission_id) {
+      return buildPermissionReference([...permissionArray.map((v) => v.permission_id)]);
     }
     debug(`Transformed ${JSON.stringify(permissionArray)} into ${JSON.stringify(result)}`);
   }
+
   return result;
 }

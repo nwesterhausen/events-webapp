@@ -1,6 +1,7 @@
 import debugLib from 'debug';
 import { RequestHandler } from 'express';
 import { Knex } from 'knex';
+import { buildPermissionReference } from '../lib/session';
 
 const debug = debugLib('eventsapp:account');
 
@@ -10,10 +11,12 @@ export const getAccount: RequestHandler = (req, res) => {
     // If there is a session, get the user data from it
     new Promise(async (resolve, reject) => {
       const user = await (res.app.get('db') as Knex).first().from('users').where({ email: req.session.user });
+      const permissions = await (req.app.get('db') as Knex).select().from('user_permissions').where({ user_id: user.id });
       if (user) {
         return resolve(
           res.status(200).json({
             user_details: user,
+            user_permissions: buildPermissionReference(permissions),
           })
         );
       } else {
