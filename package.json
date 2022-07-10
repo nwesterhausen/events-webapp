@@ -13,7 +13,7 @@
     "postinstall": "cd client && pnpm install",
     "start:prod": "set DEBUG=eventsapp:* & set NODE_ENV=production & node build/index.js",
     "clean": "rimraf build",
-    "start:prod:lin": "DEBUG=eventsapp:* NODE_ENV=production node build/index.js"
+    "start:prod:lin": "DEBUG=eventsapp:* NODE_ENV=production node build/index.js >access.log"
   },
   "dependencies": {
     "@types/cors": "^2.8.12",
