@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "pnpm prebuild && tsc && pnpm postbuild",
+    "build": "tsc && pnpm build:client && pnpm postbuild",
     "start": "set DEBUG=eventsapp:* & set \"NODE_ENV=development\" & nodemon server/index.ts",
     "start:dbg": "set DEBUG=* & set \"NODE_ENV=development\" & nodemon server/index.ts",
     "af": "prettier --write typing-stubs client/src client/public server README.md",
     "build:client": "cd client && pnpm build",
-    "prebuild": "pnpm build:client",
     "postbuild": "copyfiles client/dist/* build",
     "postinstall": "cd client && pnpm install",
     "start:prod": "set DEBUG=eventsapp:* & set NODE_ENV=production & node build/index.js",
