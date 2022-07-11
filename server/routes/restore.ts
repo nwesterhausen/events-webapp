@@ -61,34 +61,44 @@ export const postUserData: RequestHandler = (req, res) => {
           newUser.googleId = user.googleId;
         }
         // insert user
-        const res = await knex('users').insert(newUser);
-        const insertedUserId = res[0];
+        const res = await knex('users').insert(newUser, ['id']);
+        const insertedUserId = res[0].id;
+
         debug(`Created User:${insertedUserId}`);
         // insert permissions
         const insertedIds: number[] = [];
         if (user.VIEW_ALL === true) {
-          const res = await knex('user_permissions').insert({
-            user_id: insertedUserId,
-            permission_id: PERMISSION_ID.VIEW_ALL,
-          });
-          debug(`Granted User:${insertedUserId} Permission:${PERMISSION_ID.IS_ADMIN} (u_p:${JSON.stringify(res)})`);
-          insertedIds.push(res[0]);
+          const res = await knex('user_permissions').insert(
+            {
+              user_id: insertedUserId,
+              permission_id: PERMISSION_ID.VIEW_ALL,
+            },
+            ['id']
+          );
+          debug(`Granted User:${insertedUserId} Permission:${PERMISSION_ID.IS_ADMIN} (u_p:${res[0].id})`);
+          insertedIds.push(res[0].id);
         }
         if (user.MODIFY_ALL === true) {
-          const res = await knex('user_permissions').insert({
-            user_id: insertedUserId,
-            permission_id: PERMISSION_ID.MODIFY_ALL,
-          });
-          debug(`Granted User:${insertedUserId} Permission:${PERMISSION_ID.IS_ADMIN} (u_p:${JSON.stringify(res)})`);
-          insertedIds.push(res[0]);
+          const res = await knex('user_permissions').insert(
+            {
+              user_id: insertedUserId,
+              permission_id: PERMISSION_ID.MODIFY_ALL,
+            },
+            ['id']
+          );
+          debug(`Granted User:${insertedUserId} Permission:${PERMISSION_ID.IS_ADMIN} (u_p:${res[0].id})`);
+          insertedIds.push(res[0].id);
         }
         if (user.IS_ADMIN === true) {
-          const res = await knex('user_permissions').insert({
-            user_id: insertedUserId,
-            permission_id: PERMISSION_ID.IS_ADMIN,
-          });
-          debug(`Granted User:${insertedUserId} Permission:${PERMISSION_ID.IS_ADMIN} (u_p:${JSON.stringify(res)})`);
-          insertedIds.push(res[0]);
+          const res = await knex('user_permissions').insert(
+            {
+              user_id: insertedUserId,
+              permission_id: PERMISSION_ID.IS_ADMIN,
+            },
+            ['id']
+          );
+          debug(`Granted User:${insertedUserId} Permission:${PERMISSION_ID.IS_ADMIN} (u_p:${res[0].id})`);
+          insertedIds.push(res[0].id);
         }
         const consequences = {
           perm_id: insertedIds,
