@@ -6,7 +6,7 @@ import { useAuthContext } from '../providers/Auth';
 const NavMenu: Component = () => {
   const authContext = useAuthContext();
   return (
-    <Navbar bg='dark' variant='dark' expand='lg'>
+    <Navbar id='navbar' bg='dark' variant='dark' expand='lg'>
       <Container fluid>
         <Navbar.Brand href='/'>
           <Stack gap={3} direction='horizontal'>

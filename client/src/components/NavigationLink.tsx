@@ -1,15 +1,13 @@
-import { OverlayTrigger, Tooltip, Button } from 'solid-bootstrap';
+import { Button } from 'solid-bootstrap';
+import { ButtonProps } from 'solid-bootstrap/esm/Button';
+import { RiMapDirectionFill } from 'solid-icons/ri';
 import { Component } from 'solid-js';
-import { FiMap } from 'solid-icons/fi';
 
-const NaviagationLink: Component<{ href: string }> = (props) => {
-  const hiddenId = Math.floor(100 * Math.random());
+const NaviagationLink: Component<{ href: string } & ButtonProps> = (props) => {
   return (
-    <OverlayTrigger overlay={<Tooltip id={'external-link-' + hiddenId}>Get Directions</Tooltip>}>
-      <a href={props.href} target='_blank' class='text-decoration-none'>
-        <FiMap />
-      </a>
-    </OverlayTrigger>
+    <Button size={props.size} href={props.href} target='_blank'>
+      <RiMapDirectionFill class='icon-fix' /> Directions
+    </Button>
   );
 };
 

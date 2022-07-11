@@ -5,6 +5,7 @@ import ListenLink from '../components/ListenLink';
 import NaviagationLink from '../components/NavigationLink';
 import Setlist from '../components/Setlist';
 import WebsiteLink from '../components/WebsiteLink';
+import YoutubeLink from '../components/YoutubeLink';
 
 const Aug192022: Component = () => {
   return (
@@ -14,23 +15,31 @@ const Aug192022: Component = () => {
       <Itenerary.Section title='Friday Night, Aug 19th'>
         <Itenerary.Item timeRange='7:00 PM - 10:00 PM' name='Concert'>
           <Stack gap={2}>
-            <div>
-              <strong>The Main Squeeze @ Nickel Plate Amphitheater</strong>{' '}
-              <NaviagationLink href='https://google.com/maps/dir//Nickel+Plate+District+Amphitheater,+6+Municipal+Dr,+Fishers,+IN+46038/@39.9605582,-86.0193325,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8814b3869f97a02b:0xa819ac75af284476!2m2!1d-86.0171438!2d39.9605582' />
-            </div>
             <Stack direction='horizontal' gap={2}>
-              <span>
-                Main Squeeze <ListenLink href='https://www.youtube.com/watch?v=JwVcQGp3bLo' artist='Main Squeeze' />
-              </span>
-              <span>
-                Opener: Huckleberry Funk <ListenLink href='https://www.youtube.com/watch?v=DQnhCYUMkYs' artist='Huckleberry Funk' />
-              </span>
-            </Stack>
-            <div>Doors open at 7:00 PM, Show starts at 8:00 PM.</div>
-            <div>
               <Button variant='primary' size='sm' href='https://mokbpresents.com/events/?es=the+main+squeeze'>
                 Get Tickets
               </Button>
+              <NaviagationLink
+                size='sm'
+                href='https://google.com/maps/dir//Nickel+Plate+District+Amphitheater,+6+Municipal+Dr,+Fishers,+IN+46038/@39.9605582,-86.0193325,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8814b3869f97a02b:0xa819ac75af284476!2m2!1d-86.0171438!2d39.9605582'
+              />
+            </Stack>
+            <div>
+              <strong>Main Squeeze @ Nickel Plate Amphitheater</strong>{' '}
+            </div>
+            <Stack direction='horizontal' gap={2}>
+              Main Squeeze with Huckleberry Funk
+            </Stack>
+            <div>Doors open at 7:00 PM, Show starts at 8:00 PM.</div>
+            <div>
+              <YoutubeLink size='sm' variant='outline-info' href='https://www.youtube.com/watch?v=JwVcQGp3bLo'>
+                Main Squeeze at Bonarroo 2022
+              </YoutubeLink>
+            </div>
+            <div>
+              <YoutubeLink size='sm' variant='outline-info' href='https://www.youtube.com/watch?v=DQnhCYUMkYs'>
+                Huckleberry Funk Live
+              </YoutubeLink>
             </div>
           </Stack>
         </Itenerary.Item>

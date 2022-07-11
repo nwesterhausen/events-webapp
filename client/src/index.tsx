@@ -1,7 +1,7 @@
 /* @refresh reload */
 import { render } from 'solid-js/web';
 
-import 'bootswatch/dist/vapor/bootstrap.css';
+import 'bootswatch/dist/superhero/bootstrap.css';
 import './index.scss';
 
 import { Router } from 'solid-app-router';

@@ -17,7 +17,7 @@ type SetListSongProps = {
 
 const Setlist: ParentComponent = (props) => {
   return (
-    <Card class='p-1' style={{ 'border-radius': '0.75rem' }}>
+    <Card class='p-1'>
       <Card.Title class='ps-2'>Setlist</Card.Title>
       <Card.Text>
         <ListGroup as='ul' class='setlist'>
@@ -38,10 +38,10 @@ const SetlistSong: Component<SetListSongProps> = (props) => {
           </p>
           <span class='text-muted song-submitter'>Submitted by {props.submittedBy || 'Group Concensus'}</span>
         </Stack>
-        {props.tabLink ? <TabLink href={props.tabLink} /> : <></>}
-        {props.spotifyLink ? <SpotifyLink href={props.spotifyLink} /> : <></>}
-        {props.youtubeLink ? <YoutubeLink href={props.youtubeLink} /> : <></>}
-        {props.liveLink ? <ListenLink href={props.liveLink} artist='a Live Performance' /> : <></>}
+        {props.tabLink ? <TabLink size='sm' href={props.tabLink} /> : <></>}
+        {props.spotifyLink ? <SpotifyLink size='sm' href={props.spotifyLink} /> : <></>}
+        {props.youtubeLink ? <YoutubeLink size='sm' href={props.youtubeLink} /> : <></>}
+        {props.liveLink ? <ListenLink size='sm' href={props.liveLink} /> : <></>}
       </Stack>
     </ListGroup.Item>
   );

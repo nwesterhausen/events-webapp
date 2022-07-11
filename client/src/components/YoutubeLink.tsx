@@ -1,15 +1,13 @@
-import { OverlayTrigger, Tooltip, Button } from 'solid-bootstrap';
-import { Component } from 'solid-js';
+import { Button, ButtonProps } from 'solid-bootstrap';
 import { SiYoutube } from 'solid-icons/si';
+import { Component } from 'solid-js';
 
-const YoutubeLink: Component<{ href: string }> = (props) => {
-  const hiddenId = Math.floor(100 * Math.random());
+const YoutubeLink: Component<{ href: string } & ButtonProps> = (props) => {
   return (
-    <OverlayTrigger overlay={<Tooltip id={'listen-spotify' + hiddenId}>Listen on Youtube</Tooltip>}>
-      <a href={props.href} target='_blank' class='text-decoration-none' style={{ color: '#DD0000' }}>
-        <SiYoutube />
-      </a>
-    </OverlayTrigger>
+    <Button variant={props.variant} size={props.size} href={props.href} target='_blank'>
+      <SiYoutube class='icon-fix' /> Listen{props.children ? ' to ' : ''}
+      {props.children}
+    </Button>
   );
 };
 

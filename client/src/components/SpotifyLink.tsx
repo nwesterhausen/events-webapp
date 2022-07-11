@@ -1,15 +1,13 @@
-import { OverlayTrigger, Tooltip, Button } from 'solid-bootstrap';
-import { Component } from 'solid-js';
+import { Button, ButtonProps } from 'solid-bootstrap';
 import { SiSpotify } from 'solid-icons/si';
+import { Component } from 'solid-js';
 
-const SpotifyLink: Component<{ href: string }> = (props) => {
-  const hiddenId = Math.floor(100 * Math.random());
+const SpotifyLink: Component<{ href: string } & ButtonProps> = (props) => {
   return (
-    <OverlayTrigger overlay={<Tooltip id={'listen-spotify' + hiddenId}>Listen on Spotify</Tooltip>}>
-      <a href={props.href} target='_blank' class='text-decoration-none' style={{ color: '#1DB954' }}>
-        <SiSpotify />
-      </a>
-    </OverlayTrigger>
+    <Button variant={props.variant} size={props.size} href={props.href} target='_blank'>
+      <SiSpotify class='icon-fix' /> Listen{props.children ? ' to ' : ''}
+      {props.children}
+    </Button>
   );
 };
 

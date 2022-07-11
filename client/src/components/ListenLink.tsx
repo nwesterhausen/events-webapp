@@ -1,14 +1,12 @@
-import { OverlayTrigger, Tooltip, Button } from 'solid-bootstrap';
-import { Component } from 'solid-js';
+import { Button, ButtonProps } from 'solid-bootstrap';
 import { FiMusic } from 'solid-icons/fi';
+import { Component } from 'solid-js';
 
-const ListenLink: Component<{ href: string; artist: string }> = (props) => {
+const ListenLink: Component<{ href: string } & ButtonProps> = (props) => {
   return (
-    <OverlayTrigger overlay={<Tooltip id={'listen-to-' + props.artist.replace(/\s+/g, '')}>Listen To {props.artist}</Tooltip>}>
-      <a href={props.href} target='_blank' class='text-decoration-none'>
-        <FiMusic />
-      </a>
-    </OverlayTrigger>
+    <Button variant={props.variant} size={props.size} href={props.href} target='_blank'>
+      <FiMusic class='icon-fix' /> Listen
+    </Button>
   );
 };
 

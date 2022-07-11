@@ -10,7 +10,7 @@ const IteneraryItem: ParentComponent<{ timeRange?: string; name: string }> = (pr
     <Stack gap={1} class='itenerary-item mt-3'>
       <p class='fw-bold fs-4 text-info mb-0'>{props.name}</p>
       {props.timeRange ? <strong class='mb-3 ps-2'>{props.timeRange}</strong> : <></>}
-      <section class='text-secondary'>{props.children}</section>
+      <section>{props.children}</section>
     </Stack>
   );
 };

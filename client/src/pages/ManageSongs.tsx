@@ -22,7 +22,7 @@ const ManageSongs: Component = () => {
   );
 
   const deleteSetlist = (id: number) => {
-    console.log('delete set',id);
+    console.log('delete set', id);
     Delete('/v1/setlist', { id: id })
       .then(() => refetch())
       .catch(console.error);
