@@ -6,6 +6,7 @@ import { UserData } from '../pages/UserManagement';
 import { useAuthContext } from '../providers/Auth';
 import { PERMISSION_ID } from '../types';
 import { FiTrash2 } from 'solid-icons/fi';
+import CheckCross from './CheckCross';
 
 const Checked: Component = () => {
   return <FormCheck checked disabled type='checkbox' />;
@@ -123,8 +124,12 @@ export const UserRow: Component<{ user: UserData }> = (props) => {
       <td>{props.user.id}</td>
       <td>{props.user.name}</td>
       <td>{props.user.email}</td>
-      <td>{props.user.googleId ? <Checked /> : <NotChecked />}</td>
-      <td>{props.user.discordId ? <Checked /> : <NotChecked />}</td>
+      <td>
+        <CheckCross check={props.user.googleId !== null} />
+      </td>
+      <td>
+        <CheckCross check={props.user.discordId !== null} />
+      </td>
       <td>{props.user.created_at}</td>
       <td>
         {

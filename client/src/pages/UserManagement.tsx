@@ -1,8 +1,9 @@
 import { Button, Stack, Table } from 'solid-bootstrap';
 import { TbCloudUpload, TbFileDownload } from 'solid-icons/tb';
 import { Component, createResource, For } from 'solid-js';
-import { Create, Get } from '../lib/api';
+import TablePageHeader from '../components/TablePageHeader';
 import UserRow from '../components/UserRow';
+import { Create, Get } from '../lib/api';
 import { SaveJson } from '../lib/file-downloader';
 import { useAuthContext } from '../providers/Auth';
 import { Db_User, PermissionsObject } from '../types';
@@ -49,21 +50,23 @@ const UserManagment: Component = () => {
 
   return (
     <>
-      <input type='file' id='user-data-file-upload' style='display:none;' onChange={handleImport} />
-      <Stack direction='horizontal' class='d-flex justify-content-end' gap={3}>
-        <Button
-          onClick={() => {
-            SaveJson(data.latest, 'users-data.json');
-          }}>
-          <TbFileDownload size={16} class='icon-fix' /> Backup
-        </Button>
-        <Button
-          onClick={() => {
-            document.getElementById('user-data-file-upload')?.click();
-          }}>
-          <TbCloudUpload size={16} class='icon-fix' /> Restore
-        </Button>
-      </Stack>
+      <TablePageHeader>
+        <input type='file' id='user-data-file-upload' style='display:none;' onChange={handleImport} />
+        <Stack direction='horizontal' class='d-flex justify-content-end' gap={3}>
+          <Button
+            onClick={() => {
+              SaveJson(data.latest, 'users-data.json');
+            }}>
+            <TbFileDownload size={16} class='icon-fix' /> Backup
+          </Button>
+          <Button
+            onClick={() => {
+              document.getElementById('user-data-file-upload')?.click();
+            }}>
+            <TbCloudUpload size={16} class='icon-fix' /> Restore
+          </Button>
+        </Stack>
+      </TablePageHeader>
       <Table>
         <thead>
           <UserRow.Heading />

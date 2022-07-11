@@ -1,6 +1,7 @@
 import { Button, Stack, Table } from 'solid-bootstrap';
 import { Component, createResource, For } from 'solid-js';
 import SetlistRow from '../components/SetlistRow';
+import TablePageHeader from '../components/TablePageHeader';
 import { Create, Delete, Get } from '../lib/api';
 import { DB_Setlist } from '../types';
 
@@ -30,17 +31,18 @@ const ManageSetlists: Component = () => {
 
   return (
     <>
-      <Stack class='d-flex justify-content-end' direction='horizontal' gap={3}>
-        <Button
-          onClick={() => {
-            Create('/v1/setlist', {})
-              .then(() => refetch())
-              .catch(console.error);
-          }}>
-          Create Empty Setlist
-        </Button>
-      </Stack>
-
+      <TablePageHeader>
+        <Stack class='d-flex justify-content-end' direction='horizontal' gap={3}>
+          <Button
+            onClick={() => {
+              Create('/v1/setlist', {})
+                .then(() => refetch())
+                .catch(console.error);
+            }}>
+            Create Empty Setlist
+          </Button>
+        </Stack>
+      </TablePageHeader>
       <Table>
         <thead>
           <SetlistRow.Heading />

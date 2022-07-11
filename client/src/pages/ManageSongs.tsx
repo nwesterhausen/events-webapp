@@ -1,7 +1,8 @@
-import { Button, Stack, Table } from 'solid-bootstrap';
+import { Stack, Table } from 'solid-bootstrap';
 import { Component, createResource, For } from 'solid-js';
 import SetlistRow from '../components/SetlistRow';
-import { Create, Delete, Get } from '../lib/api';
+import TablePageHeader from '../components/TablePageHeader';
+import { Delete, Get } from '../lib/api';
 import { DB_Setlist } from '../types';
 
 export type SetlistData = DB_Setlist & {
@@ -10,9 +11,9 @@ export type SetlistData = DB_Setlist & {
 const EmptySetlistData: SetlistData[] = [];
 
 const ManageSongs: Component = () => {
-  const [setlists, { refetch }] = createResource(
+  const [songs, { refetch }] = createResource(
     async (): Promise<SetlistData[]> => {
-      const data = await Get('/v1/setlists');
+      const data = await Get('/v1/songs');
       if (Array.isArray(data.data)) {
         return data.data;
       }
@@ -30,16 +31,9 @@ const ManageSongs: Component = () => {
 
   return (
     <>
-      <Stack class='d-flex justify-content-end' direction='horizontal' gap={3}>
-        <Button
-          onClick={() => {
-            Create('/v1/setlist', {})
-              .then(() => refetch())
-              .catch(console.error);
-          }}>
-          Create Empty Setlist
-        </Button>
-      </Stack>
+      <TablePageHeader>
+        <Stack class='d-flex justify-content-end' direction='horizontal' gap={3}></Stack>
+      </TablePageHeader>
 
       <Table>
         <thead>
@@ -47,7 +41,7 @@ const ManageSongs: Component = () => {
         </thead>
         <tbody>
           <For
-            each={setlists.latest}
+            each={songs.latest}
             fallback={
               <tr>
                 <td colSpan={9}>No setlist data..</td>
