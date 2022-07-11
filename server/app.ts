@@ -29,6 +29,9 @@ const SessionDB = new sqlite('sessions.sqlite3');
 
 // Load env variables
 dotenv.config();
+if (process.env.NODE_ENV === 'development') {
+  dotenv.config({ path: './dev.env', override: true });
+}
 
 // Set database connection
 const knex = connectDatabase();

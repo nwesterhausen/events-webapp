@@ -11,15 +11,7 @@ export const getAccount: RequestHandler = (req, res) => {
     // If there is a session, get the user data from it
     new Promise(async (resolve, reject) => {
       const user = await (res.app.get('db') as Knex).first().from('users').where({ email: req.session.user });
-      const permissions = await (req.app.get('db') as Knex).select().from('user_permissions').where({ user_id: user.id });
-      if (user) {
-        return resolve(
-          res.status(200).json({
-            user_details: user,
-            user_permissions: buildPermissionReference(permissions),
-          })
-        );
-      } else {
+      if (!user) {
         debug(`Somehow logged in use doesn't exist!`);
         return resolve(
           res.status(501).json({
@@ -27,6 +19,14 @@ export const getAccount: RequestHandler = (req, res) => {
           })
         );
       }
+      const permissions = await (req.app.get('db') as Knex).select().from('user_permissions').where({ user_id: user.id });
+
+      return resolve(
+        res.status(200).json({
+          user_details: user,
+          user_permissions: buildPermissionReference(permissions),
+        })
+      );
     }).catch(console.error);
   } else {
     debug(`rejected unauthorized visit to account page`);

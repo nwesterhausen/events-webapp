@@ -131,10 +131,6 @@ function parseEnvironment(): ParsedEnvConfigOptions {
     DB_SSL_CERT_FILEPATH: '',
   };
 
-  if (process.env.NODE_ENV === 'development') {
-    envOptions.DB_FILENAME = 'dev-db.sqlite3';
-  }
-
   if (process.env.DB_DEBUG && process.env.DB_DEBUG === 'true') {
     envOptions.DB_DEBUG = true;
   }
@@ -202,6 +198,10 @@ function parseEnvironment(): ParsedEnvConfigOptions {
   // Set final path values
   envOptions.DB_FILEPATH = path.join(envOptions.DATA_PATH, envOptions.DB_FILENAME || '');
   envOptions.DB_SSL_CERT_FILEPATH = path.join(envOptions.DATA_PATH, envOptions.DB_SSL_CERT_FILENAME || '');
+
+  const printableEnv = { ...envOptions };
+  printableEnv.DB_PASSWORD = '<REDACTED>';
+  debug(printableEnv);
 
   return envOptions;
 }
