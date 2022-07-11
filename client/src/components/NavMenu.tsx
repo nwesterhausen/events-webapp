@@ -1,6 +1,7 @@
 import { Container, Nav, Navbar, NavDropdown, OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
 import { FiMail } from 'solid-icons/fi';
 import { Component } from 'solid-js';
+import { VscGithubInverted } from 'solid-icons/vsc';
 import { useAuthContext } from '../providers/Auth';
 
 const NavMenu: Component = () => {
@@ -44,6 +45,11 @@ const NavMenu: Component = () => {
                 ) : (
                   <></>
                 )}
+                <OverlayTrigger placement='auto' overlay={<Tooltip id='view-source'>Source code on GitHub</Tooltip>}>
+                  <Nav.Link href='https://github.com/nwesterhausen/events-webapp'>
+                    <VscGithubInverted class='icon-fix' size='1rem' />
+                  </Nav.Link>
+                </OverlayTrigger>
                 <Nav.Link href='/auth/logout'>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>
