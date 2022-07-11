@@ -33,13 +33,14 @@ html {
   border-radius: 0.25rem;
   border: 1px solid #0000;
   margin: -1px;
+  color: var(--bs-primary) !important;
 
   &.disabled {
-    color: var(--bs-gray-700);
+    color: var(--bs-secondary) !important;
   }
 
   &:not(.disabled):hover {
-    color: var(--bs-danger);
+    color: var(--bs-danger) !important;
     cursor: pointer;
     border: 1px solid var(--bs-danger);
   }
