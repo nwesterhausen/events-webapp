@@ -8,12 +8,6 @@ import { PERMISSION_ID } from '../types';
 import { FiTrash2 } from 'solid-icons/fi';
 import CheckCross from './CheckCross';
 
-const Checked: Component = () => {
-  return <FormCheck checked disabled type='checkbox' />;
-};
-const NotChecked: Component = () => {
-  return <FormCheck disabled type='checkbox' />;
-};
 const addUserPermission = async (user_id: number, permission_id: number): Promise<boolean> => {
   const data = await Create('/admin/permissions', {
     user_id: user_id,
@@ -68,7 +62,7 @@ const SavingStates = {
   FAIL: 'ERR',
 };
 
-export const UserRow: Component<{ user: UserData }> = (props) => {
+export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (props) => {
   const authContext = useAuthContext();
   const [savingState, setSavingState] = createSignal(SavingStates.IDLE);
 
@@ -187,7 +181,7 @@ export const UserRow: Component<{ user: UserData }> = (props) => {
           classList={{ disabled: authContext.auth.user.id === props.user.id }}
           onClick={() => {
             if (authContext.auth.user.id === props.user.id) return; // Exit if this is for the current user
-            Delete('/admin/user', { user_id: props.user.id }).then(() => window.location.reload());
+            Delete('/admin/user', { user_id: props.user.id }).then(() => props.dataRefetch());
           }}>
           <FiTrash2 class='icon-fix' />
         </a>

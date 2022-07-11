@@ -19,7 +19,7 @@ const UserManagment: Component = () => {
     return <></>;
   }
 
-  const [data] = createResource(
+  const [data, { refetch }] = createResource(
     async (): Promise<UserData[]> => {
       const data = await Get('/admin/users');
       if (data.user_details && Array.isArray(data.user_details)) {
@@ -40,7 +40,9 @@ const UserManagment: Component = () => {
       } catch (err) {
         console.warn(err);
       } finally {
-        Create('/admin/restore/users', res);
+        Create('/admin/restore/users', res)
+          .then(() => refetch())
+          .catch(console.error);
       }
     };
     if (el.files && el.files.length > 0) {
@@ -79,7 +81,7 @@ const UserManagment: Component = () => {
                 <td colSpan={9}>No user data..</td>
               </tr>
             }>
-            {(user: UserData) => <UserRow user={user} />}
+            {(user: UserData) => <UserRow user={user} dataRefetch={refetch} />}
           </For>
         </tbody>
       </Table>
