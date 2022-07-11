@@ -9,6 +9,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
+          if (id.includes("UtilmateGuitar.tsx")) return 'icons';
           if (id.includes('node_modules')) {
             if (id.includes('solid-icons')) {
               return 'icons';
