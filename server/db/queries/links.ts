@@ -1,6 +1,6 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
-import { Link2IteneraryArticle, Link2Song } from 'knex/types/tables';
+import { Link2ItineraryArticle, Link2Song } from 'knex/types/tables';
 import { LinkData } from './types';
 const debug = debugLib('eventsapp:query-link');
 
@@ -48,13 +48,13 @@ const allLinksForSong = async (db: Knex, songId: number): Promise<LinkData[]> =>
   return links;
 };
 
-const allLinkForIteneraryArticle = async (db: Knex, articleId: number): Promise<LinkData[]> => {
-  const articleLinks = await db.select().from('link_2_itenerary_article').where({
-    itenerary_article_id: articleId,
+const allLinkForitineraryArticle = async (db: Knex, articleId: number): Promise<LinkData[]> => {
+  const articleLinks = await db.select().from('link_2_itinerary_article').where({
+    itinerary_article_id: articleId,
   });
-  debug(`allLinkForIteneraryArticle(${articleId}) found ${articleLinks.length} links`);
+  debug(`allLinkForitineraryArticle(${articleId}) found ${articleLinks.length} links`);
   const links: LinkData[] = [];
-  for (const articlelink of articleLinks as Link2IteneraryArticle[]) {
+  for (const articlelink of articleLinks as Link2ItineraryArticle[]) {
     const match = await linkById(db, articlelink.link_id);
     if (match.length === 1) {
       links.push(match[0]);
@@ -69,6 +69,6 @@ export default Object.assign(
     all: allLinks,
     byId: linkById,
     forSong: allLinksForSong,
-    forIteneraryArticle: allLinkForIteneraryArticle,
+    foritineraryArticle: allLinkForitineraryArticle,
   }
 );

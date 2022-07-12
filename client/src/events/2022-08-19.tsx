@@ -1,19 +1,17 @@
-import { Stack, Button } from 'solid-bootstrap';
+import { Button, Stack } from 'solid-bootstrap';
 import { Component } from 'solid-js';
-import Itenerary from '../components/Itenerary';
-import ListenLink from '../components/ListenLink';
+import Itinerary from '../components/itinerary';
 import NaviagationLink from '../components/NavigationLink';
 import Setlist from '../components/Setlist';
-import WebsiteLink from '../components/WebsiteLink';
 import YoutubeLink from '../components/YoutubeLink';
 
 const Aug192022: Component = () => {
   return (
-    <Itenerary>
-      <Itenerary.Title>Music Weekend, August 19th - 21st</Itenerary.Title>
+    <Itinerary>
+      <Itinerary.Title>Music Weekend, August 19th - 21st</Itinerary.Title>
 
-      <Itenerary.Section title='Friday Night, Aug 19th'>
-        <Itenerary.Item timeRange='7:00 PM - 10:00 PM' name='Concert'>
+      <Itinerary.Section title='Friday Night, Aug 19th'>
+        <Itinerary.Article timeRange='7:00 PM - 10:00 PM' name='Concert'>
           <Stack gap={2}>
             <Stack direction='horizontal' gap={2}>
               <Button variant='primary' size='sm' href='https://mokbpresents.com/events/?es=the+main+squeeze'>
@@ -42,15 +40,15 @@ const Aug192022: Component = () => {
               </YoutubeLink>
             </div>
           </Stack>
-        </Itenerary.Item>
-        <Itenerary.Item timeRange='Late Night' name='Crash'>
+        </Itinerary.Article>
+        <Itinerary.Article timeRange='Late Night' name='Crash'>
           Find somewhere to sleep, options may include Travis or Nick.
-        </Itenerary.Item>
-      </Itenerary.Section>
+        </Itinerary.Article>
+      </Itinerary.Section>
 
-      <Itenerary.Section title='Saturday, Aug 20th'>
-        <Itenerary.Item timeRange='9:00 AM - 10:30 AM' name='Breakfast' />
-        <Itenerary.Item timeRange='11:00 AM - ???' name='Hangout'>
+      <Itinerary.Section title='Saturday, Aug 20th'>
+        <Itinerary.Article timeRange='9:00 AM - 10:30 AM' name='Breakfast' />
+        <Itinerary.Article timeRange='11:00 AM - ???' name='Hangout'>
           <p>Jams, Rocket League, Eating</p>
           <Setlist>
             <Setlist.Song
@@ -92,15 +90,15 @@ const Aug192022: Component = () => {
               tabLink='https://tabs.ultimate-guitar.com/tab/bag-raiders/shooting-stars-official-2394435'
             />
           </Setlist>
-        </Itenerary.Item>
-      </Itenerary.Section>
+        </Itinerary.Article>
+      </Itinerary.Section>
 
-      <Itenerary.Section title='Sunday, Aug 21st'>
-        <Itenerary.Item timeRange='8:00 AM - ?' name='Golfing'>
+      <Itinerary.Section title='Sunday, Aug 21st'>
+        <Itinerary.Article timeRange='8:00 AM - ?' name='Golfing'>
           Course TDB
-        </Itenerary.Item>
-      </Itenerary.Section>
-    </Itenerary>
+        </Itinerary.Article>
+      </Itinerary.Section>
+    </Itinerary>
   );
 };
 

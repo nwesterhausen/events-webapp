@@ -47,37 +47,37 @@ declare module 'knex/types/tables' {
     link_id: number;
     song_id: number;
   }
-  interface Link2IteneraryArticle {
+  interface Link2ItineraryArticle {
     link_id: number;
-    itenerary_article_id: number;
+    itinerary_article_id: number;
   }
-  interface ItenereryItem {
+  interface ItineraryItem {
     id: number;
     text: string;
-    itenerary_article_id: number;
+    itinerary_article_id: number;
   }
-  interface ItenearyArticle {
+  interface ItineraryArticle {
     id: number;
     title: string;
     start_time: string;
     end_time: string;
-    itenerary_section_id: number;
+    itinerary_section_id: number;
   }
-  interface ItenerarySection {
+  interface ItinerarySection {
     id: number;
     date: string;
     tod_modifier: string;
-    itenerary_id: number;
+    itinerary_id: number;
   }
-  interface Itenerary {
+  interface Itinerary {
     id: number;
     start_date: string;
     end_date: string;
     title: string;
   }
-  interface Setlist2IteneraryArticle {
+  interface Setlist2ItineraryArticle {
     setlist_id: number;
-    itenerary_article_id: number;
+    itinerary_article_id: number;
   }
   interface Tables {
     // This is same as specifying `knex<User>('users')`
@@ -128,13 +128,13 @@ declare module 'knex/types/tables' {
     song_2_setlist: Song2Setlist;
     setlist_song: SetlistSong;
     setlist: Setlist;
-    itenerary: Itenerary;
-    itenerary_section: ItenerarySection;
-    itenerary_article: ItenearyArticle;
-    itenerary_item: ItenereryItem;
+    itinerary: Itinerary;
+    itinerary_section: ItinerarySection;
+    itinerary_article: ItineraryArticle;
+    itinerary_item: ItineraryItem;
     link: Link;
     link_2_song: Link2Song;
-    link_2_itenerary_article: Link2IteneraryArticle;
-    setlist_2_itenerary_article: Setlist2IteneraryArticle;
+    link_2_itinerary_article: Link2ItineraryArticle;
+    setlist_2_itinerary_article: Setlist2ItineraryArticle;
   }
 }

@@ -1,10 +1,10 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
-import { ItenereryItemData } from './types';
+import { ItineraryItemData } from './types';
 const debug = debugLib('eventsapp:query-iitem');
 
-const allItems = async (db: Knex): Promise<ItenereryItemData[]> => {
-  const items = await db.select().from('itenerary_item');
+const allItems = async (db: Knex): Promise<ItineraryItemData[]> => {
+  const items = await db.select().from('itinerary_item');
   debug(`allItems found ${items.length} items`);
   return items.map((v) => {
     return {
@@ -13,8 +13,8 @@ const allItems = async (db: Knex): Promise<ItenereryItemData[]> => {
   });
 };
 
-const itemById = async (db: Knex, itemId: number): Promise<ItenereryItemData[]> => {
-  const items = await db.select().from('itenerary_item').where({
+const itemById = async (db: Knex, itemId: number): Promise<ItineraryItemData[]> => {
+  const items = await db.select().from('itinerary_item').where({
     id: itemId,
   });
   if (items.length === 0) {
@@ -28,12 +28,12 @@ const itemById = async (db: Knex, itemId: number): Promise<ItenereryItemData[]> 
   ];
 };
 
-const allItemsForArticle = async (db: Knex, articleId: number): Promise<ItenereryItemData[]> => {
-  const items = await db.select().from('itenerary_item').where({
-    itenerary_article_id: articleId,
+const allItemsForArticle = async (db: Knex, articleId: number): Promise<ItineraryItemData[]> => {
+  const items = await db.select().from('itinerary_item').where({
+    itinerary_article_id: articleId,
   });
   debug(`allItemsForArticle(${articleId}) found ${items.length} items`);
-  const resolvedItems: ItenereryItemData[] = [];
+  const resolvedItems: ItineraryItemData[] = [];
   for (const item of items) {
     resolvedItems.push({
       text: item.text,

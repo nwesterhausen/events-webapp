@@ -1,4 +1,4 @@
-import iteneraries from './itenerary';
+import itineraries from './itinerary';
 import linkTypes from './link-types';
 import links from './links';
 import setlists from './setlist';
@@ -11,7 +11,7 @@ export default Object.assign(
     Links: links,
     Songs: songs,
     Setlists: setlists,
-    Iteneraries: iteneraries,
+    Itineraries: itineraries,
     LinkTypes: linkTypes,
     Users: users,
   }

@@ -16,30 +16,30 @@ export type SetlistData = {
   location: string;
   songs: SongData[];
 };
-export type ItenereryItemData = {
+export type ItineraryItemData = {
   text: string;
 };
-export type ItenearyArticleData = {
+export type ItineraryArticleData = {
   title: string;
   start_time: Date;
   end_time: Date;
-  items: ItenereryItemData[];
+  items: ItineraryItemData[];
   links: LinkData[];
   setlists: SetlistData[];
 };
-export type ItenerarySectionData = {
+export type ItinerarySectionData = {
   date: Date;
   tod_modifier: string;
-  articles: ItenearyArticleData[];
+  articles: ItineraryArticleData[];
 };
-export type IteneraryData = {
+export type ItineraryData = {
   title: string;
   start_date: Date;
   end_date: Date;
-  sections: ItenerarySectionData[];
+  sections: ItinerarySectionData[];
 };
-export type IteneraryHead = {
-  itenerary_id: number;
+export type ItineraryHead = {
+  itinerary_id: number;
   start_date: Date;
   end_date: Date;
 };

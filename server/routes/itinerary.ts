@@ -2,36 +2,36 @@ import debugLib from 'debug';
 import { RequestHandler } from 'express';
 import { Knex } from 'knex';
 import queries from '../db/queries';
-const debug = debugLib('eventsapp:itenerary');
+const debug = debugLib('eventsapp:itinerary');
 
-export const getIteneraries: RequestHandler = (req, res) => {
+export const getItineraries: RequestHandler = (req, res) => {
   new Promise(async (resolve, reject) => {
     const knex = req.app.get('db') as Knex;
-    const iteneraries = await queries.Iteneraries.all(knex);
+    const itineraries = await queries.Itineraries.all(knex);
     return resolve(
       res.send({
-        data: iteneraries,
+        data: itineraries,
       })
     );
   }).catch(console.error);
 };
 
-export const getItenerariesHead: RequestHandler = (req, res) => {
+export const getItinerariesHead: RequestHandler = (req, res) => {
   new Promise(async (resolve, reject) => {
     const knex = req.app.get('db') as Knex;
-    const iteneraries = await queries.Iteneraries.head(knex);
+    const itineraries = await queries.Itineraries.head(knex);
     return resolve(
       res.send({
-        data: iteneraries,
+        data: itineraries,
       })
     );
   }).catch(console.error);
 };
 
-export const getIteneraryById: RequestHandler = (req, res) => {
+export const getItineraryById: RequestHandler = (req, res) => {
   if (!req.params.id || req.params.id === null) {
-    const message = 'Require itenerary ID to get';
-    debug(`Rejecting itenerary get (no id)`);
+    const message = 'Require itinerary ID to get';
+    debug(`Rejecting itinerary get (no id)`);
     return res.status(400).send({
       error: message,
       original_data: req.params,
@@ -40,10 +40,10 @@ export const getIteneraryById: RequestHandler = (req, res) => {
   const targetId = parseInt(req.params.id);
   new Promise(async (resolve, reject) => {
     const knex = req.app.get('db') as Knex;
-    const iteneraries = await queries.Iteneraries.byId(knex, targetId);
+    const itineraries = await queries.Itineraries.byId(knex, targetId);
     return resolve(
       res.send({
-        data: iteneraries,
+        data: itineraries,
         original_data: req.params,
       })
     );

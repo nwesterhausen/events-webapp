@@ -1,5 +1,5 @@
 import express from 'express';
-import { getIteneraries, getItenerariesHead, getIteneraryById } from './itenerary';
+import { getItineraries, getItinerariesHead, getItineraryById } from './itinerary';
 import { deleteSetlist, getSetlist, getSetlistById, postSetlist } from './setlists';
 const router = express.Router();
 
@@ -14,8 +14,8 @@ router.post('/setlist', postSetlist);
 router.delete('/setlist', deleteSetlist);
 
 // Iteneraries
-router.get('/iteneraries', getIteneraries);
-router.get('/itenerary/:id', getIteneraryById);
-router.get('/iteneraries/head', getItenerariesHead);
+router.get('/itineraries', getItineraries);
+router.get('/itinerary/:id', getItineraryById);
+router.get('/itineraries/head', getItinerariesHead);
 
 export default router;

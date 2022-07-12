@@ -1,7 +1,7 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
 import { LinkType } from 'knex/types/tables';
-import { ItenereryItemData } from './types';
+import { ItineraryItemData } from './types';
 const debug = debugLib('eventsapp:query-linktype');
 
 const allLinkTypes = async (db: Knex): Promise<LinkType[]> => {
@@ -10,7 +10,7 @@ const allLinkTypes = async (db: Knex): Promise<LinkType[]> => {
   return linkTypes;
 };
 
-const linkTypeById = async (db: Knex, linkTypeId: number): Promise<ItenereryItemData[]> => {
+const linkTypeById = async (db: Knex, linkTypeId: number): Promise<ItineraryItemData[]> => {
   const linkTypes = await db.select().from('_link_types').where({
     id: linkTypeId,
   });

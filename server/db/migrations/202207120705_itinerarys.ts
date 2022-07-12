@@ -1,13 +1,13 @@
 import { Knex } from 'knex';
 /**
  * New tables:
- *  - itenerary
- *  - itenerary_section
- *  - itenerary_article
- *  - itenerary_item
+ *  - itinerary
+ *  - itinerary_section
+ *  - itinerary_article
+ *  - itinerary_item
  *  - link_item
  *  - link_2_song
- *  - link_2_itenerary_item
+ *  - link_2_itinerary_item
  * Renamed tables:
  *  - _music_types => _link_types
  * Removed tables:
@@ -26,32 +26,32 @@ exports.up = function (knex: Knex) {
       .dropTable('music_link')
       .dropTable('guitar_tab')
       // Create new tables
-      .createTable('itenerary', function (table) {
+      .createTable('itinerary', function (table) {
         table.increments();
         table.date('start_date');
         table.date('end_date');
         table.string('title');
       })
-      .createTable('itenerary_section', function (table) {
+      .createTable('itinerary_section', function (table) {
         table.increments();
         table.date('date');
         table.string('tod_modifier');
-        table.integer('itenerary_id').unsigned();
-        table.foreign('itenerary_id').references('id').inTable('itenerary');
+        table.integer('itinerary_id').unsigned();
+        table.foreign('itinerary_id').references('id').inTable('itinerary');
       })
-      .createTable('itenerary_article', function (table) {
+      .createTable('itinerary_article', function (table) {
         table.increments();
         table.string('title');
         table.time('start_time');
         table.time('end_time');
-        table.integer('itenerary_section_id').unsigned();
-        table.foreign('itenerary_section_id').references('id').inTable('itenerary_section');
+        table.integer('itinerary_section_id').unsigned();
+        table.foreign('itinerary_section_id').references('id').inTable('itinerary_section');
       })
-      .createTable('itenerary_item', function (table) {
+      .createTable('itinerary_item', function (table) {
         table.increments();
         table.string('text');
-        table.integer('itenerary_article_id').unsigned();
-        table.foreign('itenerary_article_id').references('id').inTable('itenerary_article');
+        table.integer('itinerary_article_id').unsigned();
+        table.foreign('itinerary_article_id').references('id').inTable('itinerary_article');
       })
       .createTable('link', function (table) {
         table.increments();
@@ -65,11 +65,11 @@ exports.up = function (knex: Knex) {
         table.foreign('link_id').references('id').inTable('link');
         table.foreign('setlist_song_id').references('id').inTable('setlist_song');
       })
-      .createTable('link_2_itenerary_article', function (table) {
+      .createTable('link_2_itinerary_article', function (table) {
         table.integer('link_id').unsigned();
-        table.integer('itenerary_article_id').unsigned();
+        table.integer('itinerary_article_id').unsigned();
         table.foreign('link_id').references('id').inTable('link');
-        table.foreign('itenerary_article_id').references('id').inTable('itenerary_article');
+        table.foreign('itinerary_article_id').references('id').inTable('itinerary_article');
       })
       // Rename music_types
       .renameTable('_music_types', '_link_types')
@@ -79,13 +79,13 @@ exports.up = function (knex: Knex) {
 exports.down = function (knex: Knex) {
   return (
     knex.schema
-      .dropTable('itenerary')
-      .dropTable('itenerary_section')
-      .dropTable('itenerary_article')
-      .dropTable('itenerary_item')
+      .dropTable('itinerary')
+      .dropTable('itinerary_section')
+      .dropTable('itinerary_article')
+      .dropTable('itinerary_item')
       .dropTable('link')
       .dropTable('link_2_song')
-      .dropTable('link_2_itenerary_item')
+      .dropTable('link_2_itinerary_item')
       // Restore removed tables
       .createTable('guitar_tab', function (table) {
         table.increments();

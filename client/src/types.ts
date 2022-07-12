@@ -82,16 +82,16 @@ export type ItenearyArticleData = {
   links: LinkData[];
   setlists: SetlistData[];
 };
-export type ItenerarySectionData = {
+export type ItinerarySectionData = {
   date: Date;
   tod_modifier: string;
   articles: ItenearyArticleData[];
 };
-export type IteneraryData = {
+export type ItineraryData = {
   title: string;
   start_date: Date;
   end_date: Date;
-  sections: ItenerarySectionData[];
+  sections: ItinerarySectionData[];
 };
 
 export const PERMISSION_ID = {

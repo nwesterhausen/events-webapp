@@ -1,6 +1,6 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
-import { Setlist, Setlist2IteneraryArticle } from 'knex/types/tables';
+import { Setlist, Setlist2ItineraryArticle } from 'knex/types/tables';
 import songQuery from './songs';
 import { SetlistData } from './types';
 const debug = debugLib('eventsapp:query-setlist');
@@ -39,13 +39,13 @@ const setlistById = async (db: Knex, setlistId: number): Promise<SetlistData[]> 
   ];
 };
 
-const setlistForIteneraryArticle = async (db: Knex, articleId: number): Promise<SetlistData[]> => {
-  const setlistSongs = await db.select().from('setlist_2_itenerary_article').where({
-    itenerary_article_id: articleId,
+const setlistForitineraryArticle = async (db: Knex, articleId: number): Promise<SetlistData[]> => {
+  const setlistSongs = await db.select().from('setlist_2_itinerary_article').where({
+    itinerary_article_id: articleId,
   });
-  debug(`setlistForIteneraryArticle(${articleId}) found ${setlistSongs.length} setlists`);
+  debug(`setlistForitineraryArticle(${articleId}) found ${setlistSongs.length} setlists`);
   const setlists: SetlistData[] = [];
-  for (const setlist of setlistSongs as Setlist2IteneraryArticle[]) {
+  for (const setlist of setlistSongs as Setlist2ItineraryArticle[]) {
     const match = await setlistById(db, setlist.setlist_id);
     if (match.length === 1) {
       setlists.push(match[0]);
@@ -59,6 +59,6 @@ export default Object.assign(
   {
     all: allSetlists,
     byId: setlistById,
-    forIteneraryArticle: setlistForIteneraryArticle,
+    foritineraryArticle: setlistForitineraryArticle,
   }
 );
