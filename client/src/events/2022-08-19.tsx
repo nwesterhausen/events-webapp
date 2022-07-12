@@ -1,6 +1,6 @@
 import { Button, Stack } from 'solid-bootstrap';
 import { Component } from 'solid-js';
-import Itinerary from '../components/itinerary';
+import Itinerary from '../components/Itinerary';
 import NaviagationLink from '../components/NavigationLink';
 import Setlist from '../components/Setlist';
 import YoutubeLink from '../components/YoutubeLink';
