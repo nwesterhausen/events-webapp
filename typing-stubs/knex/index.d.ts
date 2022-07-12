@@ -30,30 +30,49 @@ declare module 'knex/types/tables' {
     name: string;
     artist: string;
   }
-  interface MusicType {
+  interface LinkType {
     id: number;
     name: string;
-  }
-  interface GuitarTab {
-    id: number;
-    url: string;
-  }
-  interface GuitarTab2Song {
-    guitar_tab_id: number;
-    setlist_song_id: number;
-  }
-  interface MusicLink {
-    id: number;
-    url: string;
-    type: number;
-  }
-  interface MusicLink2Song {
-    music_link_id: number;
-    setlist_song_id: number;
   }
   interface Song2Setlist {
     setlist_id: number;
     setlist_song_id: number;
+  }
+  interface Link {
+    id: number;
+    text?: string;
+    link_type: number;
+  }
+  interface Link2Song {
+    link_id: number;
+    song_id: number;
+  }
+  interface Link2IteneraryItem {
+    link_id: number;
+    itenerary_item_id: number;
+  }
+  interface ItenereryItem {
+    id: number;
+    text: string;
+    itenerary_article_id: number;
+  }
+  interface ItenearyArticle {
+    id: number;
+    title: string;
+    time_span: string;
+    itenerary_section_id: number;
+  }
+  interface ItenerarySection {
+    id: number;
+    date: string;
+    tod_modifier: string;
+    itenerary_id: number;
+  }
+  interface Itenerary {
+    id: number;
+    start_date: string;
+    end_date: string;
+    title: string;
   }
   interface Tables {
     // This is same as specifying `knex<User>('users')`
@@ -100,13 +119,16 @@ declare module 'knex/types/tables' {
     >;
 
     user_permissions: UserPermission;
-    _music_types: MusicType;
-    guitar_tab_2_song: GuitarTab2Song;
-    guitar_tab: GuitarTab;
-    music_link_2_song: MusicLink2Song;
-    music_link: MusicLink;
+    link_type: LinkType;
     song_2_setlist: Song2Setlist;
     setlist_song: SetlistSong;
     setlist: Setlist;
+    itenerary: Itenerary;
+    itenerary_section: ItenerarySection;
+    itenerary_article: ItenearyArticle;
+    itenerary_item: ItenereryItem;
+    link: Link;
+    link_2_song: Link2Song;
+    link_2_itenerary_item: Link2IteneraryItem;
   }
 }

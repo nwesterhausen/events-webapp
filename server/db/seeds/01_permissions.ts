@@ -1,4 +1,6 @@
 import { Knex } from 'knex';
+import debugLib from 'debug';
+const debug = debugLib('eventsapp:database-seed');
 
 /**
  * This file seeds the various permissions expected for the site permissions to work.
@@ -12,6 +14,7 @@ exports.seed = function (knex: Knex) {
     .from('permissions')
     .then(function (rows) {
       if (rows.length === 0) {
+        debug(`No existing permissions, seeding 3`);
         return knex('permissions').insert([
           {
             id: 1,
