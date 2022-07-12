@@ -7,6 +7,8 @@ export type FullSetlist = Setlist & {
   songs: number[];
 };
 
+// TODO: rewrite this to use the SongData and SetlistData types.
+
 export const querySetlists = async (knex: Knex, id?: number): Promise<FullSetlist[]> => {
   if (id && id !== null) {
     const setlists = await knex('setlist').select().where({ id: id });

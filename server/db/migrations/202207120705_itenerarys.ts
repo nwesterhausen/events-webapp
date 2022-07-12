@@ -42,7 +42,8 @@ exports.up = function (knex: Knex) {
       .createTable('itenerary_article', function (table) {
         table.increments();
         table.string('title');
-        table.string('time_span');
+        table.time('start_time');
+        table.time('end_time');
         table.integer('itenerary_section_id').unsigned();
         table.foreign('itenerary_section_id').references('id').inTable('itenerary_section');
       })
@@ -64,11 +65,11 @@ exports.up = function (knex: Knex) {
         table.foreign('link_id').references('id').inTable('link');
         table.foreign('setlist_song_id').references('id').inTable('setlist_song');
       })
-      .createTable('link_2_itenerary_item', function (table) {
+      .createTable('link_2_itenerary_article', function (table) {
         table.integer('link_id').unsigned();
-        table.integer('itenerary_item_id').unsigned();
+        table.integer('itenerary_article_id').unsigned();
         table.foreign('link_id').references('id').inTable('link');
-        table.foreign('itenerary_item_id').references('id').inTable('itenerary_item');
+        table.foreign('itenerary_article_id').references('id').inTable('itenerary_article');
       })
       // Rename music_types
       .renameTable('_music_types', '_link_types')

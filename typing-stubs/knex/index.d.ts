@@ -59,7 +59,8 @@ declare module 'knex/types/tables' {
   interface ItenearyArticle {
     id: number;
     title: string;
-    time_span: string;
+    start_time: string;
+    end_time: string;
     itenerary_section_id: number;
   }
   interface ItenerarySection {

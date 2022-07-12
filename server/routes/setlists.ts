@@ -1,7 +1,7 @@
 import debugLib from 'debug';
 import { RequestHandler } from 'express';
 import { Knex } from 'knex';
-import { querySetlists } from '../db/helpers/setlist';
+import { querySetlists } from '../db/queries/setlist';
 import { buildPermissionReference } from '../lib/session';
 
 const debug = debugLib('eventsapp:setlists');
