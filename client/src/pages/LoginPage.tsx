@@ -1,4 +1,4 @@
-import { Button, Card, Col, Container, Row, Stack } from 'solid-bootstrap';
+import { Button, Card, Container, Row, Stack } from 'solid-bootstrap';
 import { Component } from 'solid-js';
 
 const LoginPage: Component = () => {
@@ -9,8 +9,8 @@ const LoginPage: Component = () => {
           <Card.Title>Please Login</Card.Title>
           <Card.Body>
             <Stack gap={3}>
-              <Button href='/auth/google'>Login with Google</Button>
-              <Button href='/auth/discord'>Login with Discord</Button>
+              <Button rel="external" href='/auth/google'>Login with Google</Button>
+              <Button rel="external" href='/auth/discord'>Login with Discord</Button>
             </Stack>
           </Card.Body>
         </Card>
