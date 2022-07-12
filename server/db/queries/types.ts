@@ -4,7 +4,7 @@ import { PermissionsObj } from '../../../typing-stubs/express-session';
 export type LinkData = {
   text?: string;
   url: string;
-  type: number;
+  type: string;
 };
 export type SongData = {
   name: string;

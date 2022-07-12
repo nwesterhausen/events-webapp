@@ -1,49 +1,43 @@
-import { Card, ListGroup, Stack } from 'solid-bootstrap';
-import { Component, ParentComponent } from 'solid-js';
-import ListenLink from './ListenLink';
-import SpotifyLink from './SpotifyLink';
-import TabLink from './TabLink';
-import YoutubeLink from './YoutubeLink';
+import { Card, ListGroup, ListGroupItem, Stack } from 'solid-bootstrap';
+import { For, ParentComponent } from 'solid-js';
+import { SetlistData } from '../types';
+import Link from './Link';
+import SetlistSong from './SetlistSong';
 
-type SetListSongProps = {
-  name: string;
-  artist: string;
-  spotifyLink?: string;
-  youtubeLink?: string;
-  liveLink?: string;
-  tabLink?: string;
-  submittedBy?: string;
-};
-
-const Setlist: ParentComponent = (props) => {
+const Setlist: ParentComponent<{ setlist?: SetlistData }> = (props) => {
+  if (!props.setlist) {
+    return (
+      <Card class='p-1'>
+        <Card.Title class='ps-2'>Setlist</Card.Title>
+        <Card.Text>
+          <ListGroup as='ul' class='setlist'>
+            {props.children}
+          </ListGroup>
+        </Card.Text>
+      </Card>
+    );
+  }
   return (
-    <Card class='p-1'>
+    <Card class='p-1 mt-3'>
       <Card.Title class='ps-2'>Setlist</Card.Title>
       <Card.Text>
         <ListGroup as='ul' class='setlist'>
-          {props.children}
+          <For each={props.setlist.songs}>
+            {(song) => (
+              <ListGroupItem as='li'>
+                <Stack direction='horizontal' gap={2}>
+                  <Stack>
+                    <span class='fw-semibold'>{song.name}</span>
+                    <span class='fw-light song-artist'>{song.artist}</span>
+                  </Stack>
+                  <For each={song.links}>{(link) => <Link type='song' link={link} />}</For>
+                </Stack>
+              </ListGroupItem>
+            )}
+          </For>
         </ListGroup>
       </Card.Text>
     </Card>
-  );
-};
-
-const SetlistSong: Component<SetListSongProps> = (props) => {
-  return (
-    <ListGroup.Item as='li'>
-      <Stack direction='horizontal' gap={2}>
-        <Stack>
-          <p class='m-0'>
-            <span class='fw-semibold'>{props.name}</span> <span class='fw-light song-artist'>{props.artist}</span>
-          </p>
-          <span class='text-muted song-submitter'>Submitted by {props.submittedBy || 'Group Concensus'}</span>
-        </Stack>
-        {props.tabLink ? <TabLink size='sm' href={props.tabLink} /> : <></>}
-        {props.spotifyLink ? <SpotifyLink size='sm' href={props.spotifyLink} /> : <></>}
-        {props.youtubeLink ? <YoutubeLink size='sm' href={props.youtubeLink} /> : <></>}
-        {props.liveLink ? <ListenLink size='sm' href={props.liveLink} /> : <></>}
-      </Stack>
-    </ListGroup.Item>
   );
 };
 

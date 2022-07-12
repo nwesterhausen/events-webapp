@@ -59,7 +59,7 @@ export type DB_Song2Setlist = {
 export type LinkData = {
   text?: string;
   url: string;
-  type: number;
+  type: string;
 };
 export type SongData = {
   name: string;
@@ -99,3 +99,4 @@ export const PERMISSION_ID = {
   MODIFY_ALL: 2,
   IS_ADMIN: 3,
 };
+export const LinkTypes: string[] = ['Navigation', 'Youtube', 'Spotify', 'Ultimate Guitar', 'Generic', 'No Icon', 'Music'];

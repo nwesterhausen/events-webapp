@@ -5,21 +5,29 @@ import { LinkData } from './types';
 const debug = debugLib('eventsapp:query-link');
 
 const allLinks = async (db: Knex): Promise<LinkData[]> => {
-  const links = await db.select().from('link');
+  const links = await db.select('*').from('links').innerJoin('link_type', {
+    'links.type': 'link_type.id',
+  });
   debug(`allLinks found ${links.length} links`);
   return links.map((v) => {
     return {
       text: v.text || '',
       url: v.url,
-      type: v.type,
+      type: v.name,
     };
   });
 };
 
 const linkById = async (db: Knex, linkId: number): Promise<LinkData[]> => {
-  const links = await db.select().from('link').where({
-    id: linkId,
-  });
+  const links = await db
+    .select('*')
+    .from('links')
+    .innerJoin('link_type', {
+      'links.type': 'link_type.id',
+    })
+    .where({
+      id: linkId,
+    });
   if (links.length === 0) {
     debug(`no link matching link_id:${linkId}`);
     return [];
@@ -28,7 +36,7 @@ const linkById = async (db: Knex, linkId: number): Promise<LinkData[]> => {
     {
       text: links[0].text || '',
       url: links[0].url,
-      type: links[0].type,
+      type: links[0].name,
     },
   ];
 };

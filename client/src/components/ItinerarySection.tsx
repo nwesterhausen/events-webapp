@@ -1,4 +1,5 @@
 import { For, ParentComponent } from 'solid-js';
+import { SectionDateTitle } from '../lib/time-funcs';
 import { ItinerarySectionData } from '../types';
 import ItineraryArticle from './ItineraryArticle';
 
@@ -18,9 +19,7 @@ const ItinerarySection: ParentComponent<ItinerarySectionProps> = (props) => {
   }
   return (
     <section class='itinerary-section'>
-      <h3 class='text-warning itinerary-subtitle'>
-        {props.section.date.toDateString()} {props.section.tod_modifier}
-      </h3>
+      <h3 class='text-warning itinerary-subtitle'>{SectionDateTitle(props.section.date)}</h3>
       <article class='itinerary-details'>
         <For each={props.section.articles}>{(article) => <ItineraryArticle article={article} />}</For>
       </article>
