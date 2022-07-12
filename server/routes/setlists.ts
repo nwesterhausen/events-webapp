@@ -1,8 +1,7 @@
 import debugLib from 'debug';
 import { RequestHandler } from 'express';
 import { Knex } from 'knex';
-import { querySetlists } from '../db/queries/setlist';
-import { buildPermissionReference } from '../lib/session';
+import Query from '../db/queries';
 
 const debug = debugLib('eventsapp:setlists');
 
@@ -17,7 +16,7 @@ export const getSetlistById: RequestHandler = (req, res) => {
         raw_request: req.params.id,
       });
     }
-    querySetlists(req.app.get('db'), targetId)
+    Query.Setlists.byId(req.app.get('db'), targetId)
       .then((data) => {
         res.status(200).send({ data: data });
       })
@@ -26,7 +25,7 @@ export const getSetlistById: RequestHandler = (req, res) => {
 };
 
 export const getSetlist: RequestHandler = (req, res) => {
-  querySetlists(req.app.get('db'))
+  Query.Setlists.all(req.app.get('db'))
     .then((data) => {
       res.status(200).send({ data: data });
     })

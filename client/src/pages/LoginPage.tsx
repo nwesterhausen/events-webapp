@@ -9,8 +9,12 @@ const LoginPage: Component = () => {
           <Card.Title>Please Login</Card.Title>
           <Card.Body>
             <Stack gap={3}>
-              <Button rel="external" href='/auth/google'>Login with Google</Button>
-              <Button rel="external" href='/auth/discord'>Login with Discord</Button>
+              <Button rel='external' href='/auth/google'>
+                Login with Google
+              </Button>
+              <Button rel='external' href='/auth/discord'>
+                Login with Discord
+              </Button>
             </Stack>
           </Card.Body>
         </Card>

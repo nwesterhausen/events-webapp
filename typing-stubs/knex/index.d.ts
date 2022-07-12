@@ -47,9 +47,9 @@ declare module 'knex/types/tables' {
     link_id: number;
     song_id: number;
   }
-  interface Link2IteneraryItem {
+  interface Link2IteneraryArticle {
     link_id: number;
-    itenerary_item_id: number;
+    itenerary_article_id: number;
   }
   interface ItenereryItem {
     id: number;
@@ -74,6 +74,10 @@ declare module 'knex/types/tables' {
     start_date: string;
     end_date: string;
     title: string;
+  }
+  interface Setlist2IteneraryArticle {
+    setlist_id: number;
+    itenerary_article_id: number;
   }
   interface Tables {
     // This is same as specifying `knex<User>('users')`
@@ -130,6 +134,7 @@ declare module 'knex/types/tables' {
     itenerary_item: ItenereryItem;
     link: Link;
     link_2_song: Link2Song;
-    link_2_itenerary_item: Link2IteneraryItem;
+    link_2_itenerary_article: Link2IteneraryArticle;
+    setlist_2_itenerary_article: Setlist2IteneraryArticle;
   }
 }

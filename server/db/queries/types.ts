@@ -1,3 +1,6 @@
+import { User } from 'knex/types/tables';
+import { PermissionsObj } from '../../../typing-stubs/express-session';
+
 export type LinkData = {
   text?: string;
   url: string;
@@ -35,3 +38,9 @@ export type IteneraryData = {
   end_date: Date;
   sections: ItenerarySectionData[];
 };
+export type IteneraryHead = {
+  itenerary_id: number;
+  start_date: Date;
+  end_date: Date;
+};
+export type UserData = User & PermissionsObj;
