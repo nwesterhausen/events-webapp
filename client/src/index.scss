@@ -27,19 +27,39 @@ html {
   vertical-align: -0.125em;
 }
 
+.modify-actions > div {
+  position: relative;
+  top: -2rem;
+}
+
 .action-button {
   display: inline-block;
-  width: 2rem;
   border-radius: 0.25rem;
   border: 1px solid #0000;
   margin: -1px;
   color: var(--bs-primary) !important;
+
+  &.fixwidth {
+    width: 1.5rem;
+  }
 
   &.disabled {
     color: var(--bs-secondary) !important;
   }
 
   &:not(.disabled):hover {
+    color: var(--bs-info) !important;
+    cursor: pointer;
+    border: 1px solid var(--bs-info);
+  }
+
+  &:not(.disabled).create:hover {
+    color: var(--bs-success) !important;
+    cursor: pointer;
+    border: 1px solid var(--bs-success);
+  }
+
+  &:not(.disabled).delete:hover {
     color: var(--bs-danger) !important;
     cursor: pointer;
     border: 1px solid var(--bs-danger);

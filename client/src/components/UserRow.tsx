@@ -1,11 +1,11 @@
-import { Badge, Button, FormCheck, OverlayTrigger, Tooltip } from 'solid-bootstrap';
-import { BsGoogle, BsDiscord } from 'solid-icons/bs';
+import { Badge, FormCheck, OverlayTrigger, Tooltip } from 'solid-bootstrap';
+import { BsDiscord, BsGoogle } from 'solid-icons/bs';
+import { FiTrash2 } from 'solid-icons/fi';
 import { Component, createMemo, createSignal } from 'solid-js';
 import { Create, Delete } from '../lib/api';
 import { UserData } from '../pages/UserManagement';
 import { useAuthContext } from '../providers/Auth';
 import { PERMISSION_ID } from '../types';
-import { FiTrash2 } from 'solid-icons/fi';
 import CheckCross from './CheckCross';
 
 const addUserPermission = async (user_id: number, permission_id: number): Promise<boolean> => {
@@ -177,7 +177,7 @@ export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (p
       </td>
       <td class=''>
         <a
-          class='text-center action-button'
+          class='text-center action-button delete fixwidth'
           classList={{ disabled: authContext.auth.user.id === props.user.id }}
           onClick={() => {
             if (authContext.auth.user.id === props.user.id) return; // Exit if this is for the current user

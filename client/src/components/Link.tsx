@@ -1,10 +1,11 @@
-import { Button } from 'solid-bootstrap';
+import { Button, OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
 import { FiMusic } from 'solid-icons/fi';
 import { RiMapDirectionFill } from 'solid-icons/ri';
 import { SiSpotify, SiYoutube } from 'solid-icons/si';
-import { TbExternalLink } from 'solid-icons/tb';
+import { TbEdit, TbExternalLink, TbX } from 'solid-icons/tb';
 import { Component, createMemo } from 'solid-js';
 import { UltimateGuitarIcon } from '../icons/UtilmateGuitar';
+import { useAuthContext } from '../providers/Auth';
 import { LinkData } from '../types';
 
 export type LinkComponentProps = {
@@ -13,6 +14,7 @@ export type LinkComponentProps = {
 };
 
 const Link: Component<LinkComponentProps> = (props) => {
+  const authContext = useAuthContext();
   const btnVariant = createMemo(() => {
     if (props.type === 'article') {
       return 'outline-info';
@@ -68,10 +70,26 @@ const Link: Component<LinkComponentProps> = (props) => {
     }
   });
   return (
-    <div>
+    <div class='d-flex'>
       <Button variant={btnVariant()} size='sm' href={props.link.url} target='_blank'>
         {btnContent()}
       </Button>
+      {authContext.auth.permissions.MODIFY_ALL ? (
+        <Stack class='modify-action d-flex px-3 align-items-center' direction='horizontal' gap={2}>
+          <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
+            <a class='action-button text-center'>
+              <TbEdit class='icon-fix' />
+            </a>
+          </OverlayTrigger>
+          <OverlayTrigger overlay={<Tooltip>Delete</Tooltip>}>
+            <a class='action-button delete text-center'>
+              <TbX class='icon-fix' />
+            </a>
+          </OverlayTrigger>
+        </Stack>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
