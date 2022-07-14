@@ -57,7 +57,7 @@ const testTabkey = ItineraryShortDateRange(testItinerary.start_date, testItinera
 
 const CurrentEvents: Component = () => {
   return (
-    <Tabs defaultActiveKey='oct142022' id='upcoming-event-listing' variant='pills'>
+    <Tabs defaultActiveKey='aug192022' id='upcoming-event-listing' variant='pills'>
       <Tab eventKey='aug192022' title='Aug 19-21'>
         <Aug192022 />
       </Tab>
