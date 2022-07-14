@@ -69,7 +69,7 @@ export function buildPermissionReference(permissionArray: number[] | any[]) {
     } else if (permissionArray[0].permission_id) {
       return buildPermissionReference([...permissionArray.map((v) => v.permission_id)]);
     }
-    debug(`Transformed ${JSON.stringify(permissionArray)} into ${JSON.stringify(result)}`);
+    // debug(`Transformed ${JSON.stringify(permissionArray)} into ${JSON.stringify(result)}`);
   }
 
   return result;
