@@ -1,7 +1,7 @@
 import { Container, Nav, Navbar, NavDropdown, OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
 import { FiMail } from 'solid-icons/fi';
-import { Component } from 'solid-js';
 import { VscGithubInverted } from 'solid-icons/vsc';
+import { Component } from 'solid-js';
 import { useAuthContext } from '../providers/Auth';
 
 const NavMenu: Component = () => {
@@ -12,7 +12,7 @@ const NavMenu: Component = () => {
         <Navbar.Brand href='/'>
           <Stack gap={3} direction='horizontal'>
             <img alt='' src='favicon-32x32.png' width='32' height='32' />
-            <span>Upcoming Events</span>
+            <span>Planned Events</span>
           </Stack>
         </Navbar.Brand>
         {authContext.auth.loggedIn ? (
