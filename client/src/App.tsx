@@ -1,6 +1,6 @@
 import { Route, Routes } from 'solid-app-router';
-import { Container, Tab, Tabs } from 'solid-bootstrap';
-import { Component, lazy } from 'solid-js';
+import { Container, Nav, Stack, Tab } from 'solid-bootstrap';
+import { Component, For, JSXElement, lazy } from 'solid-js';
 import Itinerary from './components/Itinerary';
 import NavMenu from './components/NavMenu';
 import Aug192022 from './events/2022-08-19';
@@ -53,18 +53,35 @@ const testItinerary: ItineraryData = {
     },
   ],
 };
-const testTabkey = ItineraryShortDateRange(testItinerary.start_date, testItinerary.end_date);
-
+const testTabTitle = ItineraryShortDateRange(testItinerary.start_date, testItinerary.end_date);
+interface EventBlob {
+  key: string;
+  title: string;
+  content: JSXElement;
+}
 const CurrentEvents: Component = () => {
+  const content: EventBlob[] = [
+    { key: 'aug192022', title: 'Aug 19-21', content: <Aug192022 /> },
+    { key: 'oct142022', title: testTabTitle, content: <Itinerary itinerary={testItinerary} /> },
+  ];
   return (
-    <Tabs defaultActiveKey='aug192022' id='upcoming-event-listing' variant='pills'>
-      <Tab eventKey='aug192022' title='Aug 19-21'>
-        <Aug192022 />
-      </Tab>
-      <Tab eventKey='oct142022' title={testTabkey}>
-        <Itinerary itinerary={testItinerary} />
-      </Tab>
-    </Tabs>
+    <Tab.Container id='upcoming-event-listing' defaultActiveKey={content[0].key}>
+      <Stack direction='horizontal' gap={2}>
+        <span>Upcoming Events: </span>
+        <Nav variant='pills' class='flex-row'>
+          <For each={content}>
+            {(event) => (
+              <Nav.Item>
+                <Nav.Link eventKey={event.key}>{event.title}</Nav.Link>
+              </Nav.Item>
+            )}
+          </For>
+        </Nav>
+      </Stack>
+      <Tab.Content>
+        <For each={content}>{(event) => <Tab.Pane eventKey={event.key}>{event.content}</Tab.Pane>}</For>
+      </Tab.Content>
+    </Tab.Container>
   );
 };
 

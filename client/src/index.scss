@@ -73,8 +73,11 @@ html {
   border-radius: 0.25rem;
 }
 
-.nav-pills .nav-item button {
-  border-radius: 1em;
+.nav-pills .nav-item {
+  cursor: pointer;
+  a {
+    border-radius: 1em;
+  }
 }
 
 /* Custom Scrollbar */
