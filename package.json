@@ -6,7 +6,7 @@
     "build:server": "cd server && pnpm build",
     "build:client": "cd client && pnpm build",
     "build:client:update": "pnpm build:client && pnpm postbuild",
-    "postbuild": "copyfiles --up 2 client/dist/* server/build/client",
+    "postbuild": "copyfiles --up 2 client/dist/* client/dist/assets/* server/build/client",
     "install": "cd server && pnpm install",
     "postinstall": "cd client && pnpm install",
     "clean": "rimraf server/build",

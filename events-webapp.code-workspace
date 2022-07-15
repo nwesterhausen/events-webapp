@@ -13,5 +13,7 @@
 			"path": "common"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"conventionalCommits.promptScopes": false
+	}
 }
