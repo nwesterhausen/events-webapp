@@ -1,6 +1,6 @@
 import { OverlayTrigger, Tooltip, Button } from 'solid-bootstrap';
 import { Component } from 'solid-js';
-import { FiExternalLink } from 'solidjs-icons/fi';
+import { FiExternalLink } from 'solid-icons/fi';
 
 const WebsiteLink: Component<{ href: string }> = (props) => {
   const hiddenId = Math.floor(100 * Math.random());

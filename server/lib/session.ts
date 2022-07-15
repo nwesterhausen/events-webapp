@@ -1,16 +1,11 @@
 import { Request } from 'express';
 import { Knex } from 'knex';
+import { PERMISSION_ID } from '../../common/types/shared';
 
 /**
  * Creates details about the session to send to the page view renderer.
  */
 const debug = require('debug')('eventsapp:session-util');
-
-export const PERMISSION_ID = {
-  VIEW_ALL: 1,
-  MODIFY_ALL: 2,
-  IS_ADMIN: 3,
-};
 
 const DefaultPermissions = {
   IS_ADMIN: false,

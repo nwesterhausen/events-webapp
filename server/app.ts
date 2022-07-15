@@ -82,7 +82,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(logger('combined'));
 
   // Serving static files (e.g. client html, javascript, css, images) from /client
-  const staticFiles = 'client/dist';
+  const staticFiles = 'build/client';
   debug(`Serving static files from ${staticFiles}`);
   app.use(express.static(staticFiles));
 }

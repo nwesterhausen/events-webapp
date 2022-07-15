@@ -6,7 +6,7 @@ import { TbEdit, TbExternalLink, TbX } from 'solid-icons/tb';
 import { Component, createMemo } from 'solid-js';
 import { UltimateGuitarIcon } from '../icons/UtilmateGuitar';
 import { useAuthContext } from '../providers/Auth';
-import { LinkData } from '../types';
+import { LinkData } from '../../../common/types/api';
 
 export type LinkComponentProps = {
   link: LinkData;

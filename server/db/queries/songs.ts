@@ -1,8 +1,8 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
-import { SetlistSong, Song2Setlist } from 'knex/types/tables';
+import { SetlistSong, Song2Setlist } from '../../../common/types/database';
 import linkQuery from './links';
-import { SongData } from './types';
+import { SongData } from '../../../common/types/api';
 const debug = debugLib('eventsapp:query-song');
 
 const allSongs = async (db: Knex): Promise<SongData[]> => {

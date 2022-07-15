@@ -1,7 +1,7 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
 import { buildPermissionReference } from '../../lib/session';
-import { UserData } from './types';
+import { UserData } from '../../../common/types/api';
 const debug = debugLib('eventsapp:query-users');
 
 const allUsers = async (db: Knex): Promise<UserData[]> => {

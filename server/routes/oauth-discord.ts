@@ -1,9 +1,10 @@
-import express, { RequestHandler, Router } from 'express';
+import express, { Router } from 'express';
 import { Knex } from 'knex';
 import passport from 'passport';
 import DiscordStrategy from 'passport-discord';
 import debugLib from 'debug';
-import { applyUserToSession, PERMISSION_ID } from '../lib/session';
+import { applyUserToSession } from '../lib/session';
+import { PERMISSION_ID } from '../../common/types/shared';
 
 const debug = debugLib('eventsapp:oauth-discord');
 const CallbackURL =

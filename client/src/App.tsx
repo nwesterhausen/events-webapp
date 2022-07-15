@@ -1,13 +1,13 @@
 import { Route, Routes } from 'solid-app-router';
 import { Container, Nav, Stack, Tab } from 'solid-bootstrap';
 import { Component, For, JSXElement, lazy } from 'solid-js';
+import { ItineraryData } from '../../common/types/api';
 import Itinerary from './components/Itinerary';
 import NavMenu from './components/NavMenu';
 import Aug192022 from './events/2022-08-19';
 import { ItineraryShortDateRange } from './lib/time-funcs';
 import LoginPage from './pages/LoginPage';
 import { useAuthContext } from './providers/Auth';
-import { ItineraryData } from './types';
 
 const UserManagement = lazy(() => import('./pages/UserManagement'));
 const ManageSetlists = lazy(() => import('./pages/ManageSetlists'));

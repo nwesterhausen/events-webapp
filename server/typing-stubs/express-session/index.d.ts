@@ -1,10 +1,5 @@
 import 'express-session';
-
-interface PermissionsObj {
-  IS_ADMIN: boolean;
-  MODIFY_ALL: boolean;
-  VIEW_ALL: boolean;
-}
+import { PermissionsObj } from '../../../common/types/shared';
 
 declare module 'express-session' {
   export interface SessionData {

@@ -1,11 +1,11 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
-import { ItineraryArticle } from 'knex/types/tables';
+import { ItineraryArticle } from '../../../common/types/database';
 import { StringToDate } from './common';
 import itemQuery from './itinerary-item';
 import linkQuery from './links';
 import setlistQuery from './setlist';
-import { ItineraryArticleData } from './types';
+import { ItineraryArticleData } from '../../../common/types/api';
 const debug = debugLib('eventsapp:query-iarticle');
 
 const allArticles = async (db: Knex): Promise<ItineraryArticleData[]> => {

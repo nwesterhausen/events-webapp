@@ -4,12 +4,12 @@ import { TbClock, TbCursorText, TbLink, TbX } from 'solid-icons/tb';
 import { For, ParentComponent } from 'solid-js';
 import { ArticleTimeFromDate } from '../lib/time-funcs';
 import { useAuthContext } from '../providers/Auth';
-import { ItenearyArticleData } from '../types';
+import { ItineraryArticleData } from '../../../common/types/api';
 import ItineraryItem from './ItineraryItem';
 import Link from './Link';
 import Setlist from './Setlist';
 
-export type ItineraryArticleProps = { timeRange?: string; name?: string; items?: string[]; article?: ItenearyArticleData };
+export type ItineraryArticleProps = { timeRange?: string; name?: string; items?: string[]; article?: ItineraryArticleData };
 
 const ItineraryArticle: ParentComponent<ItineraryArticleProps> = (props) => {
   if (!props.article) {

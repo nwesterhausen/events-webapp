@@ -1,11 +1,11 @@
 import { Stack, Table } from 'solid-bootstrap';
 import { Component, createResource, For } from 'solid-js';
+import { Setlist } from '../../../common/types/database';
 import SetlistRow from '../components/SetlistRow';
 import TablePageHeader from '../components/TablePageHeader';
 import { Delete, Get } from '../lib/api';
-import { DB_Setlist } from '../types';
 
-export type SetlistData = DB_Setlist & {
+export type SetlistData = Setlist & {
   songs: number[];
 };
 const EmptySetlistData: SetlistData[] = [];

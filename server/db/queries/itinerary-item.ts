@@ -1,6 +1,6 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
-import { ItineraryItemData } from './types';
+import { ItineraryItemData } from '../../../common/types/api';
 const debug = debugLib('eventsapp:query-iitem');
 
 const allItems = async (db: Knex): Promise<ItineraryItemData[]> => {

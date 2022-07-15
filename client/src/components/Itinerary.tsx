@@ -2,7 +2,7 @@ import { OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
 import { TbCalendar, TbEdit, TbX } from 'solid-icons/tb';
 import { For, ParentComponent } from 'solid-js';
 import { useAuthContext } from '../providers/Auth';
-import { ItineraryData } from '../types';
+import { ItineraryData } from '../../../common/types/api';
 import ItineraryArticle from './ItineraryArticle';
 import ItinerarySection from './ItinerarySection';
 
