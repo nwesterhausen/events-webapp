@@ -1,22 +1,29 @@
-import logger from 'morgan';
-import express, { ErrorRequestHandler } from 'express';
-import session from 'express-session';
 import sqlite from 'better-sqlite3';
 import sqliteStore from 'better-sqlite3-session-store';
-import dotenv from 'dotenv';
 import debugLib from 'debug';
+import dotenv from 'dotenv';
+import express, { ErrorRequestHandler } from 'express';
 import proxy from 'express-http-proxy';
+import session from 'express-session';
+import logger from 'morgan';
+
+// Load env variables
+dotenv.config();
+if (process.env.NODE_ENV === 'development') {
+  dotenv.config({ path: './dev.env', override: true });
+}
 
 // Import database code
 import { connectDatabase } from './db';
 
 // Import our routes
+import { checkAdminAccess, checkViewAccess } from './lib/authorization';
+import adminRouter from './routes/admin';
 import apiv1Router from './routes/api-v1';
 import authRouter from './routes/auth';
-import adminRouter from './routes/admin';
-import { CreateGoogleOauthRouter } from './routes/oauth-google';
+import { CreateMagicLinkAuthRouter } from './routes/auth-magic-login';
 import { CreateDiscordOauthRouter } from './routes/oauth-discord';
-import { checkAdminAccess, checkViewAccess } from './lib/authorization';
+import { CreateGoogleOauthRouter } from './routes/oauth-google';
 
 const debug = debugLib('eventsapp:app');
 
@@ -26,12 +33,6 @@ const app = express();
 // Set up the session storage
 const SqliteStore = sqliteStore(session);
 const SessionDB = new sqlite('sessions.sqlite3');
-
-// Load env variables
-dotenv.config();
-if (process.env.NODE_ENV === 'development') {
-  dotenv.config({ path: './dev.env', override: true });
-}
 
 // Set database connection
 const knex = connectDatabase();
@@ -63,6 +64,7 @@ app.use(
 app.use('/auth', authRouter);
 app.use('/auth', CreateGoogleOauthRouter(knex));
 app.use('/auth', CreateDiscordOauthRouter(knex));
+app.use('/auth', CreateMagicLinkAuthRouter(knex));
 
 // Administration route
 app.use('/admin', checkAdminAccess, adminRouter);
