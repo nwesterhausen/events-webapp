@@ -35,7 +35,7 @@ const LoginPage: Component = () => {
                   <Form.Label>Google OAuth ID</Form.Label>
                   <Form.Control type='text' placeholder={authContext.auth.user.googleId || 'unset'} disabled readOnly />
                 </Form.Group>
-                <Button class='google-login-btn ps-5' rel='external' href='/auth/google'>
+                <Button class='google-login-btn' rel='external' href='/auth/google'>
                   <img src={GoogleLogo} />
                   Connect Google
                 </Button>
