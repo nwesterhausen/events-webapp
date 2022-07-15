@@ -1,9 +1,9 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
-import { ItinerarySection } from 'knex/types/tables';
+import { ItinerarySection } from '../../../common/types/database';
 import { StringToDate } from './common';
 import articleQuery from './itinerary-article';
-import { ItinerarySectionData } from './types';
+import { ItinerarySectionData } from '../../../common/types/api';
 const debug = debugLib('eventsapp:query-isection');
 
 const allSections = async (db: Knex): Promise<ItinerarySectionData[]> => {

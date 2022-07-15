@@ -5,7 +5,7 @@ import { Component, createMemo, createSignal } from 'solid-js';
 import { Create, Delete } from '../lib/api';
 import { UserData } from '../pages/UserManagement';
 import { useAuthContext } from '../providers/Auth';
-import { PERMISSION_ID } from '../types';
+import { PERMISSION_ID } from '../../../common/types/shared';
 import CheckCross from './CheckCross';
 
 const addUserPermission = async (user_id: number, permission_id: number): Promise<boolean> => {
@@ -130,7 +130,7 @@ export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (p
           <FormCheck
             checked={props.user.VIEW_ALL}
             disabled={editDisabled()}
-            onClick={(e) => {
+            onClick={(e: Event) => {
               const el = e.target as HTMLInputElement;
               if (el.checked) {
                 addPermission(props.user.id, PERMISSION_ID.VIEW_ALL);
@@ -146,7 +146,7 @@ export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (p
           <FormCheck
             checked={props.user.MODIFY_ALL}
             disabled={editDisabled()}
-            onClick={(e) => {
+            onClick={(e: Event) => {
               const el = e.target as HTMLInputElement;
               if (el.checked) {
                 addPermission(props.user.id, PERMISSION_ID.MODIFY_ALL);
@@ -164,7 +164,7 @@ export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (p
           <FormCheck
             checked={props.user.IS_ADMIN}
             disabled={editDisabled()}
-            onClick={(e) => {
+            onClick={(e: Event) => {
               const el = e.target as HTMLInputElement;
               if (el.checked) {
                 addPermission(props.user.id, PERMISSION_ID.IS_ADMIN);

@@ -2,7 +2,7 @@ import { Card, ListGroup, ListGroupItem, OverlayTrigger, Stack, Tooltip } from '
 import { TbLink, TbMapPin, TbMusic, TbNotebook, TbX } from 'solid-icons/tb';
 import { For, ParentComponent } from 'solid-js';
 import { useAuthContext } from '../providers/Auth';
-import { SetlistData } from '../types';
+import { SetlistData } from '../../../common/types/api';
 import Link from './Link';
 import SetlistSong from './SetlistSong';
 

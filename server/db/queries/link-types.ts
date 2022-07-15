@@ -1,7 +1,7 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
-import { LinkType } from 'knex/types/tables';
-import { ItineraryItemData } from './types';
+import { LinkType } from '../../../common/types/database';
+import { ItineraryItemData } from '../../../common/types/api';
 const debug = debugLib('eventsapp:query-linktype');
 
 const allLinkTypes = async (db: Knex): Promise<LinkType[]> => {

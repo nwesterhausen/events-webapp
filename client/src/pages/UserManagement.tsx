@@ -1,14 +1,12 @@
 import { Button, Stack, Table } from 'solid-bootstrap';
 import { TbCloudUpload, TbFileDownload } from 'solid-icons/tb';
 import { Component, createResource, For } from 'solid-js';
+import { UserData } from '../../../common/types/api';
 import TablePageHeader from '../components/TablePageHeader';
 import UserRow from '../components/UserRow';
 import { Create, Get } from '../lib/api';
 import { SaveJson } from '../lib/file-downloader';
 import { useAuthContext } from '../providers/Auth';
-import { Db_User, PermissionsObject } from '../types';
-
-export type UserData = Db_User & PermissionsObject;
 
 const EmptyUserdata: UserData[] = [];
 

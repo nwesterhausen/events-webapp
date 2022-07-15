@@ -1,84 +1,22 @@
 import { Knex } from 'knex';
+import {
+  User,
+  UserPermission,
+  LinkType,
+  Song2Setlist,
+  SetlistSong,
+  Setlist,
+  Itinerary,
+  ItinerarySection,
+  ItineraryArticle,
+  ItineraryItem,
+  Link,
+  Link2Song,
+  Link2ItineraryArticle,
+  Setlist2ItineraryArticle,
+} from '../../../common/types/database';
 
 declare module 'knex/types/tables' {
-  interface User {
-    id: number;
-    name: string;
-    email: string;
-    googleId: string;
-    discordId: string;
-    created_at: string;
-    updated_at: string;
-  }
-  interface Permission {
-    id: number;
-    name: string;
-    description: string;
-  }
-  interface UserPermission {
-    id: number;
-    user_id: number;
-    permission_id: number;
-  }
-  interface Setlist {
-    id: number;
-    notes: string;
-    location: string;
-  }
-  interface SetlistSong {
-    id: number;
-    name: string;
-    artist: string;
-  }
-  interface LinkType {
-    id: number;
-    name: string;
-  }
-  interface Song2Setlist {
-    setlist_id: number;
-    setlist_song_id: number;
-  }
-  interface Link {
-    id: number;
-    text?: string;
-    link_type: number;
-  }
-  interface Link2Song {
-    link_id: number;
-    song_id: number;
-  }
-  interface Link2ItineraryArticle {
-    link_id: number;
-    itinerary_article_id: number;
-  }
-  interface ItineraryItem {
-    id: number;
-    text: string;
-    itinerary_article_id: number;
-  }
-  interface ItineraryArticle {
-    id: number;
-    title: string;
-    start_time: string;
-    end_time: string;
-    itinerary_section_id: number;
-  }
-  interface ItinerarySection {
-    id: number;
-    date: string;
-    tod_modifier: string;
-    itinerary_id: number;
-  }
-  interface Itinerary {
-    id: number;
-    start_date: string;
-    end_date: string;
-    title: string;
-  }
-  interface Setlist2ItineraryArticle {
-    setlist_id: number;
-    itinerary_article_id: number;
-  }
   interface Tables {
     // This is same as specifying `knex<User>('users')`
     users: User;

@@ -1,9 +1,9 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
-import { Itinerary } from 'knex/types/tables';
+import { Itinerary } from '../../../common/types/database';
 import { StringToDate } from './common';
 import sectionQuery from './itinerary-section';
-import { ItineraryData, ItineraryHead } from './types';
+import { ItineraryData, ItineraryHeadData } from '../../../common/types/api';
 const debug = debugLib('eventsapp:query-setlist');
 
 const allIteneraries = async (db: Knex): Promise<ItineraryData[]> => {
@@ -43,10 +43,10 @@ const itineraryById = async (db: Knex, itineraryId: number): Promise<ItineraryDa
   ];
 };
 
-const allItenerariesHead = async (db: Knex): Promise<ItineraryHead[]> => {
+const allItenerariesHead = async (db: Knex): Promise<ItineraryHeadData[]> => {
   const iteneraries = await db.select().from('itinerary');
   debug(`allItenerariesHead found ${iteneraries.length} iteneraries`);
-  const itineraryHead: ItineraryHead[] = [];
+  const itineraryHead: ItineraryHeadData[] = [];
   for (const itinerary of iteneraries as Itinerary[]) {
     itineraryHead.push({
       itinerary_id: itinerary.id,

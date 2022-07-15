@@ -3,7 +3,7 @@ import { TbCalendar, TbSunrise, TbX } from 'solid-icons/tb';
 import { For, ParentComponent } from 'solid-js';
 import { SectionDateTitle } from '../lib/time-funcs';
 import { useAuthContext } from '../providers/Auth';
-import { ItinerarySectionData } from '../types';
+import { ItinerarySectionData } from '../../../common/types/api';
 import ItineraryArticle from './ItineraryArticle';
 
 export type ItinerarySectionProps = {

@@ -1,4 +1,4 @@
-import express, { RequestHandler, Router } from 'express';
+import express, { RequestHandler } from 'express';
 import { getAccount } from './account';
 import debugLib from 'debug';
 

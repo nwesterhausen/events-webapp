@@ -1,13 +1,10 @@
 import debugLib from 'debug';
 import { RequestHandler } from 'express';
 import { Knex } from 'knex';
-import { User } from 'knex/types/tables';
-import { use } from 'passport';
-import { PermissionsObj } from '../../typing-stubs/express-session';
-import { PERMISSION_ID } from '../lib/session';
+import { UserData } from '../../common/types/api';
+import { PERMISSION_ID } from '../../common/types/shared';
 const debug = debugLib('eventsapp:db-restore');
 
-type UserData = User & PermissionsObj;
 type InsertUserData = {
   email: string;
   name: string;

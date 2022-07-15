@@ -1,11 +1,17 @@
 import { createContextProvider } from '@solid-primitives/context';
 import { createEffect, createResource } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import { PermissionsObject, UserObject } from '../types';
+import { PermissionsObj } from '../../../common/types/shared';
+
+export type UserObject = {
+  id: number;
+  name: string;
+  email: string;
+};
 
 export const [AuthenticationProvider, useAuthContext] = createContextProvider(
   () => {
-    const [auth, setAuth] = createStore<{ user: UserObject; permissions: PermissionsObject; loggedIn: boolean }>({
+    const [auth, setAuth] = createStore<{ user: UserObject; permissions: PermissionsObj; loggedIn: boolean }>({
       user: {
         id: -1,
         name: '',

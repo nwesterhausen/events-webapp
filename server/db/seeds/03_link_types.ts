@@ -1,8 +1,7 @@
 import { Knex } from 'knex';
+import { LinkTypes } from '../../../common/types/shared';
 import debugLib from 'debug';
 const debug = debugLib('eventsapp:database-seed');
-
-const NewLinkTypes: string[] = ['Navigation', 'Youtube', 'Spotify', 'Ultimate Guitar', 'Generic', 'No Icon', 'Music'];
 
 exports.seed = function (knex: Knex) {
   return knex
@@ -10,9 +9,9 @@ exports.seed = function (knex: Knex) {
     .from('_link_types')
     .then(function (rows) {
       if (rows.length === 0) {
-        debug(`No existing link types, seeding ${NewLinkTypes.length}`);
+        debug(`No existing link types, seeding ${LinkTypes.length}`);
         return knex('_link_types').insert(
-          NewLinkTypes.map((v) => {
+          LinkTypes.map((v) => {
             return { name: v };
           })
         );
@@ -22,7 +21,7 @@ exports.seed = function (knex: Knex) {
           return v.name;
         });
         const MissingTypes: string[] = [];
-        for (const typeName of NewLinkTypes) {
+        for (const typeName of LinkTypes) {
           if (ExistingTypes.indexOf(typeName) === -1) {
             MissingTypes.push(typeName);
           }
