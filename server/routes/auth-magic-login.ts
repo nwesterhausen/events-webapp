@@ -44,6 +44,7 @@ export const CreateMagicLinkAuthRouter = (db: Knex): Router => {
       // Get or create a user with the provided email from the database
       // getOrCreateUserWithEmail(payload.destination)
       const user_email: string = payload.destination;
+      const user_name: string = payload.name || user_email;
 
       new Promise(async (resolve, rej) => {
         // Check for an exact match
@@ -56,7 +57,7 @@ export const CreateMagicLinkAuthRouter = (db: Knex): Router => {
         // Create user if we were unable to match them.
         const newUser: { id: number; name: string; email: string } = await db('users').insert(
           {
-            name: user_email,
+            name: user_name,
             email: user_email,
           },
           ['id', 'name', 'email']

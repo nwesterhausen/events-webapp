@@ -4,9 +4,9 @@ export const magicLoginHandler = async (email: string): Promise<string> => {
     method: `POST`,
     body: JSON.stringify({
       // `destination` is required.
-      destination: 'nwesterhausen@gmail.com',
+      destination: email,
       // However, you can POST anything in your payload and it will show up in your verify() method
-      name: 'test',
+      // name: name,
     }),
     headers: { 'Content-Type': 'application/json' },
   });
