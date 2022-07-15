@@ -13,11 +13,11 @@
     "postbuild": "copyfiles --up 2 client/dist/**/* server/build/client",
     "install": "cd server && pnpm install",
     "postinstall": "cd client && pnpm install",
-    "start:prod:win": "set DEBUG=eventsapp:* & set NODE_ENV=production & node server/build/index.js",
-    "start:prod": "DEBUG=eventsapp:* NODE_ENV=production node server/build/index.js",
+    "start:prod:win": "set DEBUG=eventsapp:* & set NODE_ENV=production & node server/build/server/index.js",
+    "start:prod": "DEBUG=eventsapp:* NODE_ENV=production node server/build/server/index.js",
     "clean": "rimraf server/build",
-    "start:prod:log": "DEBUG=eventsapp:* NODE_ENV=production node build/index.js >access.log",
-    "start:prod:log:win": "set DEBUG=eventsapp:* & set NODE_ENV=production & node build/index.js >access.log"
+    "start:prod:log": "DEBUG=eventsapp:* NODE_ENV=production node server/build/server/index.js >access.log",
+    "start:prod:log:win": "set DEBUG=eventsapp:* & set NODE_ENV=production & node server/build/server/index.js >access.log"
   },
   "prettier": {
     "bracketSameLine": true,
