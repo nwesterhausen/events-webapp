@@ -7,6 +7,8 @@ export type UserObject = {
   id: number;
   name: string;
   email: string;
+  discordId?: string;
+  googleId?: string;
 };
 
 export const [AuthenticationProvider, useAuthContext] = createContextProvider(
@@ -16,6 +18,8 @@ export const [AuthenticationProvider, useAuthContext] = createContextProvider(
         id: -1,
         name: '',
         email: '',
+        discordId: '',
+        googleId: '',
       },
       permissions: {
         IS_ADMIN: false,
@@ -71,6 +75,8 @@ export const [AuthenticationProvider, useAuthContext] = createContextProvider(
           id: sessionLogin.latest.user_details.id,
           name: sessionLogin.latest.user_details.name,
           email: sessionLogin.latest.user_details.email,
+          discordId: sessionLogin.latest.user_details.discordId,
+          googleId: sessionLogin.latest.user_details.googleId,
         });
         setAuth('permissions', sessionLogin.latest.user_permissions);
         setAuth('loggedIn', true);
@@ -85,6 +91,8 @@ export const [AuthenticationProvider, useAuthContext] = createContextProvider(
         id: -1,
         name: '',
         email: '',
+        discordId: '',
+        googleId: '',
       },
       permissions: {
         IS_ADMIN: false,

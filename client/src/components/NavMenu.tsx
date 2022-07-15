@@ -1,5 +1,6 @@
 import { Container, Nav, Navbar, NavDropdown, OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
 import { FiMail } from 'solid-icons/fi';
+import { RiUserAccountBoxFill } from 'solid-icons/ri';
 import { VscGithubInverted } from 'solid-icons/vsc';
 import { Component } from 'solid-js';
 import { useAuthContext } from '../providers/Auth';
@@ -19,8 +20,10 @@ const NavMenu: Component = () => {
           <>
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>
-              <Navbar.Text class='ms-5'>Authorized as {authContext.auth.user.name}</Navbar.Text>
               <Nav class='ms-auto'>
+                <Nav.Link href='my-account'>
+                  Account <RiUserAccountBoxFill class='icon-fix' />
+                </Nav.Link>
                 {authContext.auth.permissions.IS_ADMIN ? (
                   <NavDropdown title='Manage' id='collasible-nav-dropdown'>
                     <NavDropdown.Item href='user-admin'>Users</NavDropdown.Item>

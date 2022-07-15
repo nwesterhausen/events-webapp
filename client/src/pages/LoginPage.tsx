@@ -29,7 +29,7 @@ const LoginPage: Component = () => {
             <Stack gap={3}>
               <Switch>
                 <Match when={magicLinkPage() === 0}>
-                  <Button class='google-login-btn ps-1' rel='external' href='/auth/google'>
+                  <Button class='google-login-btn' rel='external' href='/auth/google'>
                     <img src={GoogleLogo} />
                     Login with Google
                   </Button>

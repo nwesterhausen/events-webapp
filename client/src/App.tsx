@@ -11,6 +11,7 @@ import { useAuthContext } from './providers/Auth';
 const UserManagement = lazy(() => import('./pages/UserManagement'));
 const ManageSetlists = lazy(() => import('./pages/ManageSetlists'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
+const MyAccount = lazy(() => import('./pages/AccountPage'));
 
 const testItinerary: ItineraryData = {
   title: 'Test Itinerary',
@@ -94,6 +95,7 @@ const App: Component = () => {
       <Container fluid class='p-3'>
         {authContext.auth.loggedIn ? (
           <Routes>
+            <Route path='/my-account' component={MyAccount} />
             {authContext.auth.permissions.VIEW_ALL ? <Route path='/' component={CurrentEvents} /> : <></>}
             {authContext.auth.permissions.IS_ADMIN ? (
               <>
