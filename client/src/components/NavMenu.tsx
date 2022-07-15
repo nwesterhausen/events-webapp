@@ -50,7 +50,9 @@ const NavMenu: Component = () => {
                     <VscGithubInverted class='icon-fix' size='1rem' />
                   </Nav.Link>
                 </OverlayTrigger>
-                <Nav.Link rel='external' href='/auth/logout'>Logout</Nav.Link>
+                <Nav.Link rel='external' href='/auth/logout'>
+                  Logout
+                </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </>
