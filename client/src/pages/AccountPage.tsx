@@ -28,26 +28,24 @@ const LoginPage: Component = () => {
                 </Button>
                 <hr />
                 <p class='mb-0 fs-4'>OAuth Login Providers</p>
-                <label class='fs-6' for='user_email'>
+                <label for='user_email'>
                   Before you connect the services below, make sure the email address above matches the one used for these accounts.
                 </label>
                 <Form.Group controlId='exampleForm.ControlInput1'>
                   <Form.Label>Google OAuth ID</Form.Label>
                   <Form.Control type='text' placeholder={authContext.auth.user.googleId || 'unset'} disabled readOnly />
                 </Form.Group>
+                <Button class='google-login-btn ps-5' rel='external' href='/auth/google'>
+                  <img src={GoogleLogo} />
+                  Connect Google
+                </Button>
                 <Form.Group controlId='exampleForm.ControlInput1'>
                   <Form.Label>Discord OAuth ID</Form.Label>
                   <Form.Control type='text' placeholder={authContext.auth.user.discordId || 'unset'} disabled readOnly />
                 </Form.Group>
-                <Stack gap={3} direction='horizontal'>
-                  <Button class='google-login-btn ps-5' rel='external' href='/auth/google'>
-                    <img src={GoogleLogo} />
-                    Connect Google
-                  </Button>
-                  <Button class='discord-login-btn' rel='external' href='/auth/discord'>
-                    Connect Discord
-                  </Button>
-                </Stack>
+                <Button class='discord-login-btn' rel='external' href='/auth/discord'>
+                  Connect Discord
+                </Button>
               </Form>
             </Stack>
           </Card.Body>
