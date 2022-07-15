@@ -2,10 +2,6 @@
   "name": "events-webapp",
   "scripts": {
     "build": "pnpm build:server && pnpm build:client && pnpm postbuild",
-    "start:win": "set DEBUG=eventsapp:* & set \"NODE_ENV=development\" & nodemon server/index.ts",
-    "start": "DEBUG=eventsapp:* \"NODE_ENV=development\"nodemon server/index.ts",
-    "start:win:dbg": "set DEBUG=* & set \"NODE_ENV=development\" & nodemon server/index.ts",
-    "start:dbg": "DEBUG=* \"NODE_ENV=development\" nodemon server/index.ts",
     "af": "prettier --write .",
     "build:server": "cd server && pnpm build",
     "build:client": "cd client && pnpm build",
@@ -13,11 +9,13 @@
     "postbuild": "copyfiles --up 2 client/dist/**/* server/build/client",
     "install": "cd server && pnpm install",
     "postinstall": "cd client && pnpm install",
-    "start:prod:win": "set DEBUG=eventsapp:* & set NODE_ENV=production & node server/build/server/index.js",
-    "start:prod": "DEBUG=eventsapp:* NODE_ENV=production node server/build/server/index.js",
     "clean": "rimraf server/build",
-    "start:prod:log": "DEBUG=eventsapp:* NODE_ENV=production node server/build/server/index.js >access.log",
-    "start:prod:log:win": "set DEBUG=eventsapp:* & set NODE_ENV=production & node server/build/server/index.js >access.log"
+    "start": "cd server && pnpm start",
+    "start:prod": "cd server && pnpm start:prod",
+    "debug:prod": "cd server && pnpm debug:prod",
+    "start:win": "cd server && pnpm start:win",
+    "start:prod:win": "cd server && pnpm start:prod:win",
+    "debug:prod:win": "cd server && pnpm debug:prod:win"
   },
   "prettier": {
     "bracketSameLine": true,

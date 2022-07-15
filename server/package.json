@@ -8,8 +8,9 @@
     "start:win": "set \"DEBUG=eventsapp:*\" & set \"NODE_ENV=development\" & nodemon index.ts",
     "start:dbg": "set DEBUG=* & set \"NODE_ENV=development\" & nodemon index.ts",
     "start:prod:win": "set DEBUG=eventsapp:* & set NODE_ENV=production & node build/server/index.js",
-    "start:prod:lin": "DEBUG=eventsapp:* NODE_ENV=production node build/server/index.js >access.log",
-    "debug:prod:win": "set DEBUG=* & set NODE_ENV=development & node build/server/index.js"
+    "start:prod": "DEBUG=eventsapp:* NODE_ENV=production node build/server/index.js >access.log",
+    "debug:prod:win": "set DEBUG=* & set NODE_ENV=production & node build/server/index.js",
+    "debug:prod": "DEBUG=* NODE_ENV=production node build/server/index.js >access.log"
   },
   "dependencies": {
     "@types/cors": "^2.8.12",
