@@ -17,7 +17,6 @@
     "solid-bootstrap": "^1.0.8",
     "solid-icons": "^0.5.0",
     "solid-js": "^1.4.2",
-    "solid-theme-provider": "^0.4.2",
     "typescript": "^4.6.4",
     "vite": "^2.9.9",
     "vite-plugin-solid": "^2.2.6"
@@ -29,9 +28,5 @@
     "proseWrap": "always",
     "singleQuote": true
   },
-  "packageManager": "pnpm@7.5.0",
-  "dependencies": {
-    "@types/qs": "^6.9.7",
-    "qs": "^6.11.0"
-  }
+  "packageManager": "pnpm@7.5.0"
 }
