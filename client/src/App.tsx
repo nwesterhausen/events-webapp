@@ -6,11 +6,11 @@ import Itinerary from './components/Itinerary';
 import NavMenu from './components/NavMenu';
 import Aug192022 from './events/2022-08-19';
 import { ItineraryShortDateRange } from './lib/time-funcs';
-import LoginPage from './pages/LoginPage';
 import { useAuthContext } from './providers/Auth';
 
 const UserManagement = lazy(() => import('./pages/UserManagement'));
 const ManageSetlists = lazy(() => import('./pages/ManageSetlists'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
 
 const testItinerary: ItineraryData = {
   title: 'Test Itinerary',

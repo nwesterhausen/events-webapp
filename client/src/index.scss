@@ -108,3 +108,21 @@ html {
 #navbar {
   width: calc(100vw);
 }
+
+.google-login-btn {
+  background-color: #4285f4;
+  border-color: #4285f4;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+
+  img {
+    position: absolute;
+    top: 2px;
+    left: 0.5rem;
+    height: 2rem;
+  }
+}
+.discord-login-btn {
+  background-color: #5865f2;
+  border-color: #5865f2;
+}
