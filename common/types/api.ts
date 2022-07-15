@@ -1,11 +1,11 @@
 import { User } from './database';
-import { PermissionsObj } from './shared';
+import { PermissionsObj, LinkTypes } from './shared';
 
 export type UserData = User & PermissionsObj;
 export type LinkData = {
   text?: string;
   url: string;
-  type: string;
+  type: typeof LinkTypes[number];
 };
 export type SongData = {
   name: string;
@@ -22,8 +22,8 @@ export type ItineraryItemData = {
 };
 export type ItineraryArticleData = {
   title: string;
-  start_time: Date;
-  end_time: Date;
+  start_time?: Date;
+  end_time?: Date;
   items: ItineraryItemData[];
   links: LinkData[];
   setlists: SetlistData[];

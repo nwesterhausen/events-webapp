@@ -10,4 +10,4 @@ export const PERMISSION_ID = {
   IS_ADMIN: 3,
 };
 
-export const LinkTypes: string[] = ['Navigation', 'Youtube', 'Spotify', 'Ultimate Guitar', 'Generic', 'No Icon', 'Music'];
+export const LinkTypes = ['Navigation', 'Youtube', 'Spotify', 'Ultimate Guitar', 'Generic', 'No Icon', 'Music'] as const;
