@@ -6,7 +6,7 @@ import { Component } from 'solid-js';
 import { useAuthContext } from '../providers/Auth';
 
 const NavMenu: Component = () => {
-  const authContext = useAuthContext();
+  const [auth] = useAuthContext();
   return (
     <Navbar id='navbar' bg='dark' variant='dark' expand='lg'>
       <Container fluid>
@@ -16,7 +16,7 @@ const NavMenu: Component = () => {
             <span>Planned Events</span>
           </Stack>
         </Navbar.Brand>
-        {authContext.auth.loggedIn ? (
+        {auth.loggedIn ? (
           <>
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>
@@ -24,7 +24,7 @@ const NavMenu: Component = () => {
                 <Nav.Link href='my-account'>
                   Account <RiUserAccountBoxFill class='icon-fix' />
                 </Nav.Link>
-                {authContext.auth.permissions.IS_ADMIN ? (
+                {auth.permissions.IS_ADMIN ? (
                   <NavDropdown title='Manage' id='collasible-nav-dropdown'>
                     <NavDropdown.Item href='user-admin'>Users</NavDropdown.Item>
                     <NavDropdown.Divider />
@@ -33,8 +33,8 @@ const NavMenu: Component = () => {
                 ) : (
                   <></>
                 )}
-                {authContext.auth.permissions.VIEW_ALL ? <Nav.Link disabled>Archives</Nav.Link> : <></>}
-                {authContext.auth.permissions.MODIFY_ALL ? (
+                {auth.permissions.VIEW_ALL ? <Nav.Link disabled>Archives</Nav.Link> : <></>}
+                {auth.permissions.MODIFY_ALL ? (
                   <>
                     <OverlayTrigger placement='auto' overlay={<Tooltip id={'send-email'}>Submit a new event or an event correction.</Tooltip>}>
                       <Nav.Link href='mailto:nwesterhausen@gmail.com?subject=Upcoming%20Event%20Contact'>

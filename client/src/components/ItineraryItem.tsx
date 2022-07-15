@@ -4,11 +4,11 @@ import { Component } from 'solid-js';
 import { useAuthContext } from '../providers/Auth';
 
 const ItineraryItem: Component<{ text: string }> = (props) => {
-  const authContext = useAuthContext();
+  const [auth] = useAuthContext();
   return (
     <div class='d-flex'>
       <span>{props.text}</span>
-      {authContext.auth.permissions.MODIFY_ALL ? (
+      {auth.permissions.MODIFY_ALL ? (
         <Stack class='modify-action d-flex px-3 align-items-center' direction='horizontal' gap={2}>
           <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
             <a class='action-button text-center'>

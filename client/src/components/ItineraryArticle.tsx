@@ -2,9 +2,9 @@ import { OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
 import { BiText } from 'solid-icons/bi';
 import { TbClock, TbCursorText, TbLink, TbX } from 'solid-icons/tb';
 import { For, ParentComponent } from 'solid-js';
+import { ItineraryArticleData } from '../../../common/types/api';
 import { ArticleTimeFromDate } from '../lib/time-funcs';
 import { useAuthContext } from '../providers/Auth';
-import { ItineraryArticleData } from '../../../common/types/api';
 import ItineraryItem from './ItineraryItem';
 import Link from './Link';
 import Setlist from './Setlist';
@@ -22,12 +22,12 @@ const ItineraryArticle: ParentComponent<ItineraryArticleProps> = (props) => {
       </Stack>
     );
   }
-  const authContext = useAuthContext();
+  const [auth] = useAuthContext();
   return (
     <Stack gap={1} class='itinerary-item mt-3'>
       <div class='d-flex'>
         <p class='fw-bold fs-4 text-info mb-0'>{props.article.title}</p>
-        {authContext.auth.permissions.MODIFY_ALL ? (
+        {auth.permissions.MODIFY_ALL ? (
           <Stack class='modify-actions d-flex px-3 align-items-center' direction='horizontal' gap={2}>
             <OverlayTrigger overlay={<Tooltip>Edit Title</Tooltip>}>
               <a class='action-button text-center'>
@@ -60,7 +60,8 @@ const ItineraryArticle: ParentComponent<ItineraryArticleProps> = (props) => {
         )}
       </div>
       <strong class='mb-3 ps-2'>
-        {ArticleTimeFromDate(props.article.start_time)} - {ArticleTimeFromDate(props.article.end_time)}
+        {ArticleTimeFromDate(props.article.start_time)}
+        {props.article.end_time ? ' - ' + ArticleTimeFromDate(props.article.end_time) : ''}
       </strong>
       <For each={props.article.items}>{(item) => <ItineraryItem text={item.text} />}</For>
       <For each={props.article.links}>{(link) => <Link type='article' link={link} />}</For>

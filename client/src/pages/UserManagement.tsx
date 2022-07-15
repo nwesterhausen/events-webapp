@@ -11,9 +11,9 @@ import { useAuthContext } from '../providers/Auth';
 const EmptyUserdata: UserData[] = [];
 
 const UserManagment: Component = () => {
-  const authContext = useAuthContext();
+  const [auth] = useAuthContext();
   // Don't render anything if we don't believe ourselves to be an admin ;)
-  if (authContext.auth.loggedIn && !authContext.auth.permissions.IS_ADMIN) {
+  if (auth.loggedIn && !auth.permissions.IS_ADMIN) {
     return <></>;
   }
 

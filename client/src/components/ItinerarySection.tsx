@@ -1,9 +1,9 @@
 import { OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
 import { TbCalendar, TbSunrise, TbX } from 'solid-icons/tb';
 import { For, ParentComponent } from 'solid-js';
+import { ItinerarySectionData } from '../../../common/types/api';
 import { SectionDateTitle } from '../lib/time-funcs';
 import { useAuthContext } from '../providers/Auth';
-import { ItinerarySectionData } from '../../../common/types/api';
 import ItineraryArticle from './ItineraryArticle';
 
 export type ItinerarySectionProps = {
@@ -12,7 +12,7 @@ export type ItinerarySectionProps = {
 };
 
 const ItinerarySection: ParentComponent<ItinerarySectionProps> = (props) => {
-  const authContext = useAuthContext();
+  const [auth] = useAuthContext();
 
   if (props.title || !props.section) {
     return (
@@ -25,8 +25,8 @@ const ItinerarySection: ParentComponent<ItinerarySectionProps> = (props) => {
   return (
     <section class='itinerary-section'>
       <div class='d-flex'>
-        <h3 class='text-warning itinerary-subtitle'>{SectionDateTitle(props.section.date)}</h3>
-        {authContext.auth.permissions.MODIFY_ALL ? (
+        <h3 class='text-warning itinerary-subtitle'>{SectionDateTitle(props.section.date, props.section.tod_modifier)}</h3>
+        {auth.permissions.MODIFY_ALL ? (
           <Stack class='modify-action d-flex px-3 align-items-center' gap={2} direction='horizontal'>
             <OverlayTrigger overlay={<Tooltip>Edit Time of Day</Tooltip>}>
               <a class='action-button text-center'>

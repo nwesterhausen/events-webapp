@@ -4,9 +4,9 @@ import { RiMapDirectionFill } from 'solid-icons/ri';
 import { SiSpotify, SiYoutube } from 'solid-icons/si';
 import { TbEdit, TbExternalLink, TbX } from 'solid-icons/tb';
 import { Component, createMemo } from 'solid-js';
+import { LinkData } from '../../../common/types/api';
 import { UltimateGuitarIcon } from '../icons/UtilmateGuitar';
 import { useAuthContext } from '../providers/Auth';
-import { LinkData } from '../../../common/types/api';
 
 export type LinkComponentProps = {
   link: LinkData;
@@ -14,7 +14,7 @@ export type LinkComponentProps = {
 };
 
 const Link: Component<LinkComponentProps> = (props) => {
-  const authContext = useAuthContext();
+  const [auth] = useAuthContext();
   const btnVariant = createMemo(() => {
     if (props.type === 'article') {
       return 'outline-info';
@@ -74,7 +74,7 @@ const Link: Component<LinkComponentProps> = (props) => {
       <Button variant={btnVariant()} size='sm' href={props.link.url} target='_blank'>
         {btnContent()}
       </Button>
-      {authContext.auth.permissions.MODIFY_ALL ? (
+      {auth.permissions.MODIFY_ALL ? (
         <Stack class='modify-action d-flex px-3 align-items-center' direction='horizontal' gap={2}>
           <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
             <a class='action-button text-center'>

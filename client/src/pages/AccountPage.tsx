@@ -4,7 +4,7 @@ import GoogleLogo from '../icons/btn_google_dark_normal_ios.svg';
 import { useAuthContext } from '../providers/Auth';
 
 const LoginPage: Component = () => {
-  const authContext = useAuthContext();
+  const [auth] = useAuthContext();
   const updateAccountInfo = () => {};
   return (
     <Container class='py-5 h-100'>
@@ -17,11 +17,11 @@ const LoginPage: Component = () => {
                 <p class='mb-0 fs-4'>User Details</p>
                 <Form.Group controlId='user_name'>
                   <Form.Label>Name</Form.Label>
-                  <Form.Control type='name' value={authContext.auth.user.name} />
+                  <Form.Control type='name' value={auth.user.name} />
                 </Form.Group>
                 <Form.Group controlId='user_email'>
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type='email' value={authContext.auth.user.email} />
+                  <Form.Control type='email' value={auth.user.email} />
                 </Form.Group>
                 <Button disabled type='submit'>
                   Update
@@ -33,7 +33,7 @@ const LoginPage: Component = () => {
                 </label>
                 <Form.Group controlId='exampleForm.ControlInput1'>
                   <Form.Label>Google OAuth ID</Form.Label>
-                  <Form.Control type='text' placeholder={authContext.auth.user.googleId || 'unset'} disabled readOnly />
+                  <Form.Control type='text' placeholder={auth.user.googleId || 'unset'} disabled readOnly />
                 </Form.Group>
                 <Button class='google-login-btn' rel='external' href='/auth/google'>
                   <img src={GoogleLogo} />
@@ -41,7 +41,7 @@ const LoginPage: Component = () => {
                 </Button>
                 <Form.Group controlId='exampleForm.ControlInput1'>
                   <Form.Label>Discord OAuth ID</Form.Label>
-                  <Form.Control type='text' placeholder={authContext.auth.user.discordId || 'unset'} disabled readOnly />
+                  <Form.Control type='text' placeholder={auth.user.discordId || 'unset'} disabled readOnly />
                 </Form.Group>
                 <Button class='discord-login-btn' rel='external' href='/auth/discord'>
                   Connect Discord

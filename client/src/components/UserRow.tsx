@@ -2,10 +2,10 @@ import { Badge, FormCheck, OverlayTrigger, Tooltip } from 'solid-bootstrap';
 import { BsDiscord, BsGoogle } from 'solid-icons/bs';
 import { FiTrash2 } from 'solid-icons/fi';
 import { Component, createMemo, createSignal } from 'solid-js';
-import { Create, Delete } from '../lib/api';
-import { UserData } from '../pages/UserManagement';
-import { useAuthContext } from '../providers/Auth';
+import { UserData } from '../../../common/types/api';
 import { PERMISSION_ID } from '../../../common/types/shared';
+import { Create, Delete } from '../lib/api';
+import { useAuthContext } from '../providers/Auth';
 import CheckCross from './CheckCross';
 
 const addUserPermission = async (user_id: number, permission_id: number): Promise<boolean> => {
@@ -63,7 +63,7 @@ const SavingStates = {
 };
 
 export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (props) => {
-  const authContext = useAuthContext();
+  const [auth] = useAuthContext();
   const [savingState, setSavingState] = createSignal(SavingStates.IDLE);
 
   const badgeClass = createMemo(() => {
@@ -158,7 +158,7 @@ export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (p
         }
       </td>
       <td>
-        {authContext.auth.user.id === props.user.id ? (
+        {auth.user.id === props.user.id ? (
           <FormCheck checked={props.user.IS_ADMIN} disabled />
         ) : (
           <FormCheck
@@ -178,9 +178,9 @@ export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (p
       <td class=''>
         <a
           class='text-center action-button delete fixwidth'
-          classList={{ disabled: authContext.auth.user.id === props.user.id }}
+          classList={{ disabled: auth.user.id === props.user.id }}
           onClick={() => {
-            if (authContext.auth.user.id === props.user.id) return; // Exit if this is for the current user
+            if (auth.user.id === props.user.id) return; // Exit if this is for the current user
             Delete('/admin/user', { user_id: props.user.id }).then(() => props.dataRefetch());
           }}>
           <FiTrash2 class='icon-fix' />

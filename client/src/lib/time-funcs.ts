@@ -2,15 +2,18 @@ const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday
 const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-export const ArticleTimeFromDate = (date: Date): string => {
-  let hours = date.getHours();
-  const minutes = date.getMinutes();
-  const ampm = hours >= 12 ? 'pm' : 'am';
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  const min = minutes < 10 ? '0' + minutes : minutes;
-  const strTime = hours + ':' + min + ' ' + ampm;
-  return strTime;
+export const ArticleTimeFromDate = (date?: Date): string => {
+  if (date) {
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    const min = minutes < 10 ? '0' + minutes : minutes;
+    const strTime = hours + ':' + min + ' ' + ampm;
+    return strTime;
+  }
+  return '';
 };
 
 export const SectionDateTitle = (date: Date, tod_modifier?: string): string => {
