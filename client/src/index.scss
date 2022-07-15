@@ -69,8 +69,14 @@ html {
 .card {
   border-radius: 0.5rem;
 }
-.btn {
+.btn,
+.form-control,
+.navbar-toggler,
+.alert {
   border-radius: 0.25rem;
+}
+.tooltip .tooltip-inner {
+  border-radius: 0.45rem;
 }
 
 .nav-pills .nav-item {
