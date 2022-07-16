@@ -1,10 +1,11 @@
 import { Knex } from 'knex';
 import {
   ActionLink2ItineraryArticle,
-  Itinerary,
   ItineraryArticle,
+  ItineraryArticleInsertType,
+  ItineraryInsertType,
   ItineraryItem,
-  ItinerarySection,
+  ItinerarySectionInsertType,
   Link,
   Link2ItineraryArticle,
   Link2Song,
@@ -67,9 +68,17 @@ declare module 'knex/types/tables' {
     song_2_setlist: Song2Setlist;
     setlist_song: SetlistSong;
     setlist: Setlist;
-    itinerary: Itinerary;
-    itinerary_section: ItinerarySection;
-    itinerary_article: ItineraryArticle;
+    itinerary: Knex.CompositeTableType<ItineraryInsertType, Omit<ItineraryInsertType, 'id'>, Partial<Omit<ItineraryInsertType, 'id'>>>;
+    itinerary_section: Knex.CompositeTableType<
+      ItinerarySectionInsertType,
+      Omit<ItinerarySectionInsertType, 'id'>,
+      Partial<Omit<ItinerarySectionInsertType, 'id'>>
+    >;
+    itinerary_article: Knex.CompositeTableType<
+      ItineraryArticle,
+      Omit<ItineraryArticleInsertType, 'id'>,
+      Partial<Omit<ItineraryArticleInsertType, 'id'>>
+    >;
     itinerary_item: ItineraryItem;
     link: Link;
     link_2_song: Link2Song;

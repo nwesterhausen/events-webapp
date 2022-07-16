@@ -1,8 +1,8 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
+import { SetlistData } from '../../../common/types/api';
 import { Setlist, Setlist2ItineraryArticle } from '../../../common/types/database';
 import songQuery from './songs';
-import { SetlistData } from '../../../common/types/api';
 const debug = debugLib('eventsapp:query-setlist');
 
 const allSetlists = async (db: Knex): Promise<SetlistData[]> => {
@@ -15,13 +15,14 @@ const allSetlists = async (db: Knex): Promise<SetlistData[]> => {
       notes: setlist.notes,
       location: setlist.location,
       songs: songs,
+      id: setlist.id,
     });
   }
   return resolvedSongs;
 };
 
 const setlistById = async (db: Knex, setlistId: number): Promise<SetlistData[]> => {
-  const setlists = await db.select().from('setlist_song').where({
+  const setlists = await db.select().from('setlist').where({
     id: setlistId,
   });
   if (setlists.length === 0) {
@@ -35,6 +36,7 @@ const setlistById = async (db: Knex, setlistId: number): Promise<SetlistData[]> 
       notes: setlist.notes,
       location: setlist.location,
       songs: songs,
+      id: setlist.id,
     },
   ];
 };
@@ -54,11 +56,35 @@ const setlistForitineraryArticle = async (db: Knex, articleId: number): Promise<
   return setlists;
 };
 
+const updateSetlist = async (db: Knex, data: SetlistData) => {
+  const res1 = await db('setlist')
+    .where({
+      id: data.id,
+    })
+    .update(
+      {
+        notes: data.notes,
+        location: data.location,
+      },
+      ['id']
+    );
+  const new_id = res1[0].id;
+  debug(`updated setlist as id:${new_id}`);
+  // For any of the connected info should be updated individually if it needs to be.
+};
+
+const deleteSetlist = async (db: Knex, id: number) => {
+  await db('setlist').where({ id: id }).delete();
+  debug(`deleted setlist id:${id}`);
+};
+
 export default Object.assign(
   {},
   {
     all: allSetlists,
     byId: setlistById,
     foritineraryArticle: setlistForitineraryArticle,
+    update: updateSetlist,
+    delete: deleteSetlist,
   }
 );

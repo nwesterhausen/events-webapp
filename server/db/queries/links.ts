@@ -64,11 +64,15 @@ const allLinksForSong = async (db: Knex, songId: number): Promise<LinkData[]> =>
   return links;
 };
 
-const allLinkForitineraryArticle = async (db: Knex, articleId: number): Promise<LinkData[]> => {
+const allLinkForitineraryArticle = async (db: Knex, articleId: number): Promise<[LinkData[], LinkData[]]> => {
   const articleLinks = await db.select().from('link_2_itinerary_article').where({
     itinerary_article_id: articleId,
   });
-  debug(`allLinkForitineraryArticle(${articleId}) found ${articleLinks.length} links`);
+  debug(`allLinks for Article(${articleId}) found ${articleLinks.length} links`);
+  const articleActionLinks = await db.select().from('actionlinks_2_itinerary_article').where({
+    itinerary_article_id: articleId,
+  });
+  debug(`allActionLinks for Article(${articleId}) found ${articleActionLinks.length} links`);
   const links: LinkData[] = [];
   for (const articlelink of articleLinks as Link2ItineraryArticle[]) {
     const match = await linkById(db, articlelink.link_id);
@@ -76,7 +80,38 @@ const allLinkForitineraryArticle = async (db: Knex, articleId: number): Promise<
       links.push(match[0]);
     }
   }
-  return links;
+  const actionLinks: LinkData[] = [];
+  for (const actionLink of articleActionLinks as Link2ItineraryArticle[]) {
+    const match = await linkById(db, actionLink.link_id);
+    if (match.length === 1) {
+      actionLinks.push(match[0]);
+    }
+  }
+  return [links, actionLinks];
+};
+
+const updateLink = async (db: Knex, data: LinkData) => {
+  const typeId = await linkTypeQuery.idByName(db, data.type);
+  const res1 = await db('links')
+    .where({
+      id: data.id,
+    })
+    .update(
+      {
+        url: data.url,
+        text: data.text || '',
+        type: typeId,
+      },
+      ['id']
+    );
+  const new_id = res1[0].id;
+  debug(`updated link as id:${new_id}`);
+  // For any of the connected info should be updated individually if it needs to be.
+};
+
+const deleteLink = async (db: Knex, id: number) => {
+  await db('links').where({ id: id }).delete();
+  debug(`deleted link id:${id}`);
 };
 
 export default Object.assign(
@@ -86,5 +121,7 @@ export default Object.assign(
     byId: linkById,
     forSong: allLinksForSong,
     foritineraryArticle: allLinkForitineraryArticle,
+    update: updateLink,
+    delete: deleteLink,
   }
 );

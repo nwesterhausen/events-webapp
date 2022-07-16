@@ -83,3 +83,23 @@ export type ActionLink2ItineraryArticle = {
   link_id: number;
   itinerary_article_id: number;
 };
+
+export type ItineraryArticleInsertType = {
+  id: number;
+  title: string;
+  start_time: Date;
+  end_time: Date;
+  itinerary_section_id: number;
+};
+export type ItinerarySectionInsertType = {
+  id: number;
+  date: Date;
+  tod_modifier: string;
+  itinerary_id: number;
+};
+export type ItineraryInsertType = {
+  id: number;
+  start_date: Date;
+  end_date: Date;
+  title: string;
+};

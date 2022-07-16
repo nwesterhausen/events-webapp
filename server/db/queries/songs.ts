@@ -1,8 +1,8 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
+import { SongData } from '../../../common/types/api';
 import { SetlistSong, Song2Setlist } from '../../../common/types/database';
 import linkQuery from './links';
-import { SongData } from '../../../common/types/api';
 const debug = debugLib('eventsapp:query-song');
 
 const allSongs = async (db: Knex): Promise<SongData[]> => {
@@ -15,6 +15,7 @@ const allSongs = async (db: Knex): Promise<SongData[]> => {
       name: song.name,
       artist: song.artist,
       links: links,
+      id: song.id,
     });
   }
   return resolvedSongs;
@@ -35,6 +36,7 @@ const songById = async (db: Knex, songId: number): Promise<SongData[]> => {
       name: song.name,
       artist: song.artist,
       links: links,
+      id: song.id,
     },
   ];
 };
@@ -53,11 +55,35 @@ const songsForSetlist = async (db: Knex, setlistId: number): Promise<SongData[]>
   return songs;
 };
 
+const updateSong = async (db: Knex, data: SongData) => {
+  const res1 = await db('setlist_song')
+    .where({
+      id: data.id,
+    })
+    .update(
+      {
+        name: data.name,
+        artist: data.artist,
+      },
+      ['id']
+    );
+  const new_id = res1[0].id;
+  debug(`updated song as id:${new_id}`);
+  // For any of the connected info should be updated individually if it needs to be.
+};
+
+const deleteSong = async (db: Knex, id: number) => {
+  await db('setlist_song').where({ id: id }).delete();
+  debug(`deleted song id:${id}`);
+};
+
 export default Object.assign(
   {},
   {
     all: allSongs,
     byId: songById,
     forSetlist: songsForSetlist,
+    update: updateSong,
+    delete: deleteSong,
   }
 );
