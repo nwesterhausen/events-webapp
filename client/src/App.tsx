@@ -5,7 +5,7 @@ import { ItineraryData } from '../../common/types/api';
 import Itinerary from './components/Itinerary';
 import NavMenu from './components/NavMenu';
 import Aug192022 from './events/2022-08-19';
-import { AuthenticationProvider, useAuthContext } from './providers/Auth';
+import { useAuthContext } from './providers/Auth';
 
 const UserManagement = lazy(() => import('./pages/UserManagement'));
 const ManageSetlists = lazy(() => import('./pages/ManageSetlists'));
@@ -199,7 +199,7 @@ const App: Component = () => {
   const [auth] = useAuthContext();
 
   return (
-    <AuthenticationProvider>
+    <>
       <NavMenu />
       <Container fluid class='p-3'>
         <Routes>
@@ -215,7 +215,7 @@ const App: Component = () => {
           )}
         </Routes>
       </Container>
-    </AuthenticationProvider>
+    </>
   );
 };
 

@@ -4,14 +4,14 @@ import { render } from 'solid-js/web';
 import 'bootswatch/dist/superhero/bootstrap.css';
 import './index.scss';
 
-import { Router } from 'solid-app-router';
+import { hashIntegration, Router } from 'solid-app-router';
 import App from './App';
 import { AuthenticationProvider } from './providers/Auth';
 
 render(
   () => (
     <AuthenticationProvider>
-      <Router>
+      <Router source={hashIntegration()}>
         <App />
       </Router>
     </AuthenticationProvider>
