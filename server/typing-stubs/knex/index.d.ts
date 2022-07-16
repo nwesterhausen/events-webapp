@@ -1,19 +1,20 @@
 import { Knex } from 'knex';
 import {
-  User,
-  UserPermission,
-  LinkType,
-  Song2Setlist,
-  SetlistSong,
-  Setlist,
+  ActionLink2ItineraryArticle,
   Itinerary,
-  ItinerarySection,
   ItineraryArticle,
   ItineraryItem,
+  ItinerarySection,
   Link,
-  Link2Song,
   Link2ItineraryArticle,
+  Link2Song,
+  LinkType,
+  Setlist,
   Setlist2ItineraryArticle,
+  SetlistSong,
+  Song2Setlist,
+  User,
+  UserPermission,
 } from '../../../common/types/database';
 
 declare module 'knex/types/tables' {
@@ -74,5 +75,6 @@ declare module 'knex/types/tables' {
     link_2_song: Link2Song;
     link_2_itinerary_article: Link2ItineraryArticle;
     setlist_2_itinerary_article: Setlist2ItineraryArticle;
+    actionlink_2_itinerary_article: ActionLink2ItineraryArticle;
   }
 }

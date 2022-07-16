@@ -38,6 +38,7 @@ export type Song2Setlist = {
 export type Link = {
   id: number;
   text?: string;
+  url: string;
   link_type: number;
 };
 export type Link2Song = {
@@ -74,5 +75,9 @@ export type Itinerary = {
 };
 export type Setlist2ItineraryArticle = {
   setlist_id: number;
+  itinerary_article_id: number;
+};
+export type ActionLink2ItineraryArticle = {
+  link_id: number;
   itinerary_article_id: number;
 };
