@@ -1,7 +1,7 @@
 {
   "name": "events-webapp",
   "scripts": {
-    "build": "pnpm:clean && pnpm build:server && pnpm build:client && pnpm postbuild",
+    "build": "pnpm clean && pnpm build:server && pnpm build:client && pnpm postbuild",
     "af": "prettier --write .",
     "build:server": "cd server && pnpm build",
     "build:client": "cd client && pnpm build",
