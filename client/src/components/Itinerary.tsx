@@ -15,7 +15,7 @@ const Itinerary: ParentComponent<{ itinerary?: ItineraryData }> = (props) => {
     <Stack gap={3}>
       <div class='d-flex'>
         <h2>{props.itinerary.title}</h2>
-        {auth.permissions.MODIFY_ALL ? (
+        {auth.user.MODIFY_ALL ? (
           <Stack class='modify-action d-flex px-3 align-items-center' gap={2} direction='horizontal'>
             <OverlayTrigger overlay={<Tooltip>Edit Title</Tooltip>}>
               <a class='action-button text-center'>

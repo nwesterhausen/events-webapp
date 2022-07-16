@@ -1,6 +1,6 @@
-import express, { RequestHandler } from 'express';
-import { getAccount } from './account';
 import debugLib from 'debug';
+import express, { RequestHandler } from 'express';
+import { getAccount, putAccount } from './account';
 
 const debug = debugLib('eventsapp:auth');
 
@@ -17,6 +17,7 @@ const LogoutHandler: RequestHandler = (req, res) => {
 const router = express.Router();
 
 router.get('/me', getAccount);
+router.put('/me', putAccount);
 router.get('/logout', LogoutHandler);
 
 export default router;

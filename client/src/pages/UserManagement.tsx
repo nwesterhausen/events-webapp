@@ -13,7 +13,7 @@ const EmptyUserdata: UserData[] = [];
 const UserManagment: Component = () => {
   const [auth] = useAuthContext();
   // Don't render anything if we don't believe ourselves to be an admin ;)
-  if (auth.loggedIn && !auth.permissions.IS_ADMIN) {
+  if (auth.loggedIn && !auth.user.IS_ADMIN) {
     return <></>;
   }
 

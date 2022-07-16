@@ -27,7 +27,7 @@ const ItineraryArticle: ParentComponent<ItineraryArticleProps> = (props) => {
     <Stack gap={1} class='itinerary-item mt-3'>
       <div class='d-flex'>
         <p class='fw-bold fs-4 text-info mb-0'>{props.article.title}</p>
-        {auth.permissions.MODIFY_ALL ? (
+        {auth.user.MODIFY_ALL ? (
           <Stack class='modify-actions d-flex px-3 align-items-center' direction='horizontal' gap={2}>
             <OverlayTrigger overlay={<Tooltip>Edit Title</Tooltip>}>
               <a class='action-button text-center'>
@@ -63,9 +63,14 @@ const ItineraryArticle: ParentComponent<ItineraryArticleProps> = (props) => {
         {ArticleTimeFromDate(props.article.start_time)}
         {props.article.end_time ? ' - ' + ArticleTimeFromDate(props.article.end_time) : ''}
       </strong>
-      <For each={props.article.items}>{(item) => <ItineraryItem text={item.text} />}</For>
-      <For each={props.article.links}>{(link) => <Link type='article' link={link} />}</For>
-      <For each={props.article.setlists}>{(setlist) => <Setlist setlist={setlist} />}</For>
+      <Stack gap={2}>
+        <Stack direction='horizontal' gap={2}>
+          <For each={props.article.action_links}>{(link) => <Link type='article_action' link={link} />}</For>
+        </Stack>
+        <For each={props.article.items}>{(item) => <ItineraryItem text={item.text} />}</For>
+        <For each={props.article.links}>{(link) => <Link type='article' link={link} />}</For>
+        <For each={props.article.setlists}>{(setlist) => <Setlist setlist={setlist} />}</For>
+      </Stack>
     </Stack>
   );
 };

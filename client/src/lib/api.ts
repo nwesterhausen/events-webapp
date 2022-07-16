@@ -46,3 +46,10 @@ export function Get(endpoint: string): Promise<any> {
 export function GetById(endpoint: string, id: number): Promise<any> {
   return Get(`${endpoint}/${id}`);
 }
+
+export function Update(endpoint: string, data: any, id?: number): Promise<any> {
+  if (id) {
+    data.id = id;
+  }
+  return Api(endpoint, 'PUT', data);
+}

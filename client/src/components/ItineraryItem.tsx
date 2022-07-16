@@ -8,7 +8,7 @@ const ItineraryItem: Component<{ text: string }> = (props) => {
   return (
     <div class='d-flex'>
       <span>{props.text}</span>
-      {auth.permissions.MODIFY_ALL ? (
+      {auth.user.MODIFY_ALL ? (
         <Stack class='modify-action d-flex px-3 align-items-center' direction='horizontal' gap={2}>
           <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
             <a class='action-button text-center'>

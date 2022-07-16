@@ -27,7 +27,7 @@ const Setlist: ParentComponent<{ setlist?: SetlistData }> = (props) => {
       <Card.Text>
         <div class='d-flex'>
           <p class='m-0 ps-3'>{props.setlist.notes}</p>
-          {auth.permissions.MODIFY_ALL ? (
+          {auth.user.MODIFY_ALL ? (
             <div class='ms-auto modify-actions d-flex justify-content-end px-3'>
               <Stack direction='horizontal' gap={2}>
                 <OverlayTrigger overlay={<Tooltip>Edit Notes</Tooltip>}>
@@ -66,7 +66,7 @@ const Setlist: ParentComponent<{ setlist?: SetlistData }> = (props) => {
                     <span class='fw-light song-artist'>{song.artist}</span>
                   </Stack>
                   <For each={song.links}>{(link) => <Link type='song' link={link} />}</For>
-                  {auth.permissions.MODIFY_ALL ? (
+                  {auth.user.MODIFY_ALL ? (
                     <OverlayTrigger overlay={<Tooltip>Add Link</Tooltip>}>
                       <a class='text-decoration-none create action-button text-center'>
                         <TbLink class='icon-fix' />+

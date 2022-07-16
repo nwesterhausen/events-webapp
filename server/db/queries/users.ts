@@ -2,7 +2,26 @@ import debugLib from 'debug';
 import { Knex } from 'knex';
 import { UserData } from '../../../common/types/api';
 import { buildPermissionReference } from '../../lib/session';
+import userPermissions from './user-permissions';
 const debug = debugLib('eventsapp:query-users');
+
+interface UpdatableUserData {
+  name: string;
+  email: string;
+}
+
+const userById = async (db: Knex, id: number): Promise<UserData[]> => {
+  const matches = await db('users').select().where({ id: id });
+  if (matches.length === 0) return [];
+  const permissions = await userPermissions.byUserId(db, id);
+  const user = matches[0];
+  return [
+    {
+      ...user,
+      ...permissions,
+    },
+  ];
+};
 
 const allUsers = async (db: Knex): Promise<UserData[]> => {
   const users = await db('users').select();
@@ -19,11 +38,11 @@ const allUsers = async (db: Knex): Promise<UserData[]> => {
   return user_data;
 };
 
-const updateUser = async (db: Knex, data: UserData) => {
+const updateUser = async (db: Knex, id: number, data: UpdatableUserData) => {
   // If you need to update permissions its done separately!
   const res = await db('users')
     .where({
-      id: data.id,
+      id: id,
     })
     .update(
       {
@@ -32,13 +51,14 @@ const updateUser = async (db: Knex, data: UserData) => {
       },
       ['id']
     );
-  debug(`updated name/email for user:${data.id}`);
+  debug(`updated name/email for user:${id}`);
 };
 
 export default Object.assign(
   {},
   {
     all: allUsers,
+    byId: userById,
     update: updateUser,
   }
 );

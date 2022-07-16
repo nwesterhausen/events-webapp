@@ -12,11 +12,14 @@ const ManageSetlists = lazy(() => import('./pages/ManageSetlists'));
 const MyAccount = lazy(() => import('./pages/AccountPage'));
 
 const augItinerary: ItineraryData = {
+  id: 0,
   title: 'Music Weekend',
   start_date: new Date('August 19 2022'),
   end_date: new Date('August 21 2022'),
   sections: [
     {
+      id: 0,
+      itinerary_id: 0,
       date: new Date('August 19 2022'),
       tod_modifier: 'Night',
       articles: [
@@ -25,31 +28,41 @@ const augItinerary: ItineraryData = {
           start_time: new Date('August 19 2022 19:00:00'),
           end_time: new Date('August 19 2022 22:00:00'),
           items: [
-            { text: 'Main Squeeze @ Nickel Plate Amphitheater' },
-            { text: 'Main Squeeze with Huckleberry Funk' },
-            { text: 'Doors open at 7:00 PM, Show starts at 8:00 PM.' },
+            { text: 'Main Squeeze @ Nickel Plate Amphitheater', id: 0, article_id: 0 },
+            { text: 'Main Squeeze with Huckleberry Funk', id: 0, article_id: 0 },
+            { text: 'Doors open at 7:00 PM, Show starts at 8:00 PM.', id: 0, article_id: 0 },
           ],
-          links: [
-            { type: 'Generic', url: 'https://mokbpresents.com/events/?es=the+main+squeeze', text: 'Get Tickets' },
+          action_links: [
+            { type: 'No Icon', url: 'https://mokbpresents.com/events/?es=the+main+squeeze', text: 'Get Tickets', id: 0 },
             {
               type: 'Navigation',
               url: 'https://google.com/maps/dir//Nickel+Plate+District+Amphitheater,+6+Municipal+Dr,+Fishers,+IN+46038/@39.9605582,-86.0193325,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8814b3869f97a02b:0xa819ac75af284476!2m2!1d-86.0171438!2d39.9605582',
+              id: 0,
             },
-            { url: 'https://www.youtube.com/watch?v=JwVcQGp3bLo', type: 'Youtube', text: 'Main Squeeze at Bonarroo 2022' },
-            { url: 'https://www.youtube.com/watch?v=DQnhCYUMkYs', type: 'Youtube', text: 'Huckleberry Funk Live' },
+          ],
+          links: [
+            { url: 'https://www.youtube.com/watch?v=JwVcQGp3bLo', type: 'Youtube', text: 'Main Squeeze at Bonarroo 2022', id: 0 },
+            { url: 'https://www.youtube.com/watch?v=DQnhCYUMkYs', type: 'Youtube', text: 'Huckleberry Funk Live', id: 0 },
           ],
           setlists: [],
+          id: 0,
+          section_id: 0,
         },
         {
           title: 'Crash',
           start_time: new Date('August 19 22:30:00'),
-          items: [{ text: 'Find somewhere to sleep for the night!' }],
+          items: [{ text: 'Find somewhere to sleep for the night!', id: 0, article_id: 0 }],
           links: [],
+          action_links: [],
           setlists: [],
+          id: 0,
+          section_id: 0,
         },
       ],
     },
     {
+      id: 0,
+      itinerary_id: 0,
       date: new Date('August 20 2022'),
       tod_modifier: '',
       articles: [
@@ -58,15 +71,22 @@ const augItinerary: ItineraryData = {
           start_time: new Date('August 20 2022 09:00:00'),
           end_time: new Date('August 20 2022 10:30:00'),
           links: [],
+          action_links: [],
           setlists: [],
           items: [],
+          id: 0,
+          section_id: 0,
         },
         {
+          id: 0,
+          section_id: 0,
           title: 'Hangout',
           start_time: new Date('August 20 2022 11:00:00'),
           links: [],
+          action_links: [],
           setlists: [
             {
+              id: 0,
               notes: '',
               location: '',
               songs: [
@@ -74,60 +94,70 @@ const augItinerary: ItineraryData = {
                   name: 'War Pigs',
                   artist: 'Black Sabbath',
                   links: [
-                    { type: 'Spotify', url: 'https://open.spotify.com/track/0HVQuuXGAcQ2P5mBN521ae?si=82682de044c442e3' },
-                    { type: 'Ultimate Guitar', url: 'https://tabs.ultimate-guitar.com/tab/black-sabbath/war-pigs-official-2003333' },
+                    { type: 'Spotify', url: 'https://open.spotify.com/track/0HVQuuXGAcQ2P5mBN521ae?si=82682de044c442e3', id: 0 },
+                    { type: 'Ultimate Guitar', url: 'https://tabs.ultimate-guitar.com/tab/black-sabbath/war-pigs-official-2003333', id: 0 },
                   ],
+                  id: 0,
                 },
                 {
                   name: `Bitches Ain't Shit`,
                   artist: 'Ben Folds (Dr. Dre)',
                   links: [
-                    { type: 'Youtube', url: 'https://www.youtube.com/watch?v=gjFRy8jQ_0U' },
-                    { type: 'Ultimate Guitar', url: 'https://tabs.ultimate-guitar.com/tab/ben-folds/bitches-aint-shit-chords-172201' },
+                    { type: 'Youtube', url: 'https://www.youtube.com/watch?v=gjFRy8jQ_0U', id: 0 },
+                    { type: 'Ultimate Guitar', url: 'https://tabs.ultimate-guitar.com/tab/ben-folds/bitches-aint-shit-chords-172201', id: 0 },
                   ],
+                  id: 0,
                 },
                 {
                   name: 'Electric Feel',
                   artist: 'MGMT',
                   links: [
-                    { type: 'Spotify', url: 'https://open.spotify.com/track/3FtYbEfBqAlGO46NUDQSAt?si=be56cf323ce945b1' },
-                    { type: 'Ultimate Guitar', url: 'https://tabs.ultimate-guitar.com/tab/mgmt/electric-feel-official-2099683' },
+                    { type: 'Spotify', url: 'https://open.spotify.com/track/3FtYbEfBqAlGO46NUDQSAt?si=be56cf323ce945b1', id: 0 },
+                    { type: 'Ultimate Guitar', url: 'https://tabs.ultimate-guitar.com/tab/mgmt/electric-feel-official-2099683', id: 0 },
                   ],
+                  id: 0,
                 },
                 {
                   name: 'Self Esteem',
                   artist: 'The Offspring',
                   links: [
-                    { type: 'Spotify', url: 'https://open.spotify.com/track/1FkoVC85Ds3mFoK0fVqEqP?si=ad690485aa0d41aa' },
-                    { type: 'Ultimate Guitar', url: 'https://tabs.ultimate-guitar.com/tab/the-offspring/self-esteem-official-1980577' },
+                    { type: 'Spotify', url: 'https://open.spotify.com/track/1FkoVC85Ds3mFoK0fVqEqP?si=ad690485aa0d41aa', id: 0 },
+                    { type: 'Ultimate Guitar', url: 'https://tabs.ultimate-guitar.com/tab/the-offspring/self-esteem-official-1980577', id: 0 },
                   ],
+                  id: 0,
                 },
                 {
                   name: 'Shooting Stars',
                   artist: 'Bag Raiders',
                   links: [
-                    { type: 'Spotify', url: 'https://open.spotify.com/track/0UeYCHOETPfai02uskjJ3x?si=03b4f275f5d847b7' },
-                    { type: 'Ultimate Guitar', url: 'https://tabs.ultimate-guitar.com/tab/bag-raiders/shooting-stars-official-2394435' },
+                    { type: 'Spotify', url: 'https://open.spotify.com/track/0UeYCHOETPfai02uskjJ3x?si=03b4f275f5d847b7', id: 0 },
+                    { type: 'Ultimate Guitar', url: 'https://tabs.ultimate-guitar.com/tab/bag-raiders/shooting-stars-official-2394435', id: 0 },
                   ],
+                  id: 0,
                 },
               ],
             },
           ],
-          items: [{ text: 'Jams, Rocket League, Eating' }],
+          items: [{ text: 'Jams, Rocket League, Eating', id: 0, article_id: 0 }],
         },
       ],
     },
     {
+      id: 0,
+      itinerary_id: 0,
       date: new Date('August 21 2022'),
       tod_modifier: '',
       articles: [
         {
+          id: 0,
+          section_id: 0,
           title: 'Golfing?',
           start_time: new Date('August 20 2022 09:00:00'),
           end_time: new Date('August 20 2022 10:30:00'),
           links: [],
+          action_links: [],
           setlists: [],
-          items: [{ text: 'Location TBD' }],
+          items: [{ text: 'Location TBD', id: 0, article_id: 0 }],
         },
       ],
     },
@@ -174,8 +204,8 @@ const App: Component = () => {
       <Container fluid class='p-3'>
         <Routes>
           <Route path='/my-account' component={MyAccount} />
-          {auth.permissions.VIEW_ALL ? <Route path='/' component={CurrentEvents} /> : <></>}
-          {auth.permissions.IS_ADMIN ? (
+          {auth.user.VIEW_ALL ? <Route path='/' component={CurrentEvents} /> : <></>}
+          {auth.user.IS_ADMIN ? (
             <>
               <Route path='/user-admin' component={UserManagement} />
               <Route path='/manage-setlists' component={ManageSetlists} />

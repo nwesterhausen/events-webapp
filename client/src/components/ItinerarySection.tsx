@@ -26,7 +26,7 @@ const ItinerarySection: ParentComponent<ItinerarySectionProps> = (props) => {
     <section class='itinerary-section'>
       <div class='d-flex'>
         <h3 class='text-warning itinerary-subtitle'>{SectionDateTitle(props.section.date, props.section.tod_modifier)}</h3>
-        {auth.permissions.MODIFY_ALL ? (
+        {auth.user.MODIFY_ALL ? (
           <Stack class='modify-action d-flex px-3 align-items-center' gap={2} direction='horizontal'>
             <OverlayTrigger overlay={<Tooltip>Edit Time of Day</Tooltip>}>
               <a class='action-button text-center'>

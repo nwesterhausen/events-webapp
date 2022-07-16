@@ -10,7 +10,7 @@ import { useAuthContext } from '../providers/Auth';
 
 export type LinkComponentProps = {
   link: LinkData;
-  type: 'song' | 'article';
+  type: 'song' | 'article' | 'article_action';
 };
 
 const Link: Component<LinkComponentProps> = (props) => {
@@ -18,6 +18,9 @@ const Link: Component<LinkComponentProps> = (props) => {
   const btnVariant = createMemo(() => {
     if (props.type === 'article') {
       return 'outline-info';
+    }
+    if (props.type === 'article_action') {
+      return 'primary';
     }
     return 'primary';
   });
@@ -74,7 +77,7 @@ const Link: Component<LinkComponentProps> = (props) => {
       <Button variant={btnVariant()} size='sm' href={props.link.url} target='_blank'>
         {btnContent()}
       </Button>
-      {auth.permissions.MODIFY_ALL ? (
+      {auth.user.MODIFY_ALL ? (
         <Stack class='modify-action d-flex px-3 align-items-center' direction='horizontal' gap={2}>
           <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
             <a class='action-button text-center'>

@@ -1,21 +1,12 @@
 import { createContext, createEffect, createResource, lazy, ParentComponent, useContext } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import { PermissionsObj } from '../../../common/types/shared';
+import { UserData } from '../../../common/types/api';
 
 const LoginPage = lazy(() => import('../pages/LoginPage'));
 
-export type UserObject = {
-  id: number;
-  name: string;
-  email: string;
-  discordId?: string;
-  googleId?: string;
-};
-
 type AuthStore = [
   {
-    user: UserObject;
-    permissions: PermissionsObj;
+    user: UserData;
     loggedIn: boolean;
   },
   {
@@ -31,11 +22,11 @@ const AuthContext = createContext<AuthStore>([
       email: '',
       discordId: '',
       googleId: '',
-    },
-    permissions: {
       IS_ADMIN: false,
       MODIFY_ALL: false,
       VIEW_ALL: false,
+      created_at: '',
+      updated_at: '',
     },
     loggedIn: false,
   },
@@ -45,29 +36,24 @@ const AuthContext = createContext<AuthStore>([
 ]);
 
 export const AuthenticationProvider: ParentComponent = (props) => {
-  const [auth, setAuth] = createStore<{ user: UserObject; permissions: PermissionsObj; loggedIn: boolean }>({
+  const [auth, setAuth] = createStore<{ user: UserData; loggedIn: boolean }>({
     user: {
       id: -1,
       name: '',
       email: '',
       discordId: '',
       googleId: '',
-    },
-    permissions: {
       IS_ADMIN: false,
       MODIFY_ALL: false,
       VIEW_ALL: false,
+      created_at: '',
+      updated_at: '',
     },
     loggedIn: false,
   });
 
   const clearStore = () => {
-    setAuth('user', { id: -1, name: '', email: '' });
-    setAuth('permissions', {
-      IS_ADMIN: false,
-      MODIFY_ALL: false,
-      VIEW_ALL: false,
-    });
+    setAuth('user', { id: -1, name: '', email: '', IS_ADMIN: false, MODIFY_ALL: false, VIEW_ALL: false, created_at: '', updated_at: '' });
     setAuth('loggedIn', false);
   };
 
@@ -90,9 +76,10 @@ export const AuthenticationProvider: ParentComponent = (props) => {
       if (!resp.ok) {
         return { complete: true, user: null };
       }
+      const data = await resp.json();
       return {
         complete: true,
-        ...(await resp.json()),
+        user: data.user_details,
       };
     },
     {
@@ -102,15 +89,8 @@ export const AuthenticationProvider: ParentComponent = (props) => {
 
   createEffect(() => {
     if (sessionLogin.latest.complete && sessionLogin.latest.user !== null) {
-      console.log(sessionLogin.latest);
-      setAuth('user', {
-        id: sessionLogin.latest.user_details.id,
-        name: sessionLogin.latest.user_details.name,
-        email: sessionLogin.latest.user_details.email,
-        discordId: sessionLogin.latest.user_details.discordId,
-        googleId: sessionLogin.latest.user_details.googleId,
-      });
-      setAuth('permissions', sessionLogin.latest.user_permissions);
+      console.log(JSON.stringify(sessionLogin.latest, null, 2));
+      setAuth('user', sessionLogin.latest.user);
       setAuth('loggedIn', true);
     }
   });
@@ -129,26 +109,6 @@ export const AuthenticationProvider: ParentComponent = (props) => {
     </AuthContext.Provider>
   );
 };
-// },
-// {
-//   auth: {
-//     user: {
-//       id: -1,
-//       name: '',
-//       email: '',
-//       discordId: '',
-//       googleId: '',
-//     },
-//     permissions: {
-//       IS_ADMIN: false,
-//       MODIFY_ALL: false,
-//       VIEW_ALL: false,
-//     },
-//     loggedIn: false,
-//   },
-//   // eslint-disable-next-line @typescript-eslint/no-empty-function
-//   logout: async () => {},
-// }
 
 export function useAuthContext() {
   return useContext(AuthContext);

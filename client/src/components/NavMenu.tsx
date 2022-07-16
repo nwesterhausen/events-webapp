@@ -24,7 +24,7 @@ const NavMenu: Component = () => {
                 <Nav.Link href='my-account'>
                   Account <RiUserAccountBoxFill class='icon-fix' />
                 </Nav.Link>
-                {auth.permissions.IS_ADMIN ? (
+                {auth.user.IS_ADMIN ? (
                   <NavDropdown title='Manage' id='collasible-nav-dropdown'>
                     <NavDropdown.Item href='user-admin'>Users</NavDropdown.Item>
                     <NavDropdown.Divider />
@@ -33,8 +33,8 @@ const NavMenu: Component = () => {
                 ) : (
                   <></>
                 )}
-                {auth.permissions.VIEW_ALL ? <Nav.Link disabled>Archives</Nav.Link> : <></>}
-                {auth.permissions.MODIFY_ALL ? (
+                {auth.user.VIEW_ALL ? <Nav.Link disabled>Archives</Nav.Link> : <></>}
+                {auth.user.MODIFY_ALL ? (
                   <>
                     <OverlayTrigger placement='auto' overlay={<Tooltip id={'send-email'}>Submit a new event or an event correction.</Tooltip>}>
                       <Nav.Link href='mailto:nwesterhausen@gmail.com?subject=Upcoming%20Event%20Contact'>
