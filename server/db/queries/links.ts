@@ -1,7 +1,8 @@
 import debugLib from 'debug';
 import { Knex } from 'knex';
-import { Link2ItineraryArticle, Link2Song } from '../../../common/types/database';
 import { LinkData } from '../../../common/types/api';
+import { Link2ItineraryArticle, Link2Song } from '../../../common/types/database';
+import linkTypeQuery from './link-types';
 const debug = debugLib('eventsapp:query-link');
 
 const allLinks = async (db: Knex): Promise<LinkData[]> => {
@@ -9,13 +10,17 @@ const allLinks = async (db: Knex): Promise<LinkData[]> => {
     'links.type': 'link_type.id',
   });
   debug(`allLinks found ${links.length} links`);
-  return links.map((v) => {
-    return {
-      text: v.text || '',
-      url: v.url,
-      type: v.name,
-    };
-  });
+  const resolvedLinks: LinkData[] = [];
+  for (const link of links) {
+    const typeStr = await linkTypeQuery.byId(db, link.link_type);
+    resolvedLinks.push({
+      id: link.id,
+      text: link.text || '',
+      url: link.url,
+      type: typeStr.length > 0 ? typeStr[0] : 'Generic',
+    });
+  }
+  return resolvedLinks;
 };
 
 const linkById = async (db: Knex, linkId: number): Promise<LinkData[]> => {
@@ -32,11 +37,14 @@ const linkById = async (db: Knex, linkId: number): Promise<LinkData[]> => {
     debug(`no link matching link_id:${linkId}`);
     return [];
   }
+  const my_link = links[0];
+  const typeStr = await linkTypeQuery.byId(db, my_link.link_type);
   return [
     {
-      text: links[0].text || '',
-      url: links[0].url,
-      type: links[0].name,
+      id: my_link.id,
+      text: my_link.text || '',
+      url: my_link.url,
+      type: typeStr.length > 0 ? typeStr[0] : 'Generic',
     },
   ];
 };

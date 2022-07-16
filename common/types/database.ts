@@ -1,3 +1,5 @@
+import { LinkTypes, GetNumericKeys } from './shared';
+
 export type User = {
   id: number;
   name: string;
@@ -39,7 +41,7 @@ export type Link = {
   id: number;
   text?: string;
   url: string;
-  link_type: number;
+  link_type: GetNumericKeys<keyof typeof LinkTypes>;
 };
 export type Link2Song = {
   link_id: number;

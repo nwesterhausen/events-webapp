@@ -1,5 +1,6 @@
-import { Knex } from 'knex';
 import debugLib from 'debug';
+import { Knex } from 'knex';
+import { PermissionsRef } from '../../../common/types/shared';
 const debug = debugLib('eventsapp:database-seed');
 
 /**
@@ -14,24 +15,22 @@ exports.seed = function (knex: Knex) {
     .from('permissions')
     .then(function (rows) {
       if (rows.length === 0) {
-        debug(`No existing permissions, seeding 3`);
-        return knex('permissions').insert([
-          {
-            id: 1,
-            name: 'View All',
-            description: 'Allowed to view details for everything except the user list.',
-          },
-          {
-            id: 2,
-            name: 'Modify All',
-            description: 'Allowed edit to everything except a user list and site settings.',
-          },
-          {
-            id: 3,
-            name: 'Admin',
-            description: 'Full access to all tables and site settings.',
-          },
-        ]);
+        debug(`No existing permissions, seeding ${PermissionsRef.length}`);
+        return knex('permissions').insert(PermissionsRef);
+      }
+      debug(`Some permissions exist, inserting any that are missing`);
+      const existingIds = rows.map((v) => {
+        return v.id;
+      });
+      const MissingPermissions: { id: number; name: string; description: string }[] = [];
+      for (const permission of PermissionsRef) {
+        if (existingIds.indexOf(permission.id) === -1) {
+          debug(`Missing ${permission.name} permission, queueing.`);
+          MissingPermissions.push(permission);
+        }
+      }
+      if (MissingPermissions.length > 0) {
+        return knex('permissions').insert(MissingPermissions);
       }
     });
 };

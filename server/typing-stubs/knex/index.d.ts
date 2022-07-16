@@ -63,7 +63,7 @@ declare module 'knex/types/tables' {
     >;
 
     user_permissions: UserPermission;
-    link_type: LinkType;
+    _link_types: LinkType;
     song_2_setlist: Song2Setlist;
     setlist_song: SetlistSong;
     setlist: Setlist;

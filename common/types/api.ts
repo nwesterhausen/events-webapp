@@ -2,7 +2,9 @@ import { User } from './database';
 import { PermissionsObj, LinkTypes } from './shared';
 
 export type UserData = User & PermissionsObj;
+
 export type LinkData = {
+  id: number;
   text?: string;
   url: string;
   type: typeof LinkTypes[number];
