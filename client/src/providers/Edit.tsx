@@ -22,7 +22,7 @@ const EditContext = createContext<EditStore>([
 
 export const EditProvider: ParentComponent = (props) => {
   const [auth] = useAuthContext();
-  const [inEditMode, setIneditMode] = createStore({ enabled: auth.user.MODIFY_ALL });
+  const [inEditMode, setIneditMode] = createStore({ enabled: true });
 
   const setEditMode = (enabled: boolean) => {
     if (auth.loggedIn && auth.user.MODIFY_ALL) {

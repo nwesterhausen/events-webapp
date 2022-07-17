@@ -69,7 +69,7 @@ export const AuthenticationProvider: ParentComponent = (props) => {
    * that hits the '/auth/account/' endpoint to get user details. If there is an existing session for the connection,
    * this will return the user data. If there isn't, this doesn't return anything useful.
    */
-  const [sessionLogin,{refetch}] = createResource(
+  const [sessionLogin, { refetch }] = createResource(
     async () => {
       const resp = await fetch('/auth/me', {
         headers: {
@@ -107,7 +107,7 @@ export const AuthenticationProvider: ParentComponent = (props) => {
       },
       async refreshAuth() {
         await refetch();
-      }
+      },
     },
   ];
   return (

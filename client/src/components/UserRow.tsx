@@ -63,7 +63,7 @@ const SavingStates = {
 };
 
 export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (props) => {
-  const [auth,{refreshAuth}] = useAuthContext();
+  const [auth, { refreshAuth }] = useAuthContext();
   const [savingState, setSavingState] = createSignal(SavingStates.IDLE);
 
   const badgeClass = createMemo(() => {
