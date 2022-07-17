@@ -1,5 +1,6 @@
 import { Button, Container, Navbar, Stack } from 'solid-bootstrap';
 import { Component, Match, Switch } from 'solid-js';
+import { useAuthContext } from '../providers/Auth';
 import { useEditContext } from '../providers/Edit';
 
 interface EditMenuProps {
@@ -12,7 +13,11 @@ const GenericError = 'Error, invalid page configurations';
 
 const EditMenu: Component<EditMenuProps> = (props) => {
   const [editMode] = useEditContext();
+  const [auth] = useAuthContext();
   if (!editMode.enabled) {
+    return <></>;
+  }
+  if (!auth.user.MODIFY_ALL) {
     return <></>;
   }
   if (!props.variant) {
