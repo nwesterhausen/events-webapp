@@ -13,7 +13,7 @@ const Itinerary: ParentComponent<{ itinerary?: ItineraryData }> = (props) => {
   }
   return (
     <>
-      <EditMenu setlist_id={props.itinerary.id} variant='setlist' />
+      <EditMenu itinerary_id={props.itinerary.id} variant='itinerary' />
       <Stack gap={3}>
         <h2>{props.itinerary.title}</h2>
         <For each={props.itinerary.sections}>{(section) => <ItinerarySection section={section} />}</For>

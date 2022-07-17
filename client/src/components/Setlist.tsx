@@ -1,5 +1,4 @@
-import { Card, ListGroup, ListGroupItem, OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
-import { TbLink } from 'solid-icons/tb';
+import { Card, ListGroup, ListGroupItem, Stack } from 'solid-bootstrap';
 import { For, ParentComponent } from 'solid-js';
 import { SetlistData } from '../../../common/types/api';
 import { useAuthContext } from '../providers/Auth';
@@ -38,15 +37,6 @@ const Setlist: ParentComponent<{ setlist?: SetlistData }> = (props) => {
                     <span class='fw-light song-artist'>{song.artist}</span>
                   </Stack>
                   <For each={song.links}>{(link) => <Link type='song' link={link} />}</For>
-                  {auth.user.MODIFY_ALL ? (
-                    <OverlayTrigger overlay={<Tooltip>Add Link</Tooltip>}>
-                      <a class='text-decoration-none create action-button text-center'>
-                        <TbLink class='icon-fix' />+
-                      </a>
-                    </OverlayTrigger>
-                  ) : (
-                    <></>
-                  )}
                 </Stack>
               </ListGroupItem>
             )}
