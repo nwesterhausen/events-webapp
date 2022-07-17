@@ -1,9 +1,10 @@
-import { Accessor, createContext, createSignal, ParentComponent, useContext } from 'solid-js';
+import { createContext, ParentComponent, useContext } from 'solid-js';
+import { createStore } from 'solid-js/store';
 import { useAuthContext } from './Auth';
 
 type EditStore = [
   {
-    inEditMode: Accessor<boolean>;
+    enabled: boolean;
   },
   {
     setEditMode: (enabled: boolean) => void;
@@ -12,7 +13,7 @@ type EditStore = [
 
 const EditContext = createContext<EditStore>([
   {
-    inEditMode: () => false,
+    enabled: false,
   },
   {
     setEditMode: (enabled) => {},
@@ -20,22 +21,20 @@ const EditContext = createContext<EditStore>([
 ]);
 
 export const EditProvider: ParentComponent = (props) => {
-  const [inEditMode, setIneditMode] = createSignal(false);
   const [auth] = useAuthContext();
+  const [inEditMode, setIneditMode] = createStore({ enabled: auth.user.MODIFY_ALL });
 
   const setEditMode = (enabled: boolean) => {
     if (auth.loggedIn && auth.user.MODIFY_ALL) {
       // Only allow enabling edit mode if user had EDIT rights and logged in.
-      setIneditMode(enabled);
+      setIneditMode({ enabled: enabled });
     } else {
-      setIneditMode(false);
+      setIneditMode({ enabled: false });
     }
   };
 
   const EditStore: EditStore = [
-    {
-      inEditMode: inEditMode,
-    },
+    inEditMode,
     {
       setEditMode: setEditMode,
     },

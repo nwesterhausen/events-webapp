@@ -11,8 +11,8 @@ interface EditMenuProps {
 const GenericError = 'Error, invalid page configurations';
 
 const EditMenu: Component<EditMenuProps> = (props) => {
-  const [inEditMode] = useEditContext();
-  if (!inEditMode) {
+  const [editMode] = useEditContext();
+  if (!editMode.enabled) {
     return <></>;
   }
   if (!props.variant) {
