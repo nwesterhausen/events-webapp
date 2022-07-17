@@ -1,8 +1,8 @@
-import { Button, OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
+import { Button } from 'solid-bootstrap';
 import { FiMusic } from 'solid-icons/fi';
 import { RiMapDirectionFill } from 'solid-icons/ri';
 import { SiSpotify, SiYoutube } from 'solid-icons/si';
-import { TbEdit, TbExternalLink, TbX } from 'solid-icons/tb';
+import { TbExternalLink } from 'solid-icons/tb';
 import { Component, createMemo } from 'solid-js';
 import { LinkData } from '../../../common/types/api';
 import { UltimateGuitarIcon } from '../icons/UtilmateGuitar';
@@ -73,26 +73,10 @@ const Link: Component<LinkComponentProps> = (props) => {
     }
   });
   return (
-    <div class='d-flex'>
+    <div>
       <Button variant={btnVariant()} size='sm' href={props.link.url} target='_blank'>
         {btnContent()}
       </Button>
-      {auth.user.MODIFY_ALL ? (
-        <Stack class='modify-action d-flex px-3 align-items-center' direction='horizontal' gap={2}>
-          <OverlayTrigger overlay={<Tooltip>Edit</Tooltip>}>
-            <a class='action-button text-center'>
-              <TbEdit class='icon-fix' />
-            </a>
-          </OverlayTrigger>
-          <OverlayTrigger overlay={<Tooltip>Delete</Tooltip>}>
-            <a class='action-button delete text-center'>
-              <TbX class='icon-fix' />
-            </a>
-          </OverlayTrigger>
-        </Stack>
-      ) : (
-        <></>
-      )}
     </div>
   );
 };

@@ -7,13 +7,16 @@ import './index.scss';
 import { hashIntegration, Router } from 'solid-app-router';
 import App from './App';
 import { AuthenticationProvider } from './providers/Auth';
+import { EditProvider } from './providers/Edit';
 
 render(
   () => (
     <AuthenticationProvider>
-      <Router source={hashIntegration()}>
-        <App />
-      </Router>
+      <EditProvider>
+        <Router source={hashIntegration()}>
+          <App />
+        </Router>
+      </EditProvider>
     </AuthenticationProvider>
   ),
   document.getElementById('root') as HTMLElement

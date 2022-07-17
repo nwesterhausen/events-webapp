@@ -1,8 +1,8 @@
-import { OverlayTrigger, Stack, Tooltip } from 'solid-bootstrap';
-import { TbCalendar, TbEdit, TbX } from 'solid-icons/tb';
+import { Stack } from 'solid-bootstrap';
 import { For, ParentComponent } from 'solid-js';
 import { ItineraryData } from '../../../common/types/api';
 import { useAuthContext } from '../providers/Auth';
+import EditMenu from './EditMenu';
 import ItineraryArticle from './ItineraryArticle';
 import ItinerarySection from './ItinerarySection';
 
@@ -12,33 +12,13 @@ const Itinerary: ParentComponent<{ itinerary?: ItineraryData }> = (props) => {
     return <Stack gap={3}>{props.children}</Stack>;
   }
   return (
-    <Stack gap={3}>
-      <div class='d-flex'>
+    <>
+      <EditMenu setlist_id={props.itinerary.id} variant='setlist' />
+      <Stack gap={3}>
         <h2>{props.itinerary.title}</h2>
-        {auth.user.MODIFY_ALL ? (
-          <Stack class='modify-action d-flex px-3 align-items-center' gap={2} direction='horizontal'>
-            <OverlayTrigger overlay={<Tooltip>Edit Title</Tooltip>}>
-              <a class='action-button text-center'>
-                <TbEdit class='icon-fix' />
-              </a>
-            </OverlayTrigger>
-            <OverlayTrigger overlay={<Tooltip>Edit Dates</Tooltip>}>
-              <a class='action-button text-center'>
-                <TbCalendar class='icon-fix' />
-              </a>
-            </OverlayTrigger>
-            <OverlayTrigger overlay={<Tooltip>Delete</Tooltip>}>
-              <a class='action-button delete text-center'>
-                <TbX class='icon-fix' />
-              </a>
-            </OverlayTrigger>
-          </Stack>
-        ) : (
-          <></>
-        )}
-      </div>
-      <For each={props.itinerary.sections}>{(section) => <ItinerarySection section={section} />}</For>
-    </Stack>
+        <For each={props.itinerary.sections}>{(section) => <ItinerarySection section={section} />}</For>
+      </Stack>
+    </>
   );
 };
 
