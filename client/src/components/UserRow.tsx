@@ -63,7 +63,7 @@ const SavingStates = {
 };
 
 export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (props) => {
-  const [auth] = useAuthContext();
+  const [auth,{refreshAuth}] = useAuthContext();
   const [savingState, setSavingState] = createSignal(SavingStates.IDLE);
 
   const badgeClass = createMemo(() => {
@@ -88,6 +88,9 @@ export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (p
       .then((success) => {
         if (success) {
           setSavingState(SavingStates.SUCCESS);
+          if (user_id === auth.user.id) {
+            return refreshAuth();
+          }
         } else {
           setSavingState(SavingStates.FAIL);
         }
@@ -103,6 +106,9 @@ export const UserRow: Component<{ user: UserData; dataRefetch: () => any }> = (p
       .then((success) => {
         if (success) {
           setSavingState(SavingStates.SUCCESS);
+          if (user_id === auth.user.id) {
+            return refreshAuth();
+          }
         } else {
           setSavingState(SavingStates.FAIL);
         }

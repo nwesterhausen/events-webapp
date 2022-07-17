@@ -11,6 +11,7 @@ type AuthStore = [
   },
   {
     logout: () => Promise<void>;
+    refreshAuth: () => Promise<void>;
   }
 ];
 
@@ -32,10 +33,12 @@ const AuthContext = createContext<AuthStore>([
   },
   {
     logout: async () => {},
+    refreshAuth: async () => {},
   },
 ]);
 
 export const AuthenticationProvider: ParentComponent = (props) => {
+  let loadedOnce = false;
   const [auth, setAuth] = createStore<{ user: UserData; loggedIn: boolean }>({
     user: {
       id: -1,
@@ -66,7 +69,7 @@ export const AuthenticationProvider: ParentComponent = (props) => {
    * that hits the '/auth/account/' endpoint to get user details. If there is an existing session for the connection,
    * this will return the user data. If there isn't, this doesn't return anything useful.
    */
-  const [sessionLogin] = createResource(
+  const [sessionLogin,{refetch}] = createResource(
     async () => {
       const resp = await fetch('/auth/me', {
         headers: {
@@ -92,6 +95,7 @@ export const AuthenticationProvider: ParentComponent = (props) => {
       console.log(JSON.stringify(sessionLogin.latest, null, 2));
       setAuth('user', sessionLogin.latest.user);
       setAuth('loggedIn', true);
+      loadedOnce = true;
     }
   });
 
@@ -101,11 +105,14 @@ export const AuthenticationProvider: ParentComponent = (props) => {
       async logout() {
         await doLogout();
       },
+      async refreshAuth() {
+        await refetch();
+      }
     },
   ];
   return (
     <AuthContext.Provider value={authStatus}>
-      {sessionLogin.loading ? <></> : <>{auth.loggedIn ? props.children : <LoginPage />}</>}
+      {sessionLogin.loading && !loadedOnce ? <></> : <>{auth.loggedIn ? props.children : <LoginPage />}</>}
     </AuthContext.Provider>
   );
 };
