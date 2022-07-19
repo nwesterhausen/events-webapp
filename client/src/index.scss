@@ -154,3 +154,13 @@ html {
 #account-details > * {
   margin-top: 1rem;
 }
+
+.editMenu {
+  margin-left: -1rem;
+  .dropdown-toggle:after {
+    content: none;
+  }
+  .btn {
+    border: none;
+  }
+}

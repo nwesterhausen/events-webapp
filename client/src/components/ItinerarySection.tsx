@@ -1,7 +1,9 @@
+import { Col, Row } from 'solid-bootstrap';
 import { For, ParentComponent } from 'solid-js';
 import { ItinerarySectionData } from '../../../common/types/api';
 import { SectionDateTitle } from '../lib/time-funcs';
 import { useAuthContext } from '../providers/Auth';
+import EditMenu from './EditMenu';
 import ItineraryArticle from './ItineraryArticle';
 
 export type ItinerarySectionProps = {
@@ -22,7 +24,14 @@ const ItinerarySection: ParentComponent<ItinerarySectionProps> = (props) => {
   }
   return (
     <section class='itinerary-section'>
-      <h3 class='text-warning itinerary-subtitle'>{SectionDateTitle(props.section.date, props.section.tod_modifier)}</h3>
+      <Row class='align-items-center'>
+        <Col md='auto'>
+          <span class='fs-3 text-warning itinerary-subtitle'>{SectionDateTitle(props.section.date, props.section.tod_modifier)}</span>
+        </Col>
+        <Col>
+          <EditMenu targetId={props.section.id} variant='section' />
+        </Col>
+      </Row>
       <article class='itinerary-details'>
         <For each={props.section.articles}>{(article) => <ItineraryArticle article={article} />}</For>
       </article>

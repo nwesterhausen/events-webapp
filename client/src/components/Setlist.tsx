@@ -23,8 +23,14 @@ const Setlist: ParentComponent<{ setlist?: SetlistData }> = (props) => {
   }
   return (
     <Card class='bg-dark border-primary setlist'>
-      <Card.Title class='ps-2'>Setlist{props.setlist.location ? ' @ ' + props.setlist.location : ''}</Card.Title>
-      <EditMenu variant='setlist' setlist_id={props.setlist.id} />
+      <Card.Title class='ps-2'>
+        <div class='d-flex justify-content-between'>
+          <div>Setlist{props.setlist.location ? ' @ ' + props.setlist.location : ''}</div>
+          <div class='ms-auto'>
+            <EditMenu variant='setlist' targetId={props.setlist.id} />
+          </div>
+        </div>
+      </Card.Title>
       <Card.Text>
         <p class='notes'>{props.setlist.notes}</p>
         <ListGroup as='ul' class='setlist'>

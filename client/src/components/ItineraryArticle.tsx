@@ -1,8 +1,9 @@
-import { Stack } from 'solid-bootstrap';
+import { Col, Row, Stack } from 'solid-bootstrap';
 import { For, ParentComponent } from 'solid-js';
 import { ItineraryArticleData } from '../../../common/types/api';
 import { ArticleTimeFromDate } from '../lib/time-funcs';
 import { useAuthContext } from '../providers/Auth';
+import EditMenu from './EditMenu';
 import ItineraryItem from './ItineraryItem';
 import Link from './Link';
 import Setlist from './Setlist';
@@ -23,7 +24,14 @@ const ItineraryArticle: ParentComponent<ItineraryArticleProps> = (props) => {
   const [auth] = useAuthContext();
   return (
     <Stack gap={1} class='itinerary-item mt-3'>
-      <p class='fw-bold fs-4 text-info mb-0'>{props.article.title}</p>
+      <Row class='align-items-center'>
+        <Col md='auto'>
+          <p class='fw-bold fs-4 text-info mb-0'>{props.article.title}</p>
+        </Col>
+        <Col>
+          <EditMenu targetId={props.article.id} variant='article' />
+        </Col>
+      </Row>
       <strong class='ps-2'>
         {ArticleTimeFromDate(props.article.start_time)}
         {props.article.end_time ? ' - ' + ArticleTimeFromDate(props.article.end_time) : ''}

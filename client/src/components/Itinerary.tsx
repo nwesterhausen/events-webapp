@@ -1,4 +1,4 @@
-import { Stack } from 'solid-bootstrap';
+import { Col, Row, Stack } from 'solid-bootstrap';
 import { For, ParentComponent } from 'solid-js';
 import { ItineraryData } from '../../../common/types/api';
 import { useAuthContext } from '../providers/Auth';
@@ -13,9 +13,15 @@ const Itinerary: ParentComponent<{ itinerary?: ItineraryData }> = (props) => {
   }
   return (
     <>
-      <EditMenu itinerary_id={props.itinerary.id} variant='itinerary' />
       <Stack gap={3}>
-        <h2>{props.itinerary.title}</h2>
+        <Row class='align-items-center'>
+          <Col md='auto'>
+            <span class='fs-2'>{props.itinerary.title}</span>
+          </Col>
+          <Col>
+            <EditMenu targetId={props.itinerary.id} variant='itinerary' />
+          </Col>
+        </Row>
         <For each={props.itinerary.sections}>{(section) => <ItinerarySection section={section} />}</For>
       </Stack>
     </>
