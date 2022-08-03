@@ -1,8 +1,9 @@
-import { Button, ButtonGroup, Container, Dropdown, OverlayTrigger, Tooltip } from 'solid-bootstrap';
-import { HiSolidDotsVertical, HiSolidPlusCircle } from 'solid-icons/hi';
+import { ButtonGroup, Container, Dropdown } from 'solid-bootstrap';
+import { HiSolidDotsVertical } from 'solid-icons/hi';
 import { Component, Match, Switch } from 'solid-js';
 import { useAuthContext } from '../providers/Auth';
 import { useEditContext } from '../providers/Edit';
+import AddButton from './AddButton';
 
 interface EditMenuProps {
   variant?: 'itinerary' | 'setlist' | 'section' | 'article';
@@ -12,7 +13,10 @@ interface EditMenuProps {
 const GenericError = 'Error, invalid page configurations';
 
 const EditMenu: Component<EditMenuProps> = (props) => {
-  const [editMode, { openEditItinerary, openCreateItinerary, openCreateSetlist, openEditSetlist }] = useEditContext();
+  const [
+    editMode,
+    { openEditItinerary, openCreateSetlist, openEditSetlist, openCreateArticle, openCreateSection, openEditArticle, openEditSection },
+  ] = useEditContext();
   const [auth] = useAuthContext();
   if (!editMode.enabled) {
     return <></>;
@@ -34,23 +38,19 @@ const EditMenu: Component<EditMenuProps> = (props) => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => openEditItinerary(props.targetId)}>Edit Itinerary</Dropdown.Item>
-              <Dropdown.Item onClick={() => openEditItinerary(props.targetId)}>Add Section</Dropdown.Item>
-              <Dropdown.Item onClick={() => openEditItinerary(props.targetId)}>Add Article</Dropdown.Item>
+              <Dropdown.Item onClick={() => openCreateSection(props.targetId)}>Add Section</Dropdown.Item>
+              <Dropdown.Item onClick={() => openCreateArticle(props.targetId)}>Add Article</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Match>
         <Match when={props.variant === 'setlist'}>
           <Dropdown as={ButtonGroup}>
-            <OverlayTrigger overlay={<Tooltip>Add Song</Tooltip>}>
-              <Button size='sm' variant='outline-success' onClick={() => openEditItinerary(props.targetId)}>
-                <HiSolidPlusCircle class='icon-fix' />
-              </Button>
-            </OverlayTrigger>
+            <AddButton name='Song' onClick={() => openCreateSetlist(props.targetId)} />
             <Dropdown.Toggle size='sm' variant='outline-primary'>
               <HiSolidDotsVertical class='icon-fix' />
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => openEditItinerary(props.targetId)}>Edit Setlist</Dropdown.Item>
+              <Dropdown.Item onClick={() => openEditSetlist(props.targetId)}>Edit Setlist</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Match>
@@ -60,8 +60,8 @@ const EditMenu: Component<EditMenuProps> = (props) => {
               <HiSolidDotsVertical class='icon-fix' />
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => openEditItinerary(props.targetId)}>Edit Section</Dropdown.Item>
-              <Dropdown.Item onClick={() => openEditItinerary(props.targetId)}>Add Article</Dropdown.Item>
+              <Dropdown.Item onClick={() => openEditSection(props.targetId)}>Edit Section</Dropdown.Item>
+              <Dropdown.Item onClick={() => openCreateArticle(props.targetId)}>Add Article</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Match>
@@ -71,8 +71,8 @@ const EditMenu: Component<EditMenuProps> = (props) => {
               <HiSolidDotsVertical class='icon-fix' />
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => openEditItinerary(props.targetId)}>Edit Article</Dropdown.Item>
-              <Dropdown.Item onClick={() => openEditItinerary(props.targetId)}>Add Setlist</Dropdown.Item>
+              <Dropdown.Item onClick={() => openEditArticle(props.targetId)}>Edit Article</Dropdown.Item>
+              <Dropdown.Item onClick={() => openCreateSetlist(props.targetId)}>Add Setlist</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Match>
