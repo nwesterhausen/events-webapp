@@ -171,8 +171,8 @@ interface EventBlob {
 }
 const CurrentEvents: Component = () => {
   const content: EventBlob[] = [
-    { key: 'aug192022', title: 'Aug 19-21', content: <Itinerary itinerary={augItinerary} /> },
     { key: 'other', title: 'Static Aug 19-21', content: <Aug192022 /> },
+    { key: 'aug192022', title: 'Aug 19-21', content: <Itinerary itinerary={augItinerary} /> },
   ];
   return (
     <Tab.Container id='upcoming-event-listing' defaultActiveKey={content[0].key}>
