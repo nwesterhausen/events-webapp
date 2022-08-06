@@ -14,7 +14,7 @@ const Aug192022: Component = () => {
         <Itinerary.Article timeRange='7:00 PM - 10:00 PM' name='Concert'>
           <Stack gap={2}>
             <Stack direction='horizontal' gap={2}>
-              <Button variant='primary' size='sm' href='https://mokbpresents.com/events/?es=the+main+squeeze'>
+              <Button variant='primary' size='sm' href='https://wl.seetickets.us/event/Govt-MuleMacAllisterAmphitheateratGarfieldPark/479236?afflky=MOKB'>
                 Get Tickets
               </Button>
               <NaviagationLink
@@ -23,20 +23,15 @@ const Aug192022: Component = () => {
               />
             </Stack>
             <div>
-              <strong>Main Squeeze @ Nickel Plate Amphitheater</strong>{' '}
+              <strong>Gov't Mule @ Nickel Plate Amphitheater</strong>{' '}
             </div>
             <Stack direction='horizontal' gap={2}>
-              Main Squeeze with Huckleberry Funk
+              Main Squeeze Opening act for Warren Haynes group Gov't Mule
             </Stack>
-            <div>Doors open at 7:00 PM, Show starts at 8:00 PM.</div>
+            <div>Doors open at 6:00 PM, Show starts at 7:00 PM.</div>
             <div>
               <YoutubeLink size='sm' variant='outline-info' href='https://www.youtube.com/watch?v=JwVcQGp3bLo'>
                 Main Squeeze at Bonarroo 2022
-              </YoutubeLink>
-            </div>
-            <div>
-              <YoutubeLink size='sm' variant='outline-info' href='https://www.youtube.com/watch?v=DQnhCYUMkYs'>
-                Huckleberry Funk Live
               </YoutubeLink>
             </div>
           </Stack>
