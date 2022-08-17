@@ -169,13 +169,15 @@ html {
   width: unset;
 }
 
-.setlist-song-edit {.list-group-item {
-  border-bottom: 1px var(--bs-primary) solid;
+.setlist-song-edit {
+  .list-group-item {
+    border-bottom: 1px var(--bs-primary) solid;
+  }
+  :first-child.list-group-item {
+    border-top: 1px var(--bs-primary) solid;
+  }
 }
-:first-child.list-group-item {
-  border-top: 1px var(--bs-primary) solid;
-}}
 
 .form-control {
-  border-radius: 0.25rem!important;
+  border-radius: 0.25rem !important;
 }

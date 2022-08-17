@@ -44,11 +44,7 @@ const FormSong: Component<FormSongProps> = (props) => {
         <AddButton name='Link' />
       </Stack>
       <ListGroup>
-        <For each={data.links}>
-            {
-                (link) => <></>
-            }
-        </For>
+        <For each={data.links}>{(link) => <></>}</For>
       </ListGroup>
     </ListGroupItem>
   );

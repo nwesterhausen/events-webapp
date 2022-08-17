@@ -8,8 +8,8 @@ interface FormDataStorage {
 export const BuildFormProvider = (
   defaultValue: FormDataStorage
 ): [
-  ParentComponent,  () => 
-  [
+  ParentComponent,
+  () => [
     typeof defaultValue,
     {
       updateFormData: (event: Event) => void;

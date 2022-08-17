@@ -9,32 +9,31 @@ import AddButton from './AddButton';
 const EditSlidover: Component<{ shown: boolean; handleClose: () => void }> = (props) => {
   const [editContext] = useEditContext();
 
-
   const NewSongListItem: Component = () => {
     const [FormsProvider, useFormsContext] = BuildFormProvider(DbDefaults.SetlistSong);
-    const [data, {updateFormData}] = useFormsContext();
+    const [data, { updateFormData }] = useFormsContext();
     createEffect(() => {
       console.log(data);
-    })
+    });
     return (
       <FormsProvider>
-      <ListGroupItem>
-        <InputGroup>
-        <InputGroup.Text>Name</InputGroup.Text>
-        <FormControl type='text' id="name" onInput={updateFormData}/>
-        
-        <InputGroup.Text>Artist</InputGroup.Text>
-        <FormControl type='text' id="artist" onInput={updateFormData}/>
-        </InputGroup>
-        
-        <Stack direction='horizontal' gap={2}>
-          <span class=''>Song Links</span>
-          <AddButton name='Link' />
-        </Stack>
-                  
-      </ListGroupItem>
-      </FormsProvider>);
-  }
+        <ListGroupItem>
+          <InputGroup>
+            <InputGroup.Text>Name</InputGroup.Text>
+            <FormControl type='text' id='name' onInput={updateFormData} />
+
+            <InputGroup.Text>Artist</InputGroup.Text>
+            <FormControl type='text' id='artist' onInput={updateFormData} />
+          </InputGroup>
+
+          <Stack direction='horizontal' gap={2}>
+            <span class=''>Song Links</span>
+            <AddButton name='Link' />
+          </Stack>
+        </ListGroupItem>
+      </FormsProvider>
+    );
+  };
 
   return (
     <Offcanvas show={props.shown} onHide={props.handleClose} placement='end'>
@@ -108,39 +107,40 @@ const EditSlidover: Component<{ shown: boolean; handleClose: () => void }> = (pr
             <h3>{editContext.create ? 'Create ' : 'Edit '}Setlist</h3>
             <FormGroup>
               <FormLabel>Location</FormLabel>
-              <FormControl type='text'/>
+              <FormControl type='text' />
             </FormGroup>
             <FormGroup>
               <FormLabel>Notes</FormLabel>
               <FormControl type='textarea' />
             </FormGroup>
             <FormGroup>
-                <Stack direction='horizontal' gap={2}>
-                  <span class='fw-bolder'>Songs</span>
-                  <AddButton name='Link' />
-                </Stack>
-            <ListGroup class='setlist-song-edit'>
-              <For each={[]} fallback={<NewSongListItem/>}>
-                {(song: SongData) =>  (
-              <ListGroupItem>
-                <InputGroup>
-                <InputGroup.Text>Name</InputGroup.Text>
-                <FormControl type='text' id='name' value={song.name}/>
-                </InputGroup>
-                
-                <InputGroup>
-                <InputGroup.Text>Artist</InputGroup.Text>
-                <FormControl type='text' id='artist' value={song.artist}/>
-                </InputGroup>
-                
-                <Stack direction='horizontal' gap={2}>
-                  <span class=''>Song Links</span>
-                  <AddButton name='Link' />
-                </Stack>
-                          
-              </ListGroupItem>
-              )}</For>
-            </ListGroup></FormGroup>
+              <Stack direction='horizontal' gap={2}>
+                <span class='fw-bolder'>Songs</span>
+                <AddButton name='Link' />
+              </Stack>
+              <ListGroup class='setlist-song-edit'>
+                <For each={[]} fallback={<NewSongListItem />}>
+                  {(song: SongData) => (
+                    <ListGroupItem>
+                      <InputGroup>
+                        <InputGroup.Text>Name</InputGroup.Text>
+                        <FormControl type='text' id='name' value={song.name} />
+                      </InputGroup>
+
+                      <InputGroup>
+                        <InputGroup.Text>Artist</InputGroup.Text>
+                        <FormControl type='text' id='artist' value={song.artist} />
+                      </InputGroup>
+
+                      <Stack direction='horizontal' gap={2}>
+                        <span class=''>Song Links</span>
+                        <AddButton name='Link' />
+                      </Stack>
+                    </ListGroupItem>
+                  )}
+                </For>
+              </ListGroup>
+            </FormGroup>
           </Match>
         </Switch>
       </Offcanvas.Body>

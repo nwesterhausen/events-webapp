@@ -14,7 +14,10 @@ const Aug192022: Component = () => {
         <Itinerary.Article timeRange='7:00 PM - 10:00 PM' name='Concert'>
           <Stack gap={2}>
             <Stack direction='horizontal' gap={2}>
-              <Button variant='primary' size='sm' href='https://wl.seetickets.us/event/Govt-MuleMacAllisterAmphitheateratGarfieldPark/479236?afflky=MOKB'>
+              <Button
+                variant='primary'
+                size='sm'
+                href='https://wl.seetickets.us/event/Govt-MuleMacAllisterAmphitheateratGarfieldPark/479236?afflky=MOKB'>
                 Get Tickets
               </Button>
               <NaviagationLink

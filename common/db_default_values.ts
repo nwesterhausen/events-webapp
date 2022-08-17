@@ -1,16 +1,16 @@
 export const User = {
   id: 0,
-  name: "",
-  email: "",
-  googleId: "",
-  discordId: "",
-  created_at: "",
-  updated_at: "",
+  name: '',
+  email: '',
+  googleId: '',
+  discordId: '',
+  created_at: '',
+  updated_at: '',
 };
 export const Permission = {
   id: 0,
-  name: "",
-  description: "",
+  name: '',
+  description: '',
 };
 export const UserPermission = {
   id: 0,
@@ -19,17 +19,17 @@ export const UserPermission = {
 };
 export const Setlist = {
   id: 0,
-  notes: "",
-  location: "",
+  notes: '',
+  location: '',
 };
 export const SetlistSong = {
   id: 0,
-  name: "",
-  artist: "",
+  name: '',
+  artist: '',
 };
 export const LinkType = {
   id: 0,
-  name: "",
+  name: '',
 };
 export const Song2Setlist = {
   setlist_id: 0,
@@ -37,8 +37,8 @@ export const Song2Setlist = {
 };
 export const Link = {
   id: 0,
-  text: "",
-  url: "",
+  text: '',
+  url: '',
   link_type: 4,
 };
 export const Link2Song = {
@@ -51,27 +51,27 @@ export const Link2ItineraryArticle = {
 };
 export const ItineraryItem = {
   id: 0,
-  text: "",
+  text: '',
   itinerary_article_id: 0,
 };
 export const ItineraryArticle = {
   id: 0,
-  title: "",
-  start_time: "",
-  end_time: "",
+  title: '',
+  start_time: '',
+  end_time: '',
   itinerary_section_id: 0,
 };
 export const ItinerarySection = {
   id: 0,
-  date: "",
-  tod_modifier: "",
+  date: '',
+  tod_modifier: '',
   itinerary_id: 0,
 };
 export const Itinerary = {
   id: 0,
-  start_date: "",
-  end_date: "",
-  title: "",
+  start_date: '',
+  end_date: '',
+  title: '',
 };
 export const Setlist2ItineraryArticle = {
   setlist_id: 0,
@@ -84,7 +84,7 @@ export const ActionLink2ItineraryArticle = {
 
 export const ItineraryArticleInsertType = {
   id: 0,
-  title: "",
+  title: '',
   start_time: Date.now(),
   end_time: Date.now(),
   itinerary_section_id: 0,
@@ -92,12 +92,12 @@ export const ItineraryArticleInsertType = {
 export const ItinerarySectionInsertType = {
   id: 0,
   date: Date.now(),
-  tod_modifier: "",
+  tod_modifier: '',
   itinerary_id: 0,
 };
 export const ItineraryInsertType = {
   id: 0,
   start_date: Date.now(),
   end_date: Date.now(),
-  title: "",
+  title: '',
 };
