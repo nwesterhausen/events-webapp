@@ -11,7 +11,13 @@ const Aug192022: Component = () => {
       <Itinerary.Title>Music Weekend, August 19th - 21st</Itinerary.Title>
 
       <Itinerary.Section title='Friday Night, Aug 19th'>
-        <Itinerary.Article timeRange='7:00 PM - 10:00 PM' name='Concert'>
+        <Itinerary.Article timeRange='5:30 PM - 6:00 PM' name='Four Day Ray'>
+          <NaviagationLink
+            size='sm'
+            href='https://www.google.com/maps/dir//Four%20Day%20Ray%20Brewing,%2011671%20Lantern%20Rd,%20Fishers,%20IN%2046038'
+          />
+        </Itinerary.Article>
+        <Itinerary.Article timeRange='6:00 PM - 10:00 PM' name='Concert'>
           <Stack gap={2}>
             <Stack direction='horizontal' gap={2}>
               <Button
